@@ -1,114 +1,123 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import Arrowback from '../../component/Images/Dark.png';
+import Arrowback from '../../component/Images/Dark.png';  // Update the path as needed
 import google from '../../component/Images/google.png';
 import facebook from '../../component/Images/facebook.png';
+import logo from '../../component/Images/Logo.png';       // Update the path as needed
 
-const CreateProfile = () => {
-  const [brandName, setBrandName] = useState('');
-  const [brandWebsite, setBrandWebsite] = useState('');
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
-  const [mobileNumber, setMobileNumber] = useState('');
+const SignupPage = () => {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(() => {
-    if (brandName && brandWebsite && country && city && mobileNumber) {
+  const handleFormValidation = () => {
+    if (fullName && email && password) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [brandName, brandWebsite, country, city, mobileNumber]);
+  };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-white">
-      {/* Main Content */}
-      <div className="w-full max-w-lg p-6">
-        {/* Arrowback Button and Create Profile Text */}
-        <div className="flex items-center mb-8">
-          <button className="text-green-500 focus:outline-none">
-            <Image src={Arrowback} alt="Back" width={40} height={40} />
-          </button>
-          <h1 className="text-4xl font-semibold text-navy ml-4">Sign Up</h1>
-        </div>
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      {/* Logo */}
+      <div className="absolute top-0 left-0 mt-4 ml-4">
+        <Image src={logo} alt="Logo" width={150} height={40} />
+      </div>
 
+      {/* Form Container */}
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg relative">
+        {/* Arrowback Button */}
+        <div className="flex items-center space-x-4 mb-8">
+          <button className="text-lg">
+            <Image src={Arrowback} alt="Back" width={29} height={29} />
+          </button>
+          <div>
+            <h1 className="text-4xl font-bold text-navy mb-2">
+          <span className="text-black rounded-[15px] bg-yellow-400 px-2">Sign</span>Up
+          </h1></div>
+        </div>
+      
+
+        {/* Subtitle */}
+        <p className="text-lg text-gray-600 mb-6">
+          Make Everyday a Pay Day
+        </p>
+
+        {/* Form */}
         <form className="space-y-4">
           <div>
             <input
               type="text"
-              placeholder="Brand Name"
-              value={brandName}
-              onChange={(e) => setBrandName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              onBlur={handleFormValidation}
+              className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
           <div>
             <input
-              type="Password"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleFormValidation}
+              className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
               placeholder="Password"
-              value={brandWebsite}
-              onChange={(e) => setBrandWebsite(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={handleFormValidation}
+              className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
-          <div>
-          
+
+          <div className="flex items-center">
+            <input type="checkbox" className="mr-2" />
+            <label className="text-gray-600">
+              Agreeing to our <span className="font-semibold">Terms and Privacy Policy</span>
+            </label>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder="Enter City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-          </div>
-          {/* <div className="flex items-center">
-            <div className="flex items-center px-3 border-r border-gray-300">
-              <span role="img" aria-label="Globe" className="text-xl">🌍</span>
-              <select
-                className="ml-2 focus:outline-none"
-                onChange={(e) => setMobileNumber(e.target.value)}
-              >
-                <option value="">00</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-              </select>
-            </div>
-            <input
-              type="text"
-              placeholder="Mobile Number"
-              value={mobileNumber}
-              onChange={(e) => setMobileNumber(e.target.value)}
-              className="w-full px-4 py-2 border rounded-r-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-          </div> */}
-          <div className="flex flex-col items-center">
-            <div className="flex items-center justify-center space-x-4">
-              <button
-                type="button"
-                disabled={!isFormValid}
-                className={`w-40 py-2 rounded-lg focus:outline-none ${isFormValid ? 'bg-green-500 text-white' : 'bg-gray-300 text-white'}`}
-              >
-                Continue
-              </button>
-              <span className="text-gray-600 font-medium">Or</span>
-              <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
-                <Image src={google} alt="Google" width={24} height={24} />
-              </button>
-              <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
-                <Image src={facebook} alt="Facebook" width={24} height={24} />
-              </button>
-            </div>
-            <p className="mt-6 text-gray-600">
-              Already have an account? <a href="#" className="text-navy font-semibold hover:underline">Log In</a>
-            </p>
+
+          <div className="flex justify-center">
+            <button
+              type="button"
+              disabled={!isFormValid}
+              className={`w-full py-2 rounded-full focus:outline-none ${
+                isFormValid ? 'bg-gray-300 text-gray-600' : 'bg-green-500 text-white'
+              }`}
+            >
+              Create Account
+            </button>
           </div>
         </form>
+
+        <div className="flex items-center justify-center mt-6 space-x-4">
+          <span className="text-gray-600">Or</span>
+          <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
+            <Image src={google} alt="Google" width={24} height={24} />
+          </button>
+          <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
+            <Image src={facebook} alt="Facebook" width={24} height={24} />
+          </button>
+        </div>
+
+        <p className="mt-6 text-center text-gray-600">
+          Already have an account?{' '}
+          <a href="/login" className="text-navy font-semibold hover:underline">
+            Log In
+          </a>
+        </p>
       </div>
     </div>
   );
 };
 
-export default CreateProfile;
+export default SignupPage;
