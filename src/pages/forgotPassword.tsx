@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Arrowback from '../../component/Images/Dark.png';
-import google from '../../component/Images/google.png';
-import facebook from '../../component/Images/facebook.png';
+import Arrowback from '@/component/Images/Dark.png';
+import google from '@component/Images/google.png';
+import facebook from '@/component/Images/facebook.png';
 
 const ResetPassword = () => {
   const [emailSent, setEmailSent] = useState(false);

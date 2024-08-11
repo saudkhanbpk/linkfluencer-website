@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Arrowback from '../../component/Images/Dark.png';
-import google from '../../component/Images/google.png';
-import facebook from '../../component/Images/facebook.png';
-import logo from '../../component/Images/Logo.png';
+import arrowBackDark from '@/public/images/arrow_back_dark.png';  // Update the path as needed
+import googleLogo from '@/public/images/google_logo.png';
+import facebookLogo from '@/public/images/facebook_logo.png';
+import mainLogo from '@/public/images/main_logo.png';      
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ const LoginPage = () => {
     <div className="relative min-h-screen flex items-center justify-center bg-white">
       {/* Logo at the top left */}
       <div className="absolute top-0 left-0 mt-4 ml-4">
-        <Image src={logo} alt="Logo" width={150} height={40} />
+        <Image src={mainLogo} alt="Logo" width={150} height={40} />
       </div>
 
       
@@ -31,7 +31,7 @@ const LoginPage = () => {
     
         <div className="flex items-center mb-8">
           <button className="text-green-500 focus:outline-none">
-            <Image src={Arrowback} alt="Back" width={40} height={40} />
+            <Image src={arrowBackDark} alt="Back" width={40} height={40} />
           </button>
           <h1 className="text-4xl font-semibold text-navy ml-4">Sign Up</h1>
         </div>
@@ -91,10 +91,10 @@ const LoginPage = () => {
             <div className="flex items-center justify-center space-x-4 mt-4">
               <span className="text-gray-600 font-medium">Or</span>
               <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
-                <Image src={google} alt="Google" width={24} height={24} />
+                <Image src={googleLogo} alt="Google" width={24} height={24} />
               </button>
               <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
-                <Image src={facebook} alt="Facebook" width={24} height={24} />
+                <Image src={facebookLogo} alt="Facebook" width={24} height={24} />
               </button>
             </div>
           </div>
