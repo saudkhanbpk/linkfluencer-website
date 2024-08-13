@@ -1,17 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
-<<<<<<< HEAD:src/pages/forgotPassword.tsx
-import Arrowback from '@/component/Images/Dark.png';
-import google from '@component/Images/google.png';
-import facebook from '@/component/Images/facebook.png';
+import logo from "@/public/images/main_logo.png";
+import Arrowback from '@/public/images/arrow_back_dark.png';
+import google from '@/public/images/google_logo.png';
+import facebook from '@/public/images/facebook_logo.png';
 
-=======
-import Arrowback from '../../component/Images/Dark.png';
-import google from '../../component/Images/google.png';
-import facebook from '../../component/Images/facebook.png';
-import logo from '../../component/Images/Logo.png';
->>>>>>> a6a0a622ab72fa9f76a51a8e67613c828103446e:src/app/forgotpassword/page.tsx
 const ResetPassword = () => {
   const [emailSent, setEmailSent] = useState(false);
 

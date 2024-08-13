@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Paper, IconButton } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+// import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 type CardProps = {
   title: string;
@@ -28,7 +29,7 @@ const Card = ({ title, description, icon, onClick }: CardProps) => (
       }}
       onClick={onClick}
     >
-      <ArrowForwardIcon />
+      {/* <ArrowForwardIcon /> */}
     </IconButton>
   </Paper>
 );
