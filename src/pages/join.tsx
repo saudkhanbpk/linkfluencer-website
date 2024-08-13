@@ -1,7 +1,5 @@
 import React from 'react'
 import influencer from "../../public/images/influencer.png"
-import Image from 'next/image'
-import arrowBackDark from '../public/images/arrow_back_dark.png'
 function join() {
     return (
         <>
@@ -14,7 +12,7 @@ function join() {
                             <div>
                                 <h1 className='font-bold text-2xl'>Influencer</h1>
                                 <p className='text-xl'>Make Everyday A Pay Day</p>
-                                <Image className='float-right ' src={arrowBackDark} alt="Back" width={40} height={40} />
+                                <div className='border border-black w-[40px] h-[40px] rounded-full flex justify-center float-right items-center bg-green-400'></div>
 
                             </div>
                         </div>

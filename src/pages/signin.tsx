@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-white">
-      {/* Logo at the top left */}
+      
       <div className="absolute top-0 left-0 mt-4 ml-4">
         <Image src={mainLogo} alt="Logo" width={150} height={40} />
       </div>
@@ -36,7 +36,6 @@ const LoginPage = () => {
           <h1 className="text-4xl font-semibold text-navy ml-4">Sign Up</h1>
         </div>
 
-        {/* Login Text */}
       
         <p className="text-lg text-gray-600 mb-6" style={{
           fontFamily: 'Avenir LT Std',
@@ -48,7 +47,7 @@ const LoginPage = () => {
           Connect to the potential influencers
         </p>
 
-        {/* Form */}
+     
         <form className="space-y-4">
           <div>
             <input
