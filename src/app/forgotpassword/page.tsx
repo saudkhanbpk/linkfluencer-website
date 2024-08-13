@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Arrowback from '../../component/Images/Dark.png';
 import google from '../../component/Images/google.png';
 import facebook from '../../component/Images/facebook.png';
-
+import logo from '../../component/Images/Logo.png';
 const ResetPassword = () => {
   const [emailSent, setEmailSent] = useState(false);
 
@@ -14,10 +14,13 @@ const ResetPassword = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="absolute top-0 left-0 mt-4 ml-4">
+        <Image src={logo} alt="Logo" width={150} height={40} />
+      </div>
       <div className="w-full max-w-md px-8 py-10 bg-white rounded-lg shadow-md">
         <div className="flex items-center space-x-4 mb-8">
-          <button className="text-lg">
-            <Image src={Arrowback} alt="Back" width={24} height={24} />
+        <button className="text-green-500 focus:outline-none">
+            <Image src={Arrowback} alt="Back" width={40} height={40} />
           </button>
           <h2 className="text-3xl font-semibold text-gray-800">Reset Password</h2>
         </div>
