@@ -1,107 +1,88 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import arrowBackDark from '@/public/images/arrow_back_dark.png';  // Update the path as needed
-import googleLogo from '@/public/images/google_logo.png';
-import facebookLogo from '@/public/images/facebook_logo.png';
-import mainLogo from '@/public/images/main_logo.png';      
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import arrowBackDark from "@/public/images/arrow_back_dark.png";
+import googleLogo from "@/public/images/google_logo.png";
+import facebookLogo from "@/public/images/facebook_logo.png";
+import mainLogo from "@/public/images/main_logo.png";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    if (email && password) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
+    setIsFormValid(email !== "" && password !== "");
   }, [email, password]);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-white">
-      
+    <div className="flex items-center justify-center min-h-screen bg-white border border-black">
       <div className="absolute top-0 left-0 mt-4 ml-4">
         <Image src={mainLogo} alt="Logo" width={150} height={40} />
       </div>
 
-      
-      <div className="w-full max-w-lg p-6 bg-white shadow-md rounded-lg">
-    
-        <div className="flex items-center mb-8">
-          <button className="text-green-500 focus:outline-none">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
+        <div className="flex items-center space-x-4 mb-4 relative md:right-12">
+          <button className="text-lg relative bottom-3 hidden md:flex">
             <Image src={arrowBackDark} alt="Back" width={40} height={40} />
           </button>
-          <h1 className="text-4xl font-semibold text-navy ml-4">Sign Up</h1>
+          <div>
+            <h1 className="text-4xl font-semibold text-navy">Log In</h1>
+            <p className="text-xl mt-2 text-gray-600">Log in to access your account.</p>
+          </div>
         </div>
 
-      
-        <p className="text-lg text-gray-600 mb-6" style={{
-          fontFamily: 'Avenir LT Std',
-          fontSize: '24px',
-          fontWeight: 400,
-          lineHeight: '29px',
-          textAlign: 'left'
-        }}>
-          Connect to the potential influencers
-        </p>
-
-     
         <form className="space-y-4">
-          <div>
-            <input
-              type="email"
-              placeholder="Enter Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Enter Your Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="p-3 rounded-full border border-gray-500 m-1 w-full focus:outline-none focus:ring-2"
+          />
+          <input
+            type="password"
+            placeholder="Enter Your Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-3 rounded-full border border-gray-500 m-1 w-full focus:outline-none focus:ring-2"
+          />
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between m-2">
             <label className="flex items-center text-gray-600">
               <input type="checkbox" className="mr-2" />
               Remember Me
             </label>
-            <a href="/forgotpassword" className="text-navy font-medium hover:underline">
+            <a onClick={() => router.push('/forgotpassword')} className="text-navy font-medium hover:underline cursor-pointer">
               Forgot Password?
             </a>
           </div>
 
-          <div className="flex flex-col items-center">
-            <button
-              type="button"
-              disabled={!isFormValid}
-              className={`w-full py-2 rounded-lg focus:outline-none ${isFormValid ? 'bg-green-500 text-white' : 'bg-gray-300 text-white'}`}
-            >
-              Log In
-            </button>
-
-            <div className="flex items-center justify-center space-x-4 mt-4">
-              <span className="text-gray-600 font-medium">Or</span>
-              <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
-                <Image src={googleLogo} alt="Google" width={24} height={24} />
-              </button>
-              <button className="p-2 bg-white border border-gray-300 rounded-full focus:outline-none">
-                <Image src={facebookLogo} alt="Facebook" width={24} height={24} />
-              </button>
-            </div>
-          </div>
+          <button
+            type="button"
+            disabled={!isFormValid}
+            className={`w-full p-3 m-2 rounded-full focus:outline-none ${isFormValid ? "bg-[#020D3A] text-white" : "bg-gray-300 text-white"}`}
+          >
+            Log In
+          </button>
         </form>
-
-        <p className="mt-6 text-center text-gray-600">
-          Don’t have an account? <a href="#" className="text-navy font-semibold hover:underline">Sign Up</a>
+        <p className="text-center text-gray-600 mt-6">
+          Don’t have an account?{" "}
+          <a onClick={() => router.push('/signup')} className="text-navy cursor-pointer font-semibold hover:underline">
+            Sign Up
+          </a>
         </p>
+
+        <div className="md:flex  items-center justify-center md:space-x-4 m-4">
+        <button className=" flex w-full gap-2 justify-center mb-2 xs:mb-0 py-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
+            <Image src={googleLogo} alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
+          </button>
+          <button className=" flex w-full justify-center gap-2 p-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
+            <Image src={facebookLogo} alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
+          </button>
+        </div>
       </div>
     </div>
   );
