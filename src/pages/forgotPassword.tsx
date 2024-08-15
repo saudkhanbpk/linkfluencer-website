@@ -116,7 +116,7 @@ const ForgotPassword = () => {
       <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
         <div className="flex items-center space-x-4 mb-4 relative md:right-12">
           <button className="text-lg hidden md:block" onClick={() => router.push('/signin')}>
-            <Image src={arrowBackDark} alt="Back" width={40} height={40} />
+            <Image src={arrowBackDark} className='hover:rotate-45 duration-100' alt="Back" width={40} height={40} />
           </button>
           <h1 className="text-4xl text-navy">
             {step === 1 ? "Forgot Password" : step === 2 ? "OTP Verification" : "Reset Password"}
