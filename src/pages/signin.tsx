@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import arrowBackDark from "@/public/images/arrow_back_dark.png";
-import googleLogo from "@/public/images/google_logo.png";
-import facebookLogo from "@/public/images/facebook_logo.png";
-import mainLogo from "@/public/images/main_logo.png";
+import arrowBackDark from "../../public/images/arrow_back_dark.png";
+import googleLogo from "../../public/images/google_logo.png";
+import facebookLogo from "../../public/images/facebook_logo.png";
 import { useRouter } from "next/router";
+import Logo from "@/components/common/Logo";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -19,10 +19,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white border border-black">
-      <div className="absolute top-0 left-0 mt-4 ml-4">
-        <Image src={mainLogo} alt="Logo" width={150} height={40} />
-      </div>
-
+     <Logo/>
       <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
         <div className="flex items-center space-x-4 mb-4 relative md:right-12">
           <button className="text-lg relative bottom-3 hidden md:flex" onClick={()=>router.push('/')}>

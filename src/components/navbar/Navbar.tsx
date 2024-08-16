@@ -1,17 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
-import mainLogo from '@/public/images/main_logo.png';
+import mainLogo from '../../../public/images/main_logo.png';
 import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const router= useRouter()
   return (
-  <div className="absolute p-4  md:flex justify-between w-full">
+  <div className="md:absolute p-4  md:flex justify-between w-full">
     <div>
     <Image src={mainLogo} alt="Logo" width={150} height={40} />
     </div>
     
-    <div className='flex gap-4'>
+    <div className='flex gap-4 md:my-0 my-2'>
       <button className='border py-2 px-4 rounded-full'>Influencer</button>
       <button className='border py-2 px-4 rounded-full'>Brand</button>
     </div>

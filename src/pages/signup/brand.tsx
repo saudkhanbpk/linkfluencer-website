@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Logo from '@/components/common/Logo';
 import useFormValidation from '@/hooks/useFormValidation';
-import arrowBackDark from '@/public/images/arrow_back_dark.png';
-import googleLogo from '@/public/images/google_logo.png';
-import facebookLogo from '@/public/images/facebook_logo.png';
-import check from '@/public/images/fi_check.png';
+import arrowBackDark from '../../../public/images/arrow_back_dark.png';
+import googleLogo from '../../../public/images/google_logo.png';
+import facebookLogo from '../../../public/images/facebook_logo.png';
+import check from '../../../public/images/fi_check.png';
 import { useRouter } from 'next/router';
 
 const SignupInfluencer = () => {
@@ -115,7 +115,7 @@ const SignupInfluencer = () => {
                 className="text-lg relative bottom-8 hidden md:block"
                 onClick={() => setStep(1)} // Go back to signup step
               >
-                <Image src={arrowBackDark} alt="Back" className="w-[60px]" />
+                <Image src={arrowBackDark}  alt="Back" className="w-[60px] hover:rotate-45 duration-100" />
               </button>
               <div>
                 <h1 className="text-4xl">OTP Verification</h1>

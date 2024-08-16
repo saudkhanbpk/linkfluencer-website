@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Logo from '@/components/common/Logo';
 import useFormValidation from '@/hooks/useFormValidation';
-import arrowBackDark from '@/public/images/arrow_back_dark.png';
-import googleLogo from '@/public/images/google_logo.png';
-import facebookLogo from '@/public/images/facebook_logo.png';
-import check from '@/public/images/fi_check.png';
+import arrowBackDark from '../../../public/images/arrow_back_dark.png';
+import googleLogo from '../../../public/images/google_logo.png';
+import facebookLogo from '../../../public/images/facebook_logo.png';
+import check from '../../../public/images/fi_check.png';
 import { useRouter } from 'next/router';
 
 const SignupInfluencer = () => {
@@ -47,7 +47,7 @@ const SignupInfluencer = () => {
           <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
             <div className="flex items-center space-x-4 mb-4 relative md:right-12">
               <button className="text-lg relative bottom-3 hidden md:flex" onClick={() => router.push('/signup')}>
-                <Image src={arrowBackDark} alt="Back" width={40} height={40} />
+                <Image src={arrowBackDark} className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
               </button>
               <div>
                 <h1 className="text-4xl">Sign Up</h1>

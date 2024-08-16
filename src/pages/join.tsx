@@ -1,7 +1,7 @@
 import React from 'react'
-import influencer from "@/public/images/Influencer.png"
-import brand from "@/public/images/Brand.png"
-import dark from "@/public/images/Dark.png"
+import influencer from "../../public/images/Influencer.png"
+import brand from "../../public/images/Brand.png"
+import dark from "../../public/images/Dark.png"
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 function join() {
