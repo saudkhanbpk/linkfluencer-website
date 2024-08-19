@@ -3,8 +3,8 @@ import React from 'react'
 import Apppic from '../../../public/images/apppic.png'
 function Apps() {
   return (
-    <div className='flex gap-10 flex-wrap justify-evenly items-center min-h-screen w-full p-8'>
-        <div className='w-[440px]' >
+    <div className='flex gap-10 flex-wrap justify-center items-center min-h-screen w-full p-8'>
+        <div className='md:w-[440px]' >
             <h1 className='text-3xl font-semibold '>
             Unlock the power of smart links that open directly in mobile apps
             </h1>
@@ -12,8 +12,8 @@ function Apps() {
                 viewers can easily subscribe, explore, and follow you across all platforms.</p>
 
         </div>
-        <div>
-            <Image src={Apppic} alt='image' />
+        <div className='md:w-[500px]'>
+            <Image src={Apppic} alt='image' layout='responsive' style={{ objectFit: 'contain', width: 'auto', height: 'auto' }} />
         </div>
     </div>
   )

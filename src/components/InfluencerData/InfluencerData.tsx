@@ -12,6 +12,7 @@ import girl from '../../../public/images/girl.png'
 import Links from './Links'
 import Apps from './Apps'
 import TimeToShine from './TimeToShine'
+import Plateforms from './Plateforms'
 function InfluencerData() {
     return (
         <div className='flex flex-col justify-center items-center w-full  '>
@@ -31,17 +32,17 @@ function InfluencerData() {
                     </div>
                 </div>
                 {/* images section  */}
-                <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10'>
+                <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10 w-full'>
                     <div className='flex gap-4'>
-                        <div className='self-end'>
-                            <Image src={Frame} alt='image' />
-                            <Image className='my-2' src={Linkt} alt='image' />
-                            <Image src={spotify} alt='image' />
+                        <div className='md:self-end w-full  md:w-[300px]'>
+                            <Image src={Frame} alt='image'  layout='responsive' />
+                            <Image className='my-2' src={Linkt} alt='image'  layout='responsive'  />
+                            <Image src={spotify} alt='image'   layout='responsive'  />
 
                         </div>
-                        <div className=' relative self-end'>
-                            <Image src={animYoutube} alt='image' />
-                            <Image className='my-2' src={img33} alt='image' />
+                        <div className=' relative md:self-end w-[300px]'>
+                            <Image src={animYoutube} alt='image'  layout='responsive'    />
+                            <Image className='my-2' src={img33} alt='image'  layout='responsive'  />
 
 
                         </div>
@@ -60,16 +61,16 @@ function InfluencerData() {
 
 </div>
 </div>
-                    <div className='flex gap-4'>
-                        <div className='relative self-end'>
-                            <Image src={Frame12} alt='image' />
+                    <div className='flex gap-4 '>
+                        <div className='relative self-end w-full md:w-[300px]'>
+                            <Image src={Frame12} alt='imaw'   layout='responsive' />
 
 
                         </div>
-                        <div>
-                            <Image src={girl} alt='image' />
-                            <Image className='my-2' src={snapchat} alt='image' />
-                            <Image src={insta} alt='image' />
+                        <div className=' w-[300px]'>
+                            <Image src={girl} alt='imag'   layout='responsive' />
+                            <Image className='my-2' src={snapchat} alt='image'   layout='responsive' />
+                            <Image src={insta} alt='image'   layout='responsive'  />
 
                         </div>
                     </div>
@@ -80,6 +81,7 @@ function InfluencerData() {
             <Links />
             <Apps />
             <TimeToShine />
+            <Plateforms/>
         </div>
     )
 }

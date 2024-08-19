@@ -43,6 +43,7 @@ function CategoriesComponent() {
     }, []);
 
     return (
+        <>
         <div className="flex items-center justify-center md:min-h-screen bg-white border border-black">
             <div className="absolute top-0 left-0 mt-4 ml-4">
                 <Image src={mainLogo} alt="Logo" width={150} height={40} />
@@ -112,7 +113,10 @@ function CategoriesComponent() {
                     ))}
                 </div>
             </div>
+          
         </div>
+       
+        </>
     );
 }
 

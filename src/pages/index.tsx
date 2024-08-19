@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/navbar/Navbar';
+import Footer from '@/components/footer/Footer';
 import InfluencerData from '@/components/InfluencerData/InfluencerData';
-const index = () => {
-  
-  return (
-  <>
-  <Navbar/>
-  <div className='relative top-20  '>
-  <InfluencerData/>
+import BrandData from '@/components/BrandData/BrandData';
 
-  </div>
- 
-  </>
-   )
+const Index = () => {
+  const [selectedComponent, setSelectedComponent] = useState('Influencer');
+
+  return (
+    <>
+      <Navbar
+        selectedComponent={selectedComponent}
+        setSelectedComponent={setSelectedComponent}
+      />
+      <div className="relative top-20">
+        {selectedComponent === 'Influencer' && <InfluencerData />}
+        {selectedComponent === 'Brand' && <BrandData />}
+      </div>
+      <Footer />
+    </>
+  );
 };
 
-export default index;
+export default Index;

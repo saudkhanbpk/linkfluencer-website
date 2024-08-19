@@ -17,18 +17,19 @@ const SignupInfluencer = () => {
   const isFormValid = useFormValidation(fullName, email, password);
   const router = useRouter();
 
-  const handleSignup = (e) => {
+  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isFormValid) {
       setStep(2); // Proceed to OTP verification step
     }
   };
-
-  const handleOtpSubmit = (e) => {
+  
+  const handleOtpSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Logic for OTP submission
     setOtp(''); // Clear the OTP input after submission
   };
+  
 
   const handleResendOTP = () => {
     // Logic to resend OTP

@@ -4,7 +4,7 @@ import Shine from '../../../public/images/Fram - Illustration.png'
 
 function TimeToShine() {
   return (
-    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-evenly items-center min-h-screen w-full p-8 bg-gray-200'>
+    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center min-h-screen w-full p-8 bg-gray-100'>
       <div className='w-full lg:w-[440px]'>
         <h1 className='text-3xl font-semibold'>
           Beyond likes, connect with brands that matter. It's your time to shine ✨

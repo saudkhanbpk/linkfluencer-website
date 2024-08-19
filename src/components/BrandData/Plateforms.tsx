@@ -12,14 +12,14 @@ import YoutubeMusic from '../../../public/images/YouTube Music Logotype.png';
 import vimeo from '../../../public/images/Vimeo Logotype.png';
 import link from '../../../public/images/fi_link.png'
 
-function Platforms() {
+function Plateforms() {
   const platforms = [Netfix, spotify, YoutubeMusic, appleMusic, snap, soundCloud, reddit]; 
   const others = [vimeo,, line, snap , appleMusic,Netfix,telegram, soundCloud]; 
 
 
   return (
     <div className='md:h-screen flex flex-col justify-center items-center w-full '>
-      <h1 className='text-center text-4xl font-semibold mb-24 '>Platforms we support</h1>
+      <h1 className='text-center text-4xl font-semibold mb-24 '>Our Trusted Partners</h1>
       <div className='md:flex  flex-wrap gap-2 '>
         {platforms.map((platform, index) => (
           <button key={index} className='flex  justify-center items-center  w-[200px] rounded-full border h-[50px]'>
@@ -41,4 +41,4 @@ function Platforms() {
   );
 }
 
-export default Platforms;
+export default Plateforms;
