@@ -1,0 +1,39 @@
+.platforms {
+    /* Container styles */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust height as needed */
+  }
+  
+  .carousel {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    width: 100%;
+  }
+  
+  .carouselButton {
+    /* Button styles */
+    flex: 0 0 auto; /* Prevent flex-grow */
+    width: 200px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slide {
+    /* Image styles */
+    width: 100px;
+    height: auto;
+  }
+  
+  .activeSlide {
+    /* Active slide styles */
+    /* Add your desired styling here */
+  }

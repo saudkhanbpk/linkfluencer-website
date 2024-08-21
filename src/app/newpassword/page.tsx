@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Arrowback from '../../component/Images/Dark.png';
+import Arrowback from '../../../public/images/Dark.png';
 export default function NewPasswordPage() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

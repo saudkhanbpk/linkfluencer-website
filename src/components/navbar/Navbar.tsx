@@ -3,27 +3,25 @@ import Image from 'next/image';
 import mainLogo from '../../../public/images/main_logo.png';
 import { useRouter } from 'next/router';
 
-const Navbar = ({ selectedComponent, setSelectedComponent }) => {
+const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent: any, setSelectedComponent: any }) => {
   const router = useRouter();
 
   return (
     <div className="md:absolute p-4 flex justify-between w-[100%]">
-      <div>
-        <Image src={mainLogo} alt="Logo" width={150} height={40} />
+      <div className='cursor-pointer'>
+        <Image src={mainLogo} alt="Logo" width={150} height={40} onClick={() => router.push('/')} />
       </div>
       <div className="md:flex hidden gap-4 md:my-0 my-2">
         <button
-          className={`py-2 px-4 rounded-full ${
-            selectedComponent === 'Influencer' ? 'bg-gray-100' : ''
-          }`}
+          className={`py-2 px-4 rounded-full ${selectedComponent === 'Influencer' ? 'bg-gray-100' : ''
+            }`}
           onClick={() => setSelectedComponent('Influencer')}
         >
           Influencer
         </button>
         <button
-          className={` py-2 px-4 rounded-full ${
-            selectedComponent === 'Brand' ? 'bg-gray-100' : ''
-          }`}
+          className={` py-2 px-4 rounded-full ${selectedComponent === 'Brand' ? 'bg-gray-100' : ''
+            }`}
           onClick={() => setSelectedComponent('Brand')}
         >
           Brand

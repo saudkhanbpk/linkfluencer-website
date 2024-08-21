@@ -37,7 +37,7 @@ function BrandData() {
                 <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10'>
                 <div className='flex gap-4'>
                         <div className='self-end w-full md:w-[300px]'>
-                            <Image src={badgirl} alt='image' />
+                            <Image src={badgirl} alt='image' className='rounded-xl' />
                            
                             <Image className='my-2' src={fram321} alt='image'   />
                           

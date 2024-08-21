@@ -5,7 +5,7 @@ interface NavigationLinkContainerProps {
   href: string;
   label: ReactNode;  // Allow `label` to be a string or JSX
   isOpen: boolean;
-  iconSrc: StaticImageData;
+  iconSrc: string;
 }
 
 export const NavigationLinkContainer: React.FC<NavigationLinkContainerProps> = ({ href, label, iconSrc, isOpen }) => (

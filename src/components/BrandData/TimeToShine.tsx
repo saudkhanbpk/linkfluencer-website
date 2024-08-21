@@ -21,13 +21,13 @@ function TimeToShine() {
         <div className='flex gap-3'>
           <div className='flex flex-col items-center'>
             <Image src={property1} alt='1' className='md:w-auto w-[110px]' />
-            <button className='p-1 md:p-3 bg-white rounded-full relative bottom-16   '>21k clicks</button>
+            <button className='p-1 md:p-3 bg-white rounded-full relative bottom-9 md:bottom-16  text-xs md:text-sm    '>21k clicks</button>
           </div>
           <div className='flex flex-col items-center'><Image src={property2} alt='2' className='md:w-auto w-[110px]' />
-          <button className=' p-1 md:p-3 bg-white rounded-full relative bottom-16 ' >2.2m impressions</button></div>
+          <button className=' p-1 md:p-3 bg-white rounded-full relative bottom-9 md:bottom-16 text-xs md:text-sm ' >2.2m impressions</button></div>
 
           <div className='flex flex-col items-center'><Image src={property3} alt='3' className='md:w-auto w-[110px]' />
-          <button className=' p-1 md:p-3 bg-white rounded-full relative bottom-16 '>$20,120 in sales</button></div>
+          <button className=' p-1 md:p-3 bg-white rounded-full relative bottom-9 md:bottom-16 text-xs md:text-sm '>$20,120 in sales</button></div>
         </div>
       </div>
     </div>

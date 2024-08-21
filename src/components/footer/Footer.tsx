@@ -23,14 +23,14 @@ function Footer() {
         <div className='md:flex gap-16  mt-24'>
             <div className='flex gap-20 md:mt-0 mt-4'>
             <div>
-                <Image src={Logo} alt='logo' onClick={()=>{Router.push('/')}} />
+                <Image src={Logo} alt='logo' onClick={()=>{Router.push('/')}} className='cursor-pointer' />
                 <p className='my-3'>@2024</p>
             </div>
             <div>
                 <h1 className='text-xl font-bold'>legality</h1>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>Cookies Settings</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>Privacy Policy</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>Terms of Service</p>
+                <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/contact')}}>Cookies Settings</p>
+                <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/privacypolicy')}}>Privacy Policy</p>
+                <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/termsofservice')}}>Terms of Service</p>
                
 
             </div>
@@ -38,38 +38,38 @@ function Footer() {
             <div className='flex gap-28 md:mt-0 mt-4'>
             <div>
             <h1 className='text-xl font-bold'>Company</h1>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>How it Works</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>Campaign Mgmt</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>What’s New</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>About</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>Contact</p>
-                <p className='underline my-1' onClick={()=>{Router.push('/contact')}}>Services</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>How it Works</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>Campaign Mgmt</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>What’s New</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/about')}}>About</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>Contact</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/services')}}>Services</p>
 
 
             </div>
             <div>
             <h1 className='text-xl font-bold'>Support</h1>
-                <p className='underline my-1'>Help Topics</p>
-                <p className='underline my-1'>FAQs</p>
-                <p className='underline my-1'>Getting Started</p>
+                <p className='cursor-pointer hover:underline  my-1'>Help Topics</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/faq')}}>FAQs</p>
+                <p className='cursor-pointer hover:underline  my-1'>Getting Started</p>
             </div>
             </div>
             <div className='flex gap-16 md:gap-20 md:mt-0 mt-4'>
             <div>
             <h1 className='text-xl font-bold'>Follow Us</h1>
             <div className='flex gap-1 my-1'>
-            <div className='p-2 bg-white rounded-full'><FaFacebook /></div>
-                <div className='p-2 bg-white rounded-full'><FaLinkedinIn /></div>
-                <div className='p-2 bg-white rounded-full'><SlSocialInstagram /></div>
-                <div className='p-2 bg-white rounded-full'><FaXTwitter /></div>
+            <div className='cursor-pointer hover:underline p-2 bg-white rounded-full'><FaFacebook /></div>
+                <div className='cursor-pointer hover:underline p-2 bg-white rounded-full'><FaLinkedinIn /></div>
+                <div className='cursor-pointer hover:underline p-2 bg-white rounded-full'><SlSocialInstagram /></div>
+                <div className='cursor-pointer hover:underline p-2 bg-white rounded-full'><FaXTwitter /></div>
             </div>
                
 
             </div>
             <div>
             <h1 className='text-xl font-bold'>Contact Us</h1>
-           <div className='flex gap-1 my-1'><LuPhone className='self-center '/><a href='tel:+91-7458965874'>+91-7458965874</a></div>
-           <div className='flex gap-1 my-1'><CiMail  className='self-center '/><a href='mailto:hello@linkfluencer.io'>hello@linkfluencer.io</a></div>
+           <div className='cursor-pointer hover:underline flex gap-1 my-1'><LuPhone className='self-center '/><a href='tel:+91-7458965874'>+91-7458965874</a></div>
+           <div className='cursor-pointer hover:underline flex gap-1 my-1'><CiMail  className='self-center '/><a href='mailto:hello@linkfluencer.io'>hello@linkfluencer.io</a></div>
 
 
             </div>
