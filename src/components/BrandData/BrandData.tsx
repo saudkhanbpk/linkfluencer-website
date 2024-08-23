@@ -13,6 +13,7 @@ import Links from './Links'
 import Main from './Main'
 import TimeToShine from './TimeToShine'
 import Plateforms from './Plateforms'
+import { IoLinkOutline } from 'react-icons/io5'
 
 function BrandData() {
     return (
@@ -24,7 +25,7 @@ function BrandData() {
                     Linkfluencer.io</h1>
                     <p className='text-xl text-[#113E53] mt-4 '>Super tool that helps you grow across all social media apps and get better engagement!!</p>
                     <div>
-                        <input className='md:w-[400px] border p-3 rounded-full mt-5 ' type='text' placeholder='Paste your link here' /><br />
+                    <div className='flex'> <input className='md:w-[400px] border p-3 rounded-full mt-5 self-center ' type='text' placeholder='Paste your link here' />  <IoLinkOutline className='self-center text-3xl text-gray-200 relative z-10 right-12 top-2 cursor-pointer' /> </div>
                         <div className='flex justify-center mt-4'>
                             <button className="w-fit py-3 px-8  rounded-full focus:outline-none centered bg-[#020D3A] text-white">
                                 Create Smart Link

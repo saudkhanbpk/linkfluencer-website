@@ -11,29 +11,41 @@ import soundCloud from '../../../public/images/SoundCloud Logotype.png';
 import YoutubeMusic from '../../../public/images/YouTube Music Logotype.png';
 import vimeo from '../../../public/images/Vimeo Logotype.png';
 import link from '../../../public/images/fi_link.png';
-import { Height } from '@mui/icons-material';
 
 function Plateforms() {
   const platforms = [Netfix, spotify, YoutubeMusic, appleMusic, snap, soundCloud, reddit];
   const others = [vimeo, line, snap, appleMusic, Netfix, telegram, soundCloud].filter(Boolean);
 
   return (
-    <div className='md:h-screen flex flex-col justify-center items-center w-full '>
-      <h1 className='text-center text-4xl font-semibold mb-24 '>Our Trusted Partners</h1>
-      <div className='md:flex flex-wrap gap-2 '>
-        {platforms.map((platform, index) => (
-          <button key={index} className='flex justify-center items-center w-[200px] rounded-full border h-[50px]'>
-            <Image src={platform.src} alt={`Platform ${index}`} width={100} height={100}  className='w-fit' />
-          </button>
-        ))}
+    <div className='min-h-screen flex flex-col justify-center items-center w-full'>
+      <h1 className='text-center text-4xl font-semibold mb-24'>Our Trusted Partners</h1>
+
+      <div className='marquee-container'>
+        <div className='marquee'>
+          {[...platforms, ...platforms].map((platform, index) => (
+            <button
+              key={index}
+              className='marquee-item flex justify-center items-center w-[200px] rounded-full border h-[50px]'
+            >
+              <Image src={platform.src} alt={`Platform ${index}`} width={100} height={100} className='w-fit' />
+            </button>
+          ))}
+        </div>
       </div>
+
       <Image src={link} alt='link' width={50} className='my-10' />
-      <div className='md:flex flex-wrap gap-2'>
-        {others.map((other, index) => (
-          <button key={index} className='flex justify-center items-center w-[200px] rounded-full border h-[50px]'>
-            <Image src={other.src} alt={`other ${index}`} width={100} height={100}  className='w-fit' />
-          </button>
-        ))}
+
+      <div className='marquee-container'>
+        <div className='marquee'>
+          {[...others, ...others].map((other, index) => (
+            <button
+              key={index}
+              className='marquee-item flex justify-center items-center w-[200px] rounded-full border h-[50px]'
+            >
+              <Image src={other.src} alt={`Other ${index}`} width={100} height={100} className='w-fit' />
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

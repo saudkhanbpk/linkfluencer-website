@@ -31,3 +31,32 @@ body {
     text-wrap: balance;
   }
 }
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.marquee {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: marquee 7s linear infinite;
+}
+
+.marquee-item {
+  flex: none;
+}
+
+.marquee-container:hover .marquee {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
