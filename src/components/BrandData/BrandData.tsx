@@ -11,7 +11,7 @@ import nike from '../../../public/images/nike.png'
 import shoes from '../../../public/images/shoes.png'
 import Links from './Links'
 import Main from './Main'
-import TimeToShine from './TimeToShine'
+import Roi from './Roi'
 import Plateforms from './Plateforms'
 import { IoLinkOutline } from 'react-icons/io5'
 
@@ -38,16 +38,16 @@ function BrandData() {
                 <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10'>
                 <div className='flex gap-4'>
                         <div className='self-end w-full md:w-[300px]'>
-                            <Image src={badgirl} alt='image' className='rounded-xl' />
+                            <Image src={badgirl} alt='image' className='rounded-xl' width={300} height={300}    />
                            
-                            <Image className='my-2' src={fram321} alt='image'   />
+                            <Image className='my-2' src={fram321} alt='image'  width={300} height={300}     />
                           
-                            <Image src={anim} alt='image'/>
+                            <Image src={anim} alt='image' width={300} height={300}   />
 
                         </div>
                         <div className= 'self-end w-[300px]'>
-                            <Image src={gymshark} alt='image'      />
-                            <Image className='my-2' src={boy} alt='image'   />
+                            <Image src={gymshark} alt='image'  width={300} height={300}    />
+                            <Image className='my-2' src={boy} alt='image' width={300} height={300}      />
 
 
                         </div>
@@ -69,14 +69,14 @@ Linkfluencer.io</h1>
 </div>
 <div className='flex gap-4 '>
                         <div className='relative self-end w-full md:w-[300px]'>
-                            <Image src={blacklady} alt='imaw'    />
+                            <Image src={blacklady} alt='imaw' width={300} height={300}       />
 
 
                         </div>
                         <div className='w-[300px]'>
-                            <Image src={shoes} alt='imag'  />
-                            <Image className='my-2' src={snapchat} alt='image'   layout='responsive' style={{width:'auto', height:'auto'}}  />
-                            <Image src={nike} alt='image'   />
+                            <Image src={shoes} alt='imag' width={300} height={300}    />
+                            <Image className='my-2' src={snapchat} alt='image'   width={300} height={300}   />
+                            <Image src={nike} alt='image' width={300} height={300}      />
 
                         </div>
                     </div>
@@ -86,7 +86,7 @@ Linkfluencer.io</h1>
             </div>
             <Links/>
             <Main/>
-            <TimeToShine/>
+            <Roi/>
             <Plateforms/>
         </div>
     )

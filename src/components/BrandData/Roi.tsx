@@ -5,7 +5,7 @@ import property1 from '../../../public/images/Property 1=frame 2.png'
 import property2 from '../../../public/images/Property 1=frame 3.png'
 import property3 from '../../../public/images/Influencer 3.png'
 import Slider from 'react-slick';
-function TimeToShine() {
+function Roi() {
   const settings = {
     vertical: true,
     verticalSwiping: true,
@@ -33,17 +33,17 @@ function TimeToShine() {
         <Image src={logoanim} alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
         </div>
         <div>
-        <Image src={logoanim} alt='logoanim' className='md:w-auto w-[70px]' />
+        <Image src={logoanim} alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
         </div>
         </Slider>
         <div className='flex gap-3'>
           <div className='flex flex-col items-center w-fit'>
             <Slider {...settings} className='w-[110px] md:w-[200px]' >
               <div>
-                <Image src={property1} alt='1' className='md:w-auto w-[110px]' />
+                <Image src={property1} alt='1'  width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
               <div>
-                <Image src={property1} alt='1' className='md:w-auto w-[110px]' />
+                <Image src={property1} alt='1' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
             </Slider>
             <Slider {...settings} className='w-[80px] md:w-[100px] relative bottom-9 md:bottom-16  ' >
@@ -58,10 +58,10 @@ function TimeToShine() {
           <div className='flex flex-col items-center'>
             <Slider {...settings} className='w-[110px] md:w-[200px]' >
               <div>
-                <Image src={property2} alt='2' className='md:w-auto w-[110px]' />
+                <Image src={property2} alt='2' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
               <div>
-                <Image src={property2} alt='2' className='md:w-auto w-[110px]' />
+                <Image src={property2} alt='2' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
             </Slider>
             <Slider {...settings} className='w-[100px] md:w-[160px] relative bottom-12 md:bottom-16  '>
@@ -77,10 +77,10 @@ function TimeToShine() {
           <div className='flex flex-col items-center'>
             <Slider {...settings} className='w-[110px] md:w-[200px]' >
               <div>
-                <Image src={property3} alt='3' className='md:w-auto w-[110px]' />
+                <Image src={property3} alt='3' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
               <div>
-                <Image src={property3} alt='3' className='md:w-auto w-[110px]' />
+                <Image src={property3} alt='3' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
             </Slider>
             <Slider {...settings} className='w-[100px] md:w-[140px] relative bottom-12 md:bottom-16  '>
@@ -98,4 +98,4 @@ function TimeToShine() {
   )
 }
 
-export default TimeToShine
+export default Roi

@@ -36,14 +36,14 @@ function InfluencerData() {
                 <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10 w-full'>
                     <div className='flex gap-4'>
                         <div className='md:self-end w-full  md:w-[300px]'>
-                            <Image src={Frame} alt='image'  layout='responsive' />
-                            <Image className='my-2' src={Linkt} alt='image'  layout='responsive'  />
-                            <Image src={spotify} alt='image'   layout='responsive'  />
+                            <Image src={Frame} alt='image'  width={300} height={300} />
+                            <Image className='my-2' src={Linkt} alt='image'  width={300} height={300}  />
+                            <Image src={spotify} alt='image'   width={300} height={300}  />
 
                         </div>
                         <div className=' relative md:self-end w-[300px]'>
-                            <Image src={animYoutube} alt='image'  layout='responsive'    />
-                            <Image className='my-2' src={img33} alt='image'  layout='responsive'  />
+                            <Image src={animYoutube} alt='image'  width={300} height={300}    />
+                            <Image className='my-2' src={img33} alt='image'  width={300} height={300}   />
 
 
                         </div>
@@ -65,14 +65,14 @@ function InfluencerData() {
 </div>
                     <div className='flex gap-4 '>
                         <div className='relative self-end w-full md:w-[300px]'>
-                            <Image src={Frame12} alt='imaw'   layout='responsive' />
+                            <Image src={Frame12} alt='imaw'   width={300} height={300}  />
 
 
                         </div>
                         <div className=' w-[300px]'>
-                            <Image src={girl} alt='imag'   layout='responsive' />
-                            <Image className='my-2' src={snapchat} alt='image'   layout='responsive' />
-                            <Image src={insta} alt='image'   layout='responsive'  />
+                            <Image src={girl} alt='imag'   width={300} height={300}  />
+                            <Image className='my-2' src={snapchat} alt='image'  width={300} height={300} />
+                            <Image src={insta} alt='image'   width={300} height={300}  />
 
                         </div>
                     </div>

@@ -2,6 +2,39 @@ import Footer from '@/components/footer/Footer';
 import Navbar from '@/components/navbar/Navbar';
 import { useRouter } from 'next/router';
 import React, { useState, FormEvent } from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+interface AccordionItemProps {
+    question: string;
+    answer: string;
+}
+
+const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleAccordion = () => setIsOpen(!isOpen);
+
+    return (
+        <div className={`border border-gray-200  shadow-sm ${isOpen ? "rounded-xl" : "rounded-full"}`}>
+            <button
+                className="md:w-[695px]  px-4 py-3 text-left bg-white focus:outline-none  flex justify-between items-center rounded-full"
+                onClick={toggleAccordion}
+            >
+                <span className="font-medium text-gray-800">{question}</span>
+                {isOpen ? (
+                    <ChevronUp className="w-5 h-5 text-gray-500 " />
+                ) : (
+                    <ChevronDown className="w-5 h-5 text-gray-500" />
+                )}
+            </button>
+            {isOpen && (
+                <div className="px-4 py-3  border-gray-200">
+                    <p className="text-gray-600">{answer}</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
 
 function Faq() {
     const [name, setName] = useState<string>('Question text goes here?');
@@ -14,10 +47,7 @@ function Faq() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        if (!isAgreed) {
-            alert("Please agree to the terms and policy.");
-            return;
-        }
+        
 
         // Handle form submission, e.g., sending data to an API
         console.log({
@@ -35,32 +65,33 @@ function Faq() {
         setMessage('Question text goes here?');
         setIsAgreed(false);
     };
-const router = useRouter()
+    const router = useRouter()
     const handleContactClick = () => {
         router.push('/contact')
     };
 
-    const dropdownOptions1 = [
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' },
-    ];
-    const dropdownOptions2 = [
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' },
-    ];
-    const dropdownOptions3 = [
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' },
-    ];
-    const dropdownOptions4 = [
-        { value: 'option1', label: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' },
-    ];
-
+    const faqItems = [
+        {
+            question: 'Question text goes here?',
+            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.'
+        },
+        {
+            question: 'Question text goes here?',
+            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.'
+        },
+        {
+            question: 'Question text goes here?',
+            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.'
+        },
+        {
+            question: 'Question text goes here?',
+            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.'
+        },
+        {
+            question: 'Question text goes here?',
+            answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.'
+        }
+    ]
     return (
         <>
             <Navbar selectedComponent={selectedComponent}
@@ -69,55 +100,16 @@ const router = useRouter()
             <div className='md:flex justify-center items-center flex-col md:min-h-screen p-8 md:pt-32'>
                 <form className='flex flex-col ' onSubmit={handleSubmit}>
                     <h1 className='text-3xl md:text-5xl font-semibold md:text-start text-center text-[#113E53] mb-5'>FAQs</h1>
-                    <p className='text-xl md:w-[700px] md:text-start text-center'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
-                    <select
-                        className='md:w-[700px] border p-3 rounded-full mt-5 '
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    >
-                        <option disabled>Question text goes here?</option>
-                        {dropdownOptions1.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
+                    <p className='text-xl md:w-[700px] md:text-start text-center mb-7'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+                    <div className="space-y-4 md:w-[700px]">
+                        {faqItems.map((item, index) => (
+                            <AccordionItem
+                                key={index}
+                                question={item.question}
+                                answer={item.answer}
+                            />
                         ))}
-                    </select>
-                    <select
-                        className='w-full md:w-[700px] border p-3 rounded-full mt-5'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    >
-                        <option disabled>Question text goes here?</option>
-                        {dropdownOptions2.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        className='w-full md:w-[700px]  border p-3 rounded-full mt-5'
-                        value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
-                    >
-                        <option disabled>Question text goes here?</option>
-                        {dropdownOptions3.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        className='w-full md:w-[700px]  border p-3  rounded-full mt-5'
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                    >
-                        <option disabled>Question text goes here?</option>
-                        {dropdownOptions4.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
+                    </div>
                     <div className='flex flex-col justify-start mt-20'>
                         <h1 className='text-2xl md:text-4xl font-semibold float-start text-[#020D3A] '>
                             Still have a question?
