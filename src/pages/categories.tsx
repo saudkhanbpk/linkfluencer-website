@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import mainLogo from '../../public/images/main_logo.png';
-import arrowBackDark from '../../public/images/arrow_back_dark.png';
 import Image from 'next/image';
 
 function CategoriesComponent() {
@@ -46,7 +44,7 @@ function CategoriesComponent() {
         <>
         <div className="flex items-center justify-center md:min-h-screen bg-white border border-black">
             <div className="absolute top-0 left-0 mt-4 ml-4">
-                <Image src={mainLogo} alt="Logo" width={150} height={40} />
+                <Image src='/images/main_logo.png' alt="Logo" width={150} height={40} />
             </div>
             <div className='md:flex gap-4 p-3 md:p-0'>
 
@@ -54,7 +52,7 @@ function CategoriesComponent() {
                     <div className="flex items-center space-x-4 mb-4 relative md:right-12">
                         <div>
                             <button className="text-lg relative bottom-7 hidden md:flex self-center" >
-                                <Image src={arrowBackDark} className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
+                                <Image src='/images/arrow_back_dark.png' className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
                             </button>
                         </div>
 

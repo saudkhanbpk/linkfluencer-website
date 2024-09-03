@@ -41,9 +41,6 @@
 
 // export default Signup;
 import React from 'react'
-import influencer from "../../public/images/Influencer.png"
-import brand from "../../public/images/Brand.png"
-import dark from "../../public/images/Dark.png"
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Logo from '@/components/common/Logo'
@@ -65,24 +62,24 @@ function join() {
                     <div className='flex flex-wrap  gap-3 '>
                         <div className='md:w-[370px] flex gap-2 border-black border rounded-2xl self-center  p-2 cursor-pointer ' onClick={handleBrandClick}>
                             <div className='self-center p-8 bg-gray-200 rounded-xl '>
-                                <Image src={influencer}  alt="influencer" width={90} height={90} />
+                                <Image src='/images/Influencer.png'  alt="influencer" width={90} height={90} />
                             </div>
                             <div className='self-center'>
                                 <h1 className='font-bold text-2xl'>Influencer</h1>
                                 <p className='text-xl'>Make Everyday A Pay Day</p>
-                                <Image className='float-right hover:rotate-45 duration-100' src={dark}  alt="influencer" width={40} height={40} />
+                                <Image className='float-right hover:rotate-45 duration-100' src='/images/Dark.png'  alt="influencer" width={40} height={40} />
 
                             </div>
                         </div>
                         <div className='md:w-[370px] flex gap-2 border-black border rounded-2xl self-center  p-2 cursor-pointer ' onClick={ handleInfluencClick}>
 
                             <div className='self-center p-8 bg-gray-200 rounded-xl '>
-                                <Image src={brand} alt="influencer" width={90} height={90} />
+                                <Image src='/images/Brand.png' alt="brand" width={90} height={90} />
                             </div>
                             <div>
                                 <h1 className='font-bold text-2xl'>Brand</h1>
                                 <p className='text-xl'>Take Your Brand To Public</p>
-                                <Image className='float-right hover:rotate-45 duration-100' src={dark} alt="influencer" width={40} height={40} />
+                                <Image className='float-right hover:rotate-45 duration-100' src='/images/Dark.png' alt="influencer" width={40} height={40} />
                             </div>
                         </div>
                     </div>

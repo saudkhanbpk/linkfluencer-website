@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Logo from '@/components/common/Logo';
 import useFormValidation from '@/hooks/useFormValidation';
-import arrowBackDark from '../../../public/images/arrow_back_dark.png';
-import googleLogo from '../../../public/images/google_logo.png';
-import facebookLogo from '../../../public/images/facebook_logo.png';
-import check from '../../../public/images/fi_check.png';
 import { useRouter } from 'next/router';
 
 const SignupInfluencer = () => {
@@ -48,7 +44,7 @@ const SignupInfluencer = () => {
           <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
             <div className="flex items-center space-x-4 mb-4 relative md:right-12">
               <button className="text-lg relative bottom-3 hidden md:flex" onClick={() => router.push('/signup')}>
-                <Image src={arrowBackDark} className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
+                <Image src='/images/arrow_back_dark.png' className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
               </button>
               <div>
                 <h1 className="text-4xl">Sign Up</h1>
@@ -97,10 +93,10 @@ const SignupInfluencer = () => {
             </p>
             <div className="md:flex  items-center justify-center md:space-x-4 m-4">
             <button className=" flex w-full gap-2 justify-center mb-2 md:mb-0 py-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src={googleLogo} alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
+            <Image src='/images/google_logo.png' alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
           </button>
           <button className=" flex w-full justify-center gap-2 p-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src={facebookLogo} alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
+            <Image src='/images/facebook_logo.png' alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
           </button>
             </div>
           </div>
@@ -116,7 +112,7 @@ const SignupInfluencer = () => {
                 className="text-lg relative bottom-8 hidden md:block"
                 onClick={() => setStep(1)} // Go back to signup step
               >
-                <Image src={arrowBackDark} alt="Back" className="w-[60px]" />
+                <Image src='/images/arrow_back_dark.png' alt="Back" className="w-[60px]" />
               </button>
               <div>
                 <h1 className="text-4xl">OTP Verification</h1>
@@ -132,7 +128,7 @@ const SignupInfluencer = () => {
                 placeholder="Enter Email OTP"
               />
               <div className="flex gap-2 m-2 w-full">
-                <Image src={check} alt="check" />
+                <Image src='/images/fi_check.png' alt="check" />
                 <p>OTP sent on your device successfully</p>
               </div>
               <p className="cursor-pointer relative left-9 " onClick={handleResendOTP}>
@@ -155,10 +151,10 @@ const SignupInfluencer = () => {
             </div>
             <div className="md:flex md:space-x-8 w-full justify-center m-2">
             <button className=" flex w-full gap-2 py-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src={googleLogo} alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
+            <Image src='/images/google_logo.png' alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
           </button>
           <button className=" flex w-full gap-2 p-3 px-8 mb-2 md:mb-0 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src={facebookLogo} alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
+            <Image src='/images/facebook_logo.png' alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
           </button>
             </div>
           </div>

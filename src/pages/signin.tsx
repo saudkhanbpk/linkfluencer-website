@@ -1,9 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import arrowBackDark from "../../public/images/arrow_back_dark.png";
-import googleLogo from "../../public/images/google_logo.png";
-import facebookLogo from "../../public/images/facebook_logo.png";
 import { useRouter } from "next/router";
 import Logo from "@/components/common/Logo";
 
@@ -23,7 +20,7 @@ const LoginPage = () => {
       <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
         <div className="flex items-center space-x-4 mb-4 relative md:right-12">
           <button className="text-lg relative bottom-3 hidden md:flex" onClick={()=>router.push('/')}>
-            <Image src={arrowBackDark} className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
+            <Image src='/images/arrow_back_dark.png' className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
           </button>
           <div>
             <h1 className="text-4xl font-semibold text-navy">Log In</h1>
@@ -74,10 +71,10 @@ const LoginPage = () => {
 
         <div className="md:flex  items-center justify-center md:space-x-4 m-4">
         <button className=" flex w-full gap-2 justify-center mb-2 xs:mb-0 py-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src={googleLogo} alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
+            <Image src='/images/google_logo.png' alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
           </button>
           <button className=" flex w-full justify-center gap-2 p-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src={facebookLogo} alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
+            <Image src='/images/facebook_logo.png' alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
           </button>
         </div>
       </div>

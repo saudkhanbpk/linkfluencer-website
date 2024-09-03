@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import mainLogo from '../../../public/images/main_logo.png';
 import { useRouter } from 'next/router';
 import { HiMenu, HiX } from 'react-icons/hi';
 
@@ -15,7 +14,7 @@ const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent
   return (
     <div className="md:absolute p-4 flex justify-between w-[100%]">
       <div className='cursor-pointer'>
-        <Image src={mainLogo} alt="Logo" width={150} height={40} onClick={() => router.push('/')} />
+        <Image src='/images/main_logo.png' alt="Logo" width={150} height={40} onClick={() => router.push('/')} />
       </div>
 
       {/* Mobile Menu Icon */}

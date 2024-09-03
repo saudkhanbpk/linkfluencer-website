@@ -80,14 +80,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import arrowBackDark from "../../public/images/arrow_back_dark.png";
-import googleLogo from "../../public/images/google_logo.png";
-import facebookLogo from "../../public/images/facebook_logo.png";
-import Tick from "../../public/images/Group.png";
 import { useRouter } from "next/router";
 import Logo from "@/components/common/Logo";
 
-const ForgotPassword = () => {
+const Forgotpassword = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -125,7 +121,7 @@ const ForgotPassword = () => {
               onClick={() => router.push('/signin')}
             >
               <Image
-                src={arrowBackDark}
+                src='/images/arrow_back_dark.png'
                 className='hover:rotate-45 duration-100'
                 alt="Back"
                 width={40}
@@ -209,7 +205,7 @@ const ForgotPassword = () => {
         {step === 4 && (
           <div className="text-center self-center flex flex-col justify-center items-center" >
             <div className="w-[100px] h-[100px] flex justify-center items-center bg-gray-100 rounded-full mb-3 border border-black ">
-              <Image src={Tick} alt="tick" />
+              <Image src='/images/Group.png' alt="tick" />
             </div>
             <p>Password Changed Successfully</p>
             <a
@@ -236,11 +232,11 @@ const ForgotPassword = () => {
         {(step === 1 || step === 2) && (
           <div className="md:flex items-center justify-center md:space-x-2 mb-6 mt-4">
             <button className=" flex justify-center w-full gap-2 py-3 px-8 bg-white border mb-2 md:mb-0 rounded-full shadow-sm hover:shadow-md">
-              <Image src={googleLogo} alt="Google" width={20} height={20} />
+              <Image src='/images/google_logo.png' alt="Google" width={20} height={20} />
               <span className="font-bold">Google</span>
             </button>
             <button className=" flex justify-center w-full gap-2 p-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-              <Image src={facebookLogo} alt="Facebook" width={20} height={20} />
+              <Image src='/images/facebook_logo.png' alt="Facebook" width={20} height={20} />
               <span className="font-bold">Facebook</span>
             </button>
           </div>
@@ -250,5 +246,5 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Forgotpassword;
 
