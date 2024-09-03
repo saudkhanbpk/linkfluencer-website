@@ -30,20 +30,20 @@ function Roi() {
       <div className='flex flex-col justify-center items-center gap-4 self-center relative bottom-10'>
       <Slider {...settings} className='w-[70px] md:w-[100px] md:h-[100px' >
         <div>
-        <Image src={logoanim} alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
+        <Image src='/images/logo animation.png' alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
         </div>
         <div>
-        <Image src={logoanim} alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
+        <Image src='/images/logo animation.png' alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
         </div>
         </Slider>
         <div className='flex gap-3'>
           <div className='flex flex-col items-center w-fit'>
             <Slider {...settings} className='w-[110px] md:w-[200px]' >
               <div>
-                <Image src={property1} alt='1'  width={300} height={400} className='md:w-auto w-[110px]' />
+                <Image src='/images/Property 1=frame 2.png' alt='1'  width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
               <div>
-                <Image src={property1} alt='1' width={300} height={400} className='md:w-auto w-[110px]' />
+                <Image src='/images/Property 1=frame 2.png' alt='1' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
             </Slider>
             <Slider {...settings} className='w-[80px] md:w-[100px] relative bottom-9 md:bottom-16  ' >
@@ -58,10 +58,10 @@ function Roi() {
           <div className='flex flex-col items-center'>
             <Slider {...settings} className='w-[110px] md:w-[200px]' >
               <div>
-                <Image src={property2} alt='2' width={300} height={400} className='md:w-auto w-[110px]' />
+                <Image src='/images/Property 1=frame 3.png' alt='2' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
               <div>
-                <Image src={property2} alt='2' width={300} height={400} className='md:w-auto w-[110px]' />
+                <Image src='/images/Property 1=frame 3.png' alt='2' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
             </Slider>
             <Slider {...settings} className='w-[100px] md:w-[160px] relative bottom-12 md:bottom-16  '>
@@ -77,10 +77,10 @@ function Roi() {
           <div className='flex flex-col items-center'>
             <Slider {...settings} className='w-[110px] md:w-[200px]' >
               <div>
-                <Image src={property3} alt='3' width={300} height={400} className='md:w-auto w-[110px]' />
+                <Image src='/images/Influencer 3.png' alt='3' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
               <div>
-                <Image src={property3} alt='3' width={300} height={400} className='md:w-auto w-[110px]' />
+                <Image src='/images/Influencer 3.png' alt='3' width={300} height={400} className='md:w-auto w-[110px]' />
               </div>
             </Slider>
             <Slider {...settings} className='w-[100px] md:w-[140px] relative bottom-12 md:bottom-16  '>

@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import Logo from '../../../public/images/main_logo.png'
 import { LuPhone } from 'react-icons/lu'
 import { CiMail } from 'react-icons/ci'
 import { FaFacebook, FaLinkedinIn } from 'react-icons/fa'
@@ -23,12 +22,12 @@ function Footer() {
         <div className='md:flex gap-16  mt-24'>
             <div className='flex gap-20 md:mt-0 mt-4'>
             <div>
-                <Image src={Logo} alt='logo' onClick={()=>{Router.push('/')}} className='cursor-pointer' />
+                <Image src='/images/main_logo.png' alt='logo' width={160} height={300} onClick={()=>{Router.push('/')}} className='cursor-pointer' />
                 <p className='my-3'>@2024</p>
             </div>
             <div>
                 <h1 className='text-xl font-bold'>legality</h1>
-                <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/contact')}}>Cookies Settings</p>
+                <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/')}}>Cookies Settings</p>
                 <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/privacypolicy')}}>Privacy Policy</p>
                 <p className='cursor-pointer hover:underline underline my-1' onClick={()=>{Router.push('/termsofservice')}}>Terms of Service</p>
                
@@ -38,9 +37,9 @@ function Footer() {
             <div className='flex gap-28 md:mt-0 mt-4'>
             <div>
             <h1 className='text-xl font-bold'>Company</h1>
-                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>How it Works</p>
-                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>Campaign Mgmt</p>
-                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>What’s New</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/')}}>How it Works</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/')}}>Campaign Mgmt</p>
+                <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/')}}>What’s New</p>
                 <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/about')}}>About</p>
                 <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/contact')}}>Contact</p>
                 <p className='cursor-pointer hover:underline  my-1' onClick={()=>{Router.push('/services')}}>Services</p>

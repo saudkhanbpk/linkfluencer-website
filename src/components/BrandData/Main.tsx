@@ -35,10 +35,6 @@
 // export default Main
 import Image from 'next/image';
 import React from 'react';
-import brand from '../../../public/images/Brand 1.2 - images.png'
-import AdidasLogo from '../../../public/images/adidaslogo.png';
-import y2 from '../../../public/images/youtube2.png';
-import blueTick from '../../../public/images/BlueTick.png';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -72,19 +68,19 @@ function Apps() {
         <div className='flex flex-col justify-center items-center'>
     <Slider {...settings} className='relative top-16 md:top-20 w-[180px] md:w-[280px]  z-10'>
       <div>
-          <button className='p-1 md:p-3 rounded-full bg-white flex gap-1 lg:text-[16px] text-xs'><Image className='self-center ' src={y2} alt='img' width={20} height={20}/><p>linkfluencer.io/youtube/joeys...</p></button>
+          <button className='p-1 md:p-3 rounded-full bg-white flex gap-1 lg:text-[16px] text-xs'><Image className='self-center ' src='/images/youtube2.png' alt='img' width={20} height={20}/><p>linkfluencer.io/youtube/joeys...</p></button>
           </div>
           <div>
-          <button className='p-1 md:p-3 rounded-full bg-white flex gap-1  lg:text-[16px] text-xs'><Image className='self-center ' src={y2} alt='img' width={20} height={20}/><p>linkfluencer.io/youtube/joeys...</p></button>
+          <button className='p-1 md:p-3 rounded-full bg-white flex gap-1  lg:text-[16px] text-xs'><Image className='self-center ' src='/images/youtube2.png' alt='img' width={20} height={20}/><p>linkfluencer.io/youtube/joeys...</p></button>
           </div>
            </Slider>
         {/* First slider */}
         <Slider {...settings} className=' md:w-full w-[200px]'>
           <div className=''>
-            <Image src={brand} alt='image' className='w-[200px] md:w-auto' width={400} height={400} />
+            <Image src='/images/Brand 1.2 - images.png' alt='image' className='w-[200px] md:w-auto' width={400} height={400} />
           </div>
           <div className=''>
-            <Image src={brand} alt='image' className='w-[200px] md:w-auto' width={400} height={400} />
+            <Image src='/images/Brand 1.2 - images.png' alt='image' className='w-[200px] md:w-auto' width={400} height={400} />
           </div>
           {/* Add more slides as needed */}
         </Slider>
@@ -103,16 +99,16 @@ function Apps() {
             <div className='flex flex-col justify-center items-center  gap-2'>
 
               <div className='bg-[#FFDEE0] w-[200px] md:w-[304px] h-[180px] md:h-[206px] gap-2 flex items-center justify-center flex-col rounded-2xl'>
-                <Image src={AdidasLogo} alt='ios' className='w-[60px] md:w-auto' width={80} height={80} />
-                <h1 className='md:text-xl font-semibold text-[#500F13] flex gap-2'><p>Adidas </p><Image src={blueTick} alt='bluTick' width={30} height={30} /></h1>
+                <Image src='/images/adidaslogo.png' alt='ios' className='w-[60px] md:w-auto' width={80} height={80} />
+                <h1 className='md:text-xl font-semibold text-[#500F13] flex gap-2'><p>Adidas </p><Image src='/images/BlueTick.png' alt='bluTick' width={30} height={30} /></h1>
                 <button className='py-2 px-4 md:px-8 md:text-md text-sm text-white rounded-full bg-[#500F13]'>Subscribe</button>
               </div>
             </div>
             <div className='flex justify-center flex-col items-center gap-2'>
               {/* <Image src='/images/youtube.png' className='w-[30px] md:w-auto' alt='android' width={40} height={40} /> */}
               <div className='bg-[#FFDEE0] w-[200px] md:w-[304px] h-[180px] md:h-[206px] gap-2 flex items-center justify-center flex-col rounded-2xl'>
-                <Image src={AdidasLogo} alt='ios' className='w-[60px] md:w-auto' width={80} height={80} />
-                <h1 className='md:text-xl font-semibold text-[#500F13] flex gap-2'><p>Adidas </p><Image src={blueTick} alt='bluTick' width={30} height={30} /></h1>
+                <Image src='/images/adidaslogo.png' alt='ios' className='w-[60px] md:w-auto' width={80} height={80} />
+                <h1 className='md:text-xl font-semibold text-[#500F13] flex gap-2'><p>Adidas </p><Image src='/images/BlueTick.png' alt='bluTick' width={30} height={30} /></h1>
                 <button className='py-2 px-4 md:px-8 md:text-md text-sm text-white rounded-full bg-[#500F13]'>Subscribe</button>
               </div>
             </div>

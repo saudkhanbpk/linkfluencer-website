@@ -1,14 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import Frame from '../../../public/images/Frame 1261153494.png'
-import spotify from '../../../public/images/spotify.png'
-import Linkt from '../../../public/images/Link-Twitch.png'
-import animYoutube from '../../../public/images/Animation - Youtube.png'
-import img33 from '../../../public/images/image 33.png'
-import Frame12 from '../../../public/images/Frame12.png'
-import snapchat from '../../../public/images/Link-Snapchat.png'
-import insta from '../../../public/images/Animation - Insta.png'
-import girl from '../../../public/images/girl.png'
 import Links from './Links'
 import Apps from './Apps'
 import TimeToShine from './TimeToShine'
@@ -36,14 +27,14 @@ function InfluencerData() {
                 <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10 w-full'>
                     <div className='flex gap-4'>
                         <div className='md:self-end w-full  md:w-[300px]'>
-                            <Image src={Frame} alt='image'  width={300} height={300} />
-                            <Image className='my-2' src={Linkt} alt='image'  width={300} height={300}  />
-                            <Image src={spotify} alt='image'   width={300} height={300}  />
+                            <Image src='/images/Frame 1261153494.png' alt='image'  width={300} height={300} />
+                            <Image className='my-2' src='/images/Link-Twitch.png' alt='image'  width={300} height={300}  />
+                            <Image src='/images/spotify.png' alt='image'   width={300} height={300}  />
 
                         </div>
                         <div className=' relative md:self-end w-[300px]'>
-                            <Image src={animYoutube} alt='image'  width={300} height={300}    />
-                            <Image className='my-2' src={img33} alt='image'  width={300} height={300}   />
+                            <Image src='/images/Animation - Youtube.png' alt='image'  width={300} height={300}    />
+                            <Image className='my-2' src='/images/image 33.png' alt='image'  width={300} height={300}   />
 
 
                         </div>
@@ -65,14 +56,14 @@ function InfluencerData() {
 </div>
                     <div className='flex gap-4 '>
                         <div className='relative self-end w-full md:w-[300px]'>
-                            <Image src={Frame12} alt='imaw'   width={300} height={300}  />
+                            <Image src='/images/Frame12.png' alt='imaw'   width={300} height={300}  />
 
 
                         </div>
                         <div className=' w-[300px]'>
-                            <Image src={girl} alt='imag'   width={300} height={300}  />
-                            <Image className='my-2' src={snapchat} alt='image'  width={300} height={300} />
-                            <Image src={insta} alt='image'   width={300} height={300}  />
+                            <Image src='/images/girl.png' alt='imag'   width={300} height={300}  />
+                            <Image className='my-2' src='/images/Link-Snapchat.png' alt='image'  width={300} height={300} />
+                            <Image src='/images/Animation - Insta.png' alt='image'   width={300} height={300}  />
 
                         </div>
                     </div>

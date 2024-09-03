@@ -1,10 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import Slider from 'react-slick';
-import gymshark from '../../../public/images/image - gymshark.png'
-import shark2 from '../../../public/images/Influencer 2.1.png'
-import shark1 from '../../../public/images/Influencer 2.2.png'
-
 function TimeToShine() {
   const settings = {
     vertical: true,
@@ -34,10 +30,10 @@ function TimeToShine() {
         <div>
           <Slider {...settings} className=' md:w-[300px] w-[200px]'>
             <div>
-              <Image src={gymshark} alt='image' width={300} height={300} />
+              <Image src='/images/image - gymshark.png' alt='image' width={300} height={300} />
             </div>
             <div>
-              <Image src={gymshark} alt='image' width={300} height={300} />
+              <Image src='/images/image - gymshark.png' alt='image' width={300} height={300} />
             </div>
           </Slider>
         </div>
@@ -45,20 +41,20 @@ function TimeToShine() {
           <div className='self-end relative -right-6 md:-right-10 md:bottom-24 bottom-14   w-fit'>
           <Slider {...settings} className=' md:w-[350px] w-[200px]'>
             <div>
-            <Image src={shark1} alt='image' className='w-fit ' width={500} height={400} />
+            <Image src='/images/Influencer 2.2.png' alt='image' className='w-fit ' width={500} height={400} />
             </div>
             <div>
-            <Image src={shark1} alt='image' className='w-fit ' width={500} height={400} />
+            <Image src='/images/Influencer 2.2.png' alt='image' className='w-fit ' width={500} height={400} />
             </div>
             </Slider>
           </div>
           <div className='self-end relative md:bottom-44 -left-6 md:-left-10 bottom-28  w-fit'>
           <Slider {...settings} className=' md:w-[350px] w-[200px]'>
             <div>
-            <Image src={shark2} alt='shark' className='w-fit ' width={500} height={400} />
+            <Image src='/images/Influencer 2.1.png' alt='shark' className='w-fit ' width={500} height={400} />
             </div>
             <div>
-            <Image src={shark2} alt='shark' className='w-fit ' width={500} height={400} />
+            <Image src='/images/Influencer 2.1.png' alt='shark' className='w-fit ' width={500} height={400} />
             </div>
             </Slider>
           </div>

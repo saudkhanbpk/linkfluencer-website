@@ -1,14 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import badgirl from '../../../public/images/badgirl.png'
-import anim from '../../../public/images/Animation - Sephora - Brand.png'
-import fram321 from '../../../public/images/frame321.png'
-import gymshark from '../../../public/images/gymshark.png'
-import boy from '../../../public/images/boy.png'
-import blacklady from '../../../public/images/blacklady.png'
-import snapchat from '../../../public/images/Link-Snapchat.png'
-import nike from '../../../public/images/nike.png'
-import shoes from '../../../public/images/shoes.png'
 import Links from './Links'
 import Main from './Main'
 import Roi from './Roi'
@@ -38,16 +29,16 @@ function BrandData() {
                 <div className='flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10'>
                 <div className='flex gap-4'>
                         <div className='self-end w-full md:w-[300px]'>
-                            <Image src={badgirl} alt='image' className='rounded-xl' width={300} height={300}    />
+                            <Image src='/images/badgirl.png' alt='image' className='rounded-xl' width={300} height={300}    />
                            
-                            <Image className='my-2' src={fram321} alt='image'  width={300} height={300}     />
+                            <Image className='my-2' src='/images/frame321.png' alt='image'  width={300} height={300}     />
                           
-                            <Image src={anim} alt='image' width={300} height={300}   />
+                            <Image src='/images/Animation - Sephora - Brand.png' alt='image' width={300} height={300}   />
 
                         </div>
                         <div className= 'self-end w-[300px]'>
-                            <Image src={gymshark} alt='image'  width={300} height={300}    />
-                            <Image className='my-2' src={boy} alt='image' width={300} height={300}      />
+                            <Image src='/images/gymshark.png' alt='image'  width={300} height={300}    />
+                            <Image className='my-2' src='/images/boy.png' alt='image' width={300} height={300}      />
 
 
                         </div>
@@ -69,14 +60,14 @@ Linkfluencer.io</h1>
 </div>
 <div className='flex gap-4 '>
                         <div className='relative self-end w-full md:w-[300px]'>
-                            <Image src={blacklady} alt='imaw' width={300} height={300}       />
+                            <Image src='/images/blacklady.png' alt='imaw' width={300} height={300}       />
 
 
                         </div>
                         <div className='w-[300px]'>
-                            <Image src={shoes} alt='imag' width={300} height={300}    />
-                            <Image className='my-2' src={snapchat} alt='image'   width={300} height={300}   />
-                            <Image src={nike} alt='image' width={300} height={300}      />
+                            <Image src='/images/shoes.png' alt='imag' width={300} height={300}    />
+                            <Image className='my-2' src='/images/Link-Snapchat.png' alt='image'   width={300} height={300}   />
+                            <Image src='/images/nike.png' alt='image' width={300} height={300}      />
 
                         </div>
                     </div>
