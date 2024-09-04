@@ -205,7 +205,7 @@ const Forgotpassword = () => {
         {step === 4 && (
           <div className="text-center self-center flex flex-col justify-center items-center" >
             <div className="w-[100px] h-[100px] flex justify-center items-center bg-gray-100 rounded-full mb-3 border border-black ">
-              <Image src='/images/Group.png' alt="tick" />
+              <Image src='/images/Group.png' alt="tick" width={50} height={50} />
             </div>
             <p>Password Changed Successfully</p>
             <a

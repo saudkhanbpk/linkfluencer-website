@@ -112,7 +112,7 @@ const SignupInfluencer = () => {
                 className="text-lg relative bottom-8 hidden md:block"
                 onClick={() => setStep(1)} // Go back to signup step
               >
-                <Image src='/images/arrow_back_dark.png' alt="Back" className="w-[60px]" />
+                <Image src='/images/arrow_back_dark.png' alt="Back" className="w-[60px]" width={40} height={40}  />
               </button>
               <div>
                 <h1 className="text-4xl">OTP Verification</h1>
@@ -128,7 +128,7 @@ const SignupInfluencer = () => {
                 placeholder="Enter Email OTP"
               />
               <div className="flex gap-2 m-2 w-full">
-                <Image src='/images/fi_check.png' alt="check" />
+                <Image src='/images/fi_check.png' alt="check" width={20} height={20}/>
                 <p>OTP sent on your device successfully</p>
               </div>
               <p className="cursor-pointer relative left-9 " onClick={handleResendOTP}>
