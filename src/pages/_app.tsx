@@ -2,9 +2,10 @@ import { AppProps } from 'next/app';
 import PropTypes from 'prop-types';
 import RootLayout from './layout';
 import './../styles/globals.css';
-
+import { useRouter } from 'next/router';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useEffect } from 'react';
 
 const theme = createTheme({
   typography: {
@@ -31,6 +32,10 @@ const theme = createTheme({
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+  useEffect(()=>{
+    // router.push('/signin');
+  },[])
   return (
     <RootLayout>
       <ThemeProvider theme={theme}>

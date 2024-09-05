@@ -3,79 +3,155 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Logo from "@/components/common/Logo";
+import { LeftArrow } from "./../svg";
+import Link from "next/link";
+import axios from "axios";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [rememberMe, setRememberMe] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setValues((previousValues) => {
+      return {
+        ...previousValues,
+        [name]: value,
+      };
+    });
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+
+    axios
+      .post(`${apiUrl}/auth/login`, values)
+      .then((res) => {
+        localStorage.setItem(
+          "linkfluencer-remember-me",
+          JSON.stringify(rememberMe)
+        );
+        localStorage.setItem("linkfluencer-activation-token", res.data.token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
-    setIsFormValid(email !== "" && password !== "");
-  }, [email, password]);
+    setIsFormValid(values.email !== "" && values.password !== "");
+  }, [values.email, values.password]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white border border-black">
-     <Logo/>
-      <div className="w-full max-w-md p-8 bg-white rounded-lg relative">
-        <div className="flex items-center space-x-4 mb-4 relative md:right-12">
-          <button className="text-lg relative bottom-3 hidden md:flex" onClick={()=>router.push('/')}>
-            <Image src='/images/arrow_back_dark.png' className="hover:rotate-45 duration-100" alt="Back" width={40} height={40} />
-          </button>
-          <div>
-            <h1 className="text-4xl font-semibold text-navy">Log In</h1>
-            <p className="text-xl mt-2 text-gray-600">Log in to access your account.</p>
+    <div>
+      <Logo />
+      <div className=" bg-white min-h-screen flex items-center justify-center">
+        <div className="w-full max-w-md p-4 md:p-8 bg-white rounded-lg relative">
+          <div className="flex items-center md:space-x-4 mb-4 relative md:right-4">
+            <Link href={"/"}>
+              <button className="text-lg relative bottom-3 hidden md:flex">
+                <LeftArrow
+                  className={
+                    " size-10 border p-2 rounded-full border-[#113E53] absolute right-0 bottom-0 bg-[#59FF93] hover:rotate-45 duration-150"
+                  }
+                />
+              </button>
+            </Link>
+            <div>
+              <h1 className="text-4xl font-semibold text-navy">Log In</h1>
+              <p className="text-xl mt-2 text-gray-600">
+                Welcome back! Log in to access your account.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <form className="space-y-4">
-          <input
-            type="email"
-            placeholder="Enter Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-3 rounded-full border border-gray-500 m-1 w-full focus:outline-none focus:ring-2"
-          />
-          <input
-            type="password"
-            placeholder="Enter Your Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="p-3 rounded-full border border-gray-500 m-1 w-full focus:outline-none focus:ring-2"
-          />
+          <form className="space-y-4">
+            <input
+              type="email"
+              placeholder="Enter Your Email"
+              value={values.email}
+              onChange={handleChange}
+              name="email"
+              className="p-3 rounded-full border border-gray-500 w-full focus:outline-none focus:ring-2"
+            />
+            <input
+              type="password"
+              placeholder="Enter Your Password"
+              value={values.password}
+              onChange={handleChange}
+              name="password"
+              className="p-3 rounded-full border border-gray-500 w-full focus:outline-none focus:ring-2"
+            />
 
-          <div className="flex items-center justify-between m-2">
-            <label className="flex items-center text-gray-600">
-              <input type="checkbox" className="mr-2" />
-              Remember Me
-            </label>
-            <a onClick={() => router.push('/forgotpassword')} className="text-navy font-medium hover:underline cursor-pointer">
-              Forgot Password?
+            <div className="flex items-center justify-between">
+              <label className="flex items-center text-gray-600">
+                <input
+                  type="checkbox"
+                  className="mr-2 scale-150"
+                  checked={rememberMe}
+                  onChange={() => {
+                    setRememberMe(!rememberMe);
+                  }}
+                />
+                Remember Me
+              </label>
+              <a
+                onClick={() => router.push("/forgetPassword")}
+                className="text-navy hover:underline cursor-pointer text-[16px] font-[400] underline"
+              >
+                Forgot Password?
+              </a>
+            </div>
+
+            <button
+              type="button"
+              // disabled={!isFormValid}
+              className={`w-full p-3 rounded-full focus:outline-none ${
+                isFormValid
+                  ? "bg-[#020D3A] text-white"
+                  : " bg-slate-500 text-white "
+              } cursor-pointer`}
+              onClick={handleLogin}
+            >
+              Log In
+            </button>
+          </form>
+          <p className="text-center text-gray-600 mt-6">
+            Don’t have an account?{" "}
+            <a
+              onClick={() => router.push("/signup")}
+              className="text-navy cursor-pointer font-semibold hover:underline"
+            >
+              Sign Up
             </a>
+          </p>
+
+          <div className="flex flex-col md:flex-row items-center justify-center mt-[32px] gap-4">
+            <button className=" flex w-full gap-2 justify-center xs:mb-0 py-3 px-8 bg-white border border-[#113E53] rounded-full shadow-sm hover:shadow-md">
+              <Image
+                src="/images/google_logo.png"
+                alt="Google"
+                width={20}
+                height={20}
+              />
+              <span className="font-bold">Google</span>
+            </button>
+            <button className=" flex w-full justify-center gap-2 p-3 px-8 bg-white border border-[#113E53] rounded-full shadow-sm hover:shadow-md">
+              <Image
+                src="/images/facebook_logo.png"
+                alt="Facebook"
+                width={20}
+                height={20}
+              />
+              <span className="font-bold">Facebook</span>
+            </button>
           </div>
-
-          <button
-            type="button"
-            disabled={!isFormValid}
-            className={`w-full p-3 m-2 rounded-full focus:outline-none ${isFormValid ? "bg-[#020D3A] text-white" : "bg-gray-300 text-white"}`}
-          >
-            Log In
-          </button>
-        </form>
-        <p className="text-center text-gray-600 mt-6">
-          Don’t have an account?{" "}
-          <a onClick={() => router.push('/signup')} className="text-navy cursor-pointer font-semibold hover:underline">
-            Sign Up
-          </a>
-        </p>
-
-        <div className="md:flex  items-center justify-center md:space-x-4 m-4">
-        <button className=" flex w-full gap-2 justify-center mb-2 xs:mb-0 py-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src='/images/google_logo.png' alt="Google" width={20} height={20} /><span className="font-bold">Google</span>
-          </button>
-          <button className=" flex w-full justify-center gap-2 p-3 px-8 bg-white border rounded-full shadow-sm hover:shadow-md">
-            <Image src='/images/facebook_logo.png' alt="Facebook" width={20} height={20} /><span className="font-bold">Facebook</span>
-          </button>
         </div>
       </div>
     </div>
