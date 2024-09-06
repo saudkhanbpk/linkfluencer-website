@@ -7,25 +7,28 @@ import Plateforms from "./Plateforms";
 import { IoLinkOutline } from "react-icons/io5";
 import axios from "axios";
 import { decryptData } from "@/helper/encryptDecrypt";
-import { useUser } from '../../context/userContext';
-
+import { useUser } from "../../context/userContext";
+import api from "@/api";
+import { useRouter } from "next/router";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 function InfluencerData() {
   const [link, setLink] = useState("");
-  const {user} = useUser();
+  const { user } = useUser();
+  const router = useRouter()
   const handleCreateSmartLink = async () => {
-    alert("clicked")
     const data = decryptData(localStorage.getItem("linkfluencer-data"));
-    console.log(data);
-    await axios.post(`${apiUrl}/users/${data.userId}/links`, {originalUrl:link}).then((res)=>{
-    })
+    const response = await api.post(`/users/${data.userId}/links`, {
+      originalUrl: link,
+    });
+    if(response.status == 201){
+      alert("done")
+      router.push('http://localhost:3001/my-links')
+    }
   };
-
-  useEffect(()=>{
-console.log(user);
-
-  },[])
+  useEffect(() => {
+    console.log(user);
+  }, []);
   return (
     <div className="flex flex-col justify-center items-center w-full  ">
       <div className="p-8">
@@ -43,7 +46,9 @@ console.log(user);
               <input
                 className="md:w-[400px] border p-3 rounded-full mt-5 self-center "
                 type="text"
-                onChange={(e)=>{setLink(e.target.value)}}
+                onChange={(e) => {
+                  setLink(e.target.value);
+                }}
                 placeholder="Paste your link here"
                 name="link"
                 value={link}
@@ -51,9 +56,10 @@ console.log(user);
               <IoLinkOutline className="self-center text-3xl text-gray-200 relative z-10 right-12 top-2" />{" "}
             </div>
             <div className="flex justify-center mt-4">
-              <button 
-                  onClick={handleCreateSmartLink}
-              className="w-fit py-3 px-8  rounded-full focus:outline-none centered bg-[#020D3A] text-white">
+              <button
+                onClick={handleCreateSmartLink}
+                className="w-fit py-3 px-8  rounded-full focus:outline-none centered bg-[#020D3A] text-white"
+              >
                 Create Smart Link
               </button>
             </div>
@@ -112,7 +118,9 @@ console.log(user);
                 className="md:w-[400px] border p-3 rounded-full mt-5 "
                 type="text"
                 value={link}
-                onChange={(e)=>{setLink(e.target.value)}}
+                onChange={(e) => {
+                  setLink(e.target.value);
+                }}
                 placeholder="Paste your link here"
                 name="link"
               />

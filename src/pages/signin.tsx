@@ -7,8 +7,8 @@ import { LeftArrow } from "./../svg";
 import Link from "next/link";
 import axios from "axios";
 import { decryptData, encryptData } from "../helper/encryptDecrypt";
-import { useUser } from '../context/userContext';
-import api from '../api'
+import { useUser } from "../context/userContext";
+import api from "../api";
 const LoginPage = () => {
   const [values, setValues] = useState({
     email: "",
@@ -19,7 +19,7 @@ const LoginPage = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   const { setUser } = useUser();
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
 
     setValues((previousValues) => {
@@ -29,7 +29,7 @@ const LoginPage = () => {
       };
     });
   };
-  const handleLogin = async (e) => {
+  const handleLogin = async (e:any) => {
     e.preventDefault();
     console.log("clicked");
     // await axios
@@ -61,15 +61,13 @@ const LoginPage = () => {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-    const response = await api.post('/auth/login', values)
+    const response = await api.post("/auth/login", values);
 
-    console.log({response});
-    
+    console.log({ response });
   };
   useEffect(() => {
     setIsFormValid(values.email !== "" && values.password !== "");
   }, [values.email, values.password]);
-
   useEffect(() => {
     console.log(localStorage.getItem("linkfluencer-remember-me"));
     const rememberMeData = JSON.parse(
