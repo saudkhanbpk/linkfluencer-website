@@ -1,11 +1,9 @@
 import { createContext, useState, useContext } from 'react';
 
-// Create the User Context
 const UserContext = createContext();
 
-// Create a provider component
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Only set when user logs in
+  const [user, setUser] = useState(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -14,7 +12,6 @@ export const UserProvider = ({ children }) => {
   );
 };
 
-// Create a custom hook to use the UserContext
 export const useUser = () => {
   return useContext(UserContext);
 };
