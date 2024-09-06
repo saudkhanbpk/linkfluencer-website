@@ -5,7 +5,9 @@ import './../styles/globals.css';
 import { useRouter } from 'next/router';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { UserProvider } from '@/context/userContext';
 
 const theme = createTheme({
   typography: {
@@ -32,17 +34,53 @@ const theme = createTheme({
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  // const router = useRouter();
+  // useEffect(()=>{
+  //   const rememberMe = localStorage.getItem('linkfluencer-remember-me')
+  //   if(rememberMe !== 'true'){
+  //     // router.push('/signin');
+  //   }
+  // },[])
   const router = useRouter();
-  useEffect(()=>{
-    // router.push('/signin');
-  },[])
+  const [token, setToken] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem('token');
+  //   if (storedToken) {
+  //     setToken(storedToken);
+  //   }
+  // }, []);
+
+  // if (token) {
+  //   axios.post('/api/verify-token', { token })
+  //     .then(response => {
+  //       if (response.data.isValid) {
+  //         setIsAuthenticated(true);
+  //       } else {
+  //         localStorage.removeItem('token');
+  //         router.push('/signin');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //       localStorage.removeItem('token');
+  //       router.push('/signin');
+  //     });
+  // }
+
+  // if (!isAuthenticated) {
+  //   return null; // or a loading indicator
+  // }
   return (
-    <RootLayout>
+   <UserProvider>
+     <RootLayout>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
     </RootLayout>
+   </UserProvider>
   );
 };
 

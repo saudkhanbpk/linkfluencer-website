@@ -6,7 +6,9 @@ import Logo from "@/components/common/Logo";
 import { LeftArrow } from "./../svg";
 import Link from "next/link";
 import axios from "axios";
-
+import { decryptData, encryptData } from "../helper/encryptDecrypt";
+import { useUser } from '../context/userContext';
+import api from '../api'
 const LoginPage = () => {
   const [values, setValues] = useState({
     email: "",
@@ -16,7 +18,7 @@ const LoginPage = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
-
+  const { setUser } = useUser();
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -27,27 +29,70 @@ const LoginPage = () => {
       };
     });
   };
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     console.log("clicked");
+    // await axios
+    //   .post(`${apiUrl}/auth/login`, values)
+    //   .then(async (res) => {
+    //     localStorage.setItem(
+    //       "linkfluencer-remember-me",
+    //       JSON.stringify(rememberMe)
+    //     );
+    //     console.log(res.data.user._id);
+    //     if (rememberMe) {
+    //       const userData = encryptData({
+    //         token: res.data.token,
+    //         email: values.email,
+    //         password: values.password,
+    //         userId: res.data.user._id,
+    //       });
+    //       setUser({
+    //         token: res.data.token,
+    //         email: values.email,
+    //         password: values.password,
+    //         userId: res.data.user._id,
+    //       });
+    //       localStorage.setItem("linkfluencer-data", userData);
+    //       alert("done");
+    //     }
+    //     router.push("/");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    const response = await api.post('/auth/login', values)
 
-    axios
-      .post(`${apiUrl}/auth/login`, values)
-      .then((res) => {
-        localStorage.setItem(
-          "linkfluencer-remember-me",
-          JSON.stringify(rememberMe)
-        );
-        localStorage.setItem("linkfluencer-activation-token", res.data.token);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log({response});
+    
   };
   useEffect(() => {
     setIsFormValid(values.email !== "" && values.password !== "");
   }, [values.email, values.password]);
 
+  useEffect(() => {
+    console.log(localStorage.getItem("linkfluencer-remember-me"));
+    const rememberMeData = JSON.parse(
+      localStorage.getItem("linkfluencer-remember-me")
+    );
+    console.log(typeof rememberMeData);
+    if (rememberMeData) {
+      setRememberMe(rememberMeData);
+      const data = decryptData(localStorage.getItem("linkfluencer-data"));
+      console.log({ data });
+      setValues({
+        ...values,
+        email: data.email,
+        password: data.password,
+      });
+    } else {
+      setValues({
+        ...values,
+        email: "",
+        password: "",
+      });
+    }
+  }, []);
   return (
     <div>
       <Logo />
@@ -71,7 +116,7 @@ const LoginPage = () => {
             </div>
           </div>
 
-          <form className="space-y-4">
+          <form className="space-y-4" autoComplete="off">
             <input
               type="email"
               placeholder="Enter Your Email"

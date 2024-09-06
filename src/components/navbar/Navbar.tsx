@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { HiMenu, HiX } from 'react-icons/hi';
+import Link from 'next/link';
 
 const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent: any, setSelectedComponent: any }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,20 +60,30 @@ const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent
       </div>
 
       {/* Desktop Buttons (Visible in larger screens) */}
-      <div className="hidden md:flex gap-4">
-        <button
-          className="py-2 px-6 border rounded-full"
-          onClick={() => router.push('/signin')}
+      {
+      //   <div className="hidden md:flex gap-4">
+      //   <button
+      //     className="py-2 px-6 border rounded-full"
+      //     onClick={() => router.push('/signin')}
+      //   >
+      //     Log In
+      //   </button>
+      //   <button
+      //     className="py-2 px-6 border rounded-full bg-[#59FF93]"
+      //     onClick={() => router.push('/signup')}
+      //   >
+      //     Sign Up for free
+      //   </button>
+      // </div>
+        <Link href={"http://localhost:3001"}>
+         <button
+          className="py-2 px-6 border rounded-full bg-[#59FF93] border-gray-300"
+          // onClick={() => router.push('/signup')}
         >
-          Log In
+          My Dashboard
         </button>
-        <button
-          className="py-2 px-6 border rounded-full bg-[#59FF93]"
-          onClick={() => router.push('/signup')}
-        >
-          Sign Up for free
-        </button>
-      </div>
+        </Link>
+      }
     </div>
   );
 };
