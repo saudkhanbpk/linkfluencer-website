@@ -32,8 +32,7 @@ const LoginPage = () => {
       const response = await api.post("/auth/login", values);
       console.log(response.data);
       setUser(response.data);
-
-      router.push("http://localhost:3001/");
+      router.push("/");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials and try again.");
       console.error(error);

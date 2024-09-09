@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { HiMenu, HiX } from 'react-icons/hi';
 import Link from 'next/link';
-
+import { useUser } from '@/context/userContext';
 const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent: any, setSelectedComponent: any }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
+  const {user} = useUser()
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(()=>{
+    console.log({user});   
+  },[])
   return (
     <div className="md:absolute p-4 flex justify-between w-[100%]">
       <div className='cursor-pointer'>
@@ -20,12 +24,20 @@ const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent
 
       {/* Mobile Menu Icon */}
       <div className="md:hidden flex gap-2 items-center">
-        <button
+       { user == null?  <button
           className={`py-2 px-6 border rounded-full ${menuOpen ? 'hidden' : 'block'}`}
           onClick={() => router.push('/signin')}
         >
           Log In
-        </button>
+        </button>:
+          <Link href={"http://localhost:3001"}>
+          <button
+           className="py-2 px-4 border rounded-full border-gray-300 text-sm"
+         >
+           My Dashboard
+         </button>
+         </Link>
+        }
         <button onClick={toggleMenu} className="focus:outline-none ">
           {menuOpen ? <HiX className='relative bottom-[85px] left-48  self-center' size={28} /> : <HiMenu size={28} />}
         </button>
@@ -61,24 +73,24 @@ const Navbar = ({ selectedComponent, setSelectedComponent }: { selectedComponent
 
       {/* Desktop Buttons (Visible in larger screens) */}
       {
-      //   <div className="hidden md:flex gap-4">
-      //   <button
-      //     className="py-2 px-6 border rounded-full"
-      //     onClick={() => router.push('/signin')}
-      //   >
-      //     Log In
-      //   </button>
-      //   <button
-      //     className="py-2 px-6 border rounded-full bg-[#59FF93]"
-      //     onClick={() => router.push('/signup')}
-      //   >
-      //     Sign Up for free
-      //   </button>
-      // </div>
-        <Link href={"http://localhost:3001"}>
+        user == null? 
+        <div className="hidden md:flex gap-4">
+        <button
+          className="py-2 px-6 border rounded-full"
+          onClick={() => router.push('/signin')}
+        >
+          Log In
+        </button>
+        <button
+          className="py-2 px-6 border rounded-full bg-[#59FF93]"
+          onClick={() => router.push('/signup')}
+        >
+          Sign Up for free
+        </button>
+      </div> :
+        <Link href={"http://localhost:3001"} className='hidden md:block'>
          <button
           className="py-2 px-6 border rounded-full bg-[#59FF93] border-gray-300"
-          // onClick={() => router.push('/signup')}
         >
           My Dashboard
         </button>
