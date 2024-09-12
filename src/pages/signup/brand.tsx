@@ -10,7 +10,7 @@ import axios from "axios";
 const SignupInfluencer = () => {
   const [values, setValues] = useState({
     brandName:"",
-    companyEmail:"",
+    email:"",
     password:"",
     role:"brandUser",
     authProvider: "local",
@@ -82,8 +82,8 @@ const SignupInfluencer = () => {
               <input
                 className="p-3 rounded-full border border-gray-500 m-2 w-full"
                 type="email"
-                value={values.companyEmail}
-                name="companyEmail"
+                value={values.email}
+                name="email"
                 onChange={handleChange}
                 placeholder="Company Email"
               />
@@ -158,7 +158,9 @@ const SignupInfluencer = () => {
                 </p>
               </div>
             </div>
-            <form onSubmit={handleOtpSubmit}>
+            <form 
+            // onSubmit={handleOtpSubmit}
+            >
               <input
                 className="p-3 rounded-full border border-gray-500 m-2 w-full"
                 type="text" // Change type to text for OTP input

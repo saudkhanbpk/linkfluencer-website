@@ -8,6 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserProvider } from '@/context/userContext';
+import { SessionProvider } from "next-auth/react";
 
 const theme = createTheme({
   typography: {
@@ -77,7 +78,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
      <RootLayout>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <SessionProvider session={pageProps.session}>
         <Component {...pageProps} />
+        </SessionProvider>
       </ThemeProvider>
     </RootLayout>
    </UserProvider>
