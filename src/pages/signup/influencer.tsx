@@ -154,7 +154,7 @@ const SignupInfluencer = () => {
                 </p>
               </div>
             </div>
-            <form onSubmit={handleOtpSubmit}>
+            <form >
               <input
                 className="p-3 rounded-full border border-gray-500 m-2 w-full"
                 type="text" // Change type to text for OTP input
