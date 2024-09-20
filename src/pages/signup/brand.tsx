@@ -29,7 +29,7 @@ const SignupInfluencer = () => {
     })
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
 
     setValues((previousValues) => {
