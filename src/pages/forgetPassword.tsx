@@ -77,7 +77,7 @@ const Forgotpassword = () => {
                 type="email"
                 placeholder="Enter Your Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: any) => setEmail(e.target.value)}
                 className="p-3 rounded-full border border-gray-500 m-2 w-full focus:outline-none focus:ring-2"
               />
               <button
@@ -99,7 +99,7 @@ const Forgotpassword = () => {
                 type="text"
                 placeholder="Enter OTP"
                 value={otp}
-                onChange={(e) => setOtp(e.target.value)}
+                onChange={(e: any) => setOtp(e.target.value)}
                 className="p-3 rounded-full border border-gray-500 m-2 w-full focus:outline-none focus:ring-2"
               />
               <button
@@ -121,14 +121,14 @@ const Forgotpassword = () => {
                 type="password"
                 placeholder="Enter New Password"
                 value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                onChange={(e: any) => setNewPassword(e.target.value)}
                 className="p-3 rounded-full border border-gray-500 m-2 w-full focus:outline-none focus:ring-2"
               />
               <input
                 type="password"
                 placeholder="Confirm Password"
                 value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                onChange={(e: any) => setNewPassword(e.target.value)}
                 className="p-3 rounded-full border border-gray-500 m-2 w-full focus:outline-none focus:ring-2"
               />
               <button

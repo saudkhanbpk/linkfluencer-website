@@ -67,7 +67,7 @@ function CategoriesComponent() {
                             placeholder="Search"
                             className="p-3 rounded-full border border-gray-500 m-1 w-full focus:outline-none focus:ring-2"
                             value={searchTerm}
-                            onChange={(e) => {
+                            onChange={(e: any) => {
                                 setSearchTerm(e.target.value);
                                 setDropdownVisible(true);
                             }}

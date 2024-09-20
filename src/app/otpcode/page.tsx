@@ -32,7 +32,7 @@ export default function OTPVerificationPage() {
             placeholder="Enter Email OTP"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             value={otp}
-            onChange={(e) => setOtp(e.target.value)}
+            onChange={(e: any) => setOtp(e.target.value)}
           />
           <p className="text-sm text-gray-500">
             Not received yet? <a href="#" className="text-blue-600 font-semibold">Resend OTP</a>

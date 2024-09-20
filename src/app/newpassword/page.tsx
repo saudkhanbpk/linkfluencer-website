@@ -33,7 +33,7 @@ export default function NewPasswordPage() {
               placeholder="Enter Your New Password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              onChange={(e: any) => setNewPassword(e.target.value)}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <svg
@@ -56,7 +56,7 @@ export default function NewPasswordPage() {
               placeholder="Confirm New Password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e: any) => setConfirmPassword(e.target.value)}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
               <svg

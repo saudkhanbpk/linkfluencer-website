@@ -48,7 +48,7 @@ function InfluencerData() {
               <input
                 className="md:w-[400px] border p-3 rounded-full mt-5 self-center "
                 type="text"
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setLink(e.target.value);
                 }}
                 placeholder="Paste your link here"
@@ -120,7 +120,7 @@ function InfluencerData() {
                 className="w-full md:w-[400px] border p-3 rounded-full mt-[32px] md:mt-[40px] "
                 type="text"
                 value={link}
-                onChange={(e) => {
+                onChange={(e: any) => {
                   setLink(e.target.value);
                 }}
                 placeholder="Paste your link here"

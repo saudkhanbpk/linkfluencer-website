@@ -21,7 +21,7 @@ const SignupInfluencer = () => {
   const router = useRouter();
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
 
     setValues((previousValues) => {
@@ -31,7 +31,7 @@ const SignupInfluencer = () => {
       };
     });
   };
-  const handleSignUp = (e) => {
+  const handleSignUp = (e:any) => {
     e.preventDefault();
     axios.post(`${apiUrl}/auth/register`,values).then((res)=>{
       console.log(res);
@@ -159,7 +159,7 @@ const SignupInfluencer = () => {
                 className="p-3 rounded-full border border-gray-500 m-2 w-full"
                 type="text" // Change type to text for OTP input
                 value={otp}
-                onChange={(e) => setOtp(e.target.value)}
+                onChange={(e: any) => setOtp(e.target.value)}
                 placeholder="Enter Email OTP"
               />
               <div className="flex gap-2 m-2 w-full">

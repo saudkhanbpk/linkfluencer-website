@@ -48,28 +48,28 @@ import React, { useState, FormEvent } from 'react';
                         type='text'
                         placeholder='Name'
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e: any) => setName(e.target.value)}
                     />
                     <input
                         className='w-full md:w-[700px] border p-3 rounded-full mt-5'
                         type='email'
                         placeholder='Email'
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e: any) => setEmail(e.target.value)}
                     />
                     <input
                         className='w-full md:w-[700px] border p-3 rounded-full mt-5'
                         type='text'
                         placeholder='Subject'
                         value={subject}
-                        onChange={(e) => setSubject(e.target.value)}
+                        onChange={(e: any) => setSubject(e.target.value)}
                     />
                     <textarea
                         className='w-full md:w-[700px] border p-3 rounded-xl mt-5'
                         rows={5}
                         placeholder='Message'
                         value={message}
-                        onChange={(e) => setMessage(e.target.value)}
+                        onChange={(e: any) => setMessage(e.target.value)}
                     />
                     <div className="flex gap-2 m-2 w-full">
                         <input
