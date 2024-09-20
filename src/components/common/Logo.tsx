@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import mainLogo from '../../../public/images/logo.svg';
+import mainLogo from '../../../public/images/Logo.svg';
 import { useRouter } from 'next/router';
 
 const Logo = () => {
