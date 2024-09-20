@@ -15,32 +15,34 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 function InfluencerData() {
   const [link, setLink] = useState("");
   const { user } = useUser();
-  const router = useRouter()
+  const router = useRouter();
   const handleCreateSmartLink = async () => {
-    const data = decryptData(localStorage.getItem("linkfluencer-data"));
-    const response = await api.post(`/users/${data.userId}/links`, {
-      originalUrl: link,
-    });
-    if(response.status == 201){
-      alert("done")
-      router.push('http://localhost:3001/my-links')
+    if (user) {
+      const response = await api.post(`/users/${user._id}/links`, {
+        originalUrl: link,
+      });
+      if (response.status == 201) {
+        router.push("http://localhost:3001/my-links");
+      }
+    } else {
+      router.push("http://localhost:3000/signup");
     }
   };
   useEffect(() => {
     console.log(user);
   }, []);
   return (
-    <div className="flex flex-col justify-center items-center w-full  ">
-      <div className="p-8">
+    <div className="flex flex-col justify-center items-center w-full">
+      <div className="px-[20px] md:px-[80px] border border-green-500">
         <div className=" flex-col justify-center items-center md:flex hidden">
-          <h1 className="text-3xl md:text-5xl font-semibold text-center md:w-[600px] text-[#113E53] mt-10 ">
+          <h4 className="text-[32px] md:text-[64px] font-semibold text-center md:w-[600px] text-[#113E53] mt-10 leading-none font-header">
             Open link in bio natively across 30+ Apps
-          </h1>
-          <p className="text-xl text-[#113E53] mt-4 ">
+          </h4>
+          <p className="text-xl text-[#113E53] mt-4 leading-none font-content">
             Super tool that helps you grow across all social media apps and get
             better brand deals!!
           </p>
-          <div>
+          <div className="border border-red-500">
             <div className="flex">
               {" "}
               <input
@@ -66,9 +68,9 @@ function InfluencerData() {
           </div>
         </div>
         {/* images section  */}
-        <div className="flex flex-wrap md:flex-nowrap  gap-4 mt-4 pb-10 w-full">
-          <div className="flex gap-4">
-            <div className="md:self-end w-full  md:w-[300px]">
+        <div className="flex flex-col md:flex-row gap-4 w-full pb-10 mt-6 border-4">
+          <div className="flex gap-4 items-end w-full justify-center">
+            <div className="">
               <Image
                 src="/images/Frame 1261153494.png"
                 alt="image"
@@ -76,7 +78,7 @@ function InfluencerData() {
                 height={300}
               />
               <Image
-                className="my-2"
+                className="mt-2"
                 src="/images/Link-Twitch.png"
                 alt="image"
                 width={300}
@@ -89,7 +91,7 @@ function InfluencerData() {
                 height={300}
               />
             </div>
-            <div className=" relative md:self-end w-[300px]">
+            <div className=" relative">
               <Image
                 src="/images/Animation - Youtube.png"
                 alt="image"
@@ -97,7 +99,7 @@ function InfluencerData() {
                 height={300}
               />
               <Image
-                className="my-2"
+                className="mt-2"
                 src="/images/image 33.png"
                 alt="image"
                 width={300}
@@ -105,17 +107,17 @@ function InfluencerData() {
               />
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center  md:hidden ">
-            <h1 className="text-3xl md:text-5xl font-semibold text-center md:w-[600px] text-[#113E53] mt-10 ">
+          <div className="flex flex-col justify-center items-center  md:hidden">
+            <h1 className="text-[32px] md:text-[64px] font-semibold text-center w-4/5 text-[#113E53] mt-[32px] leading-none font-header">
               Open link in bio natively across 30+ Apps
             </h1>
-            <p className="text-xl text-[#113E53] mt-4 ">
+            <p className="text-xl text-[#113E53] mt-4 text-center text-[14px] md:text-[24px] leading-none font-content">
               Super tool that helps you grow across all social media apps and
               get better brand deals!!
             </p>
-            <div>
+            <div className="w-full">
               <input
-                className="md:w-[400px] border p-3 rounded-full mt-5 "
+                className="w-full md:w-[400px] border p-3 rounded-full mt-[32px] md:mt-[40px] "
                 type="text"
                 value={link}
                 onChange={(e) => {
@@ -125,7 +127,7 @@ function InfluencerData() {
                 name="link"
               />
               <br />
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-4 pb-[32px]">
                 <button
                   onClick={handleCreateSmartLink}
                   className="w-fit py-3 px-8  rounded-full focus:outline-none centered bg-[#020D3A] text-white"
@@ -135,8 +137,8 @@ function InfluencerData() {
               </div>
             </div>
           </div>
-          <div className="flex gap-4 ">
-            <div className="relative self-end w-full md:w-[300px]">
+          <div className="flex gap-4 flex-row items-center w-full justify-center">
+            <div className="relative self-end h-full md:h-auto">
               <Image
                 src="/images/Frame12.png"
                 alt="imaw"
@@ -144,7 +146,7 @@ function InfluencerData() {
                 height={300}
               />
             </div>
-            <div className=" w-[300px]">
+            <div className=" w-[300px] border flex flex-col-reverse">
               <Image
                 src="/images/girl.png"
                 alt="imag"

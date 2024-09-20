@@ -18,7 +18,7 @@ function Roi() {
     arrows: false,
   };
   return (
-    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center min-h-screen w-full p-8 bg-gray-100'>
+    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center w-full px-[20px] md:px-[80px] bg-gray-100 border border-green-500'>
       <div className='w-full lg:w-[440px]'>
         <h1 className='text-3xl font-semibold'>
           Fix your influencer marketing ROI

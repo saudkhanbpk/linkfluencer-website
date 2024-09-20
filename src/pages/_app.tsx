@@ -79,7 +79,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
+       <div className=''>
+       <Component {...pageProps} />
+       </div>
         </SessionProvider>
       </ThemeProvider>
     </RootLayout>

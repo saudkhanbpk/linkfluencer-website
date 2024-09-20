@@ -17,8 +17,8 @@ function Plateforms() {
   const others = [vimeo, line, snap, appleMusic, Netfix, telegram, soundCloud].filter(Boolean);
 
   return (
-    <div className='min-h-screen flex flex-col justify-center items-center w-full'>
-      <h1 className='text-center text-4xl font-semibold mb-24'>Our Trusted Partners</h1>
+    <div className='flex flex-col justify-center items-center w-full px-[20px] md:px-[80px] py-[40px] md:py-[100px]'>
+      <h1 className='text-center text-[20px] md:text-[40px] font-semibold mb-10'>Our Trusted Partners</h1>
 
       <div className='marquee-container'>
         <div className='marquee'>

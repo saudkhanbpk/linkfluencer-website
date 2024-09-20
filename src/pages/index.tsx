@@ -13,7 +13,7 @@ const Index = () => {
         selectedComponent={selectedComponent}
         setSelectedComponent={setSelectedComponent}
       />
-      <div className="relative top-20">
+      <div className="relative">
         {selectedComponent === 'Influencer' && <InfluencerData />}
         {selectedComponent === 'Brand' && <BrandData />}
       </div>

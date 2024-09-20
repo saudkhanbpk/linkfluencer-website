@@ -7,13 +7,12 @@ import Link from "next/link";
 import { useUser } from '../context/userContext';
 import api from '../api';
 import axios from "axios";
-import { signIn, signOut, useSession } from "next-auth/react";
+
 const LoginPage = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  const { data: session } = useSession();
   const [rememberMe, setRememberMe] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -41,11 +40,10 @@ const LoginPage = () => {
     }
   };
   const handleGoogle = async() =>{
-    await axios.get('http://localhost:5005/auth/google').then((res)=>{
-      console.log("this is response ==>>>>>",res);
-    }).catch((err)=>{
-      console.log("this is error =====>>>>>",err);
-    })
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
+  }
+  const handleFacebook = async() =>{
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/facebook`;
   }
   useEffect(() => {
     setIsFormValid(values.email !== "" && values.password !== "");
@@ -138,7 +136,6 @@ const LoginPage = () => {
               Sign Up
             </a>
           </p>
-
           <div className="flex flex-col md:flex-row items-center justify-center mt-[32px] gap-4">
             <button className="flex w-full gap-2 justify-center xs:mb-0 py-3 px-8 bg-white border border-[#113E53] rounded-full shadow-sm hover:shadow-md">
               <Image
@@ -156,7 +153,7 @@ const LoginPage = () => {
                 width={20}
                 height={20}
               />
-              <span className="font-bold" onClick={() => signIn("facebook")}>Facebook</span>
+              <span className="font-bold" onClick={handleFacebook}>Facebook</span>
             </button>
           </div>
         </div>
