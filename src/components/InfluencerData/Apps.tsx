@@ -30,13 +30,13 @@ function Apps() {
         </p>
       </div>
 
-      <div className="flex items-center border justify-center">
-        <div className="flex flex-col justify-center items-center border border-green-500 w-[177px] md:w-[316px]">
+      <div className="flex items-center justify-center">
+        <div className="flex flex-col justify-center items-center w-[177px] md:w-[316px]">
           <Slider
             {...settings}
-            className="relative top-16 md:top-20 w-[180px] md:w-[280px]  z-10 border border-pink-700"
+            className="relative top-16 md:top-20 w-[180px] md:w-[280px]  z-10"
           >
-            <div className="border border-green-500">
+            <div className="">
               <button className="p-1 md:p-3 rounded-full bg-white flex gap-1 lg:text-[16px] text-xs">
                 <Image
                   className="self-center "
@@ -51,7 +51,7 @@ function Apps() {
             <div>
               <button className="p-1 md:p-3 rounded-full bg-white flex gap-1  lg:text-[16px] text-xs">
                 <Image
-                  className="self-center border border-pink-500"
+                  className="self-center"
                   src="/images/youtube2.png"
                   alt="img"
                   width={20}
@@ -84,7 +84,7 @@ function Apps() {
             {/* Add more slides as needed */}
           </Slider>
         </div>
-        <div className="flex justify-center items-center gap-2 flex-col relative w-[171px] border border-red-500">
+        <div className="flex justify-center items-center gap-2 flex-col relative w-[171px]">
           <Slider {...settings} className="w-[30px]">
             <div>
               <Image
@@ -106,13 +106,13 @@ function Apps() {
             </div>
           </Slider>
           {/* Second slider for display content */}
-          <Slider {...settings} className="w-[200px] md:w-[304px] border">
+          <Slider {...settings} className="w-[200px] md:w-[304px]">
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="bg-[#FFDEE0] w-[171px] md:w-[304px] h-[180px] md:h-[206px] gap-2 flex items-center justify-center flex-col rounded-2xl">
                 <Image
                   src="/images/display.png"
                   alt="ios"
-                  className="w-[60px] md:w-auto border"
+                  className="w-[60px] md:w-auto"
                   width={50}
                   height={50}
                 />
@@ -124,7 +124,7 @@ function Apps() {
                 </button>
               </div>
             </div>
-            <div className="flex justify-center flex-col items-center border-green-500 border">
+            <div className="flex justify-center flex-col items-center">
               {/* <Image src='/images/youtube.png' className='w-[30px] md:w-auto' alt='android' width={40} height={40} /> */}
               <div className="bg-[#FFDEE0] w-[171px] md:w-[304px] h-[180px] md:h-[206px] flex items-center justify-center flex-col rounded-2xl">
                 <Image

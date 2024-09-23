@@ -52,7 +52,7 @@ function Apps() {
   };
 
   return (
-    <div className="flex gap-10 flex-wrap justify-center items-center w-full px-[20px] md:px-[80px] border-2 border-green-500 py-[40px] md:py-[100px]">
+    <div className="flex gap-10 flex-wrap justify-center items-center w-full px-[20px] md:px-[80px] py-[40px] md:py-[100px]">
       <div className="md:w-[440px]">
         <h1 className="text-3xl font-semibold">
           Unlock the power of smart links that open directly in mobile apps

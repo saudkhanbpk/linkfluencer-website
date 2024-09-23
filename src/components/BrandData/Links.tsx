@@ -26,7 +26,7 @@ function Links() {
               width={100}
               height={100}
             />
-            <div className="border flex flex-col items-start">
+            <div className="flex flex-col items-start">
               <h1 className="text-[#74265A] font-semibold text-[12px]">
                 @johndoe1988
               </h1>
@@ -73,7 +73,7 @@ function Links() {
               width={100}
               height={100}
             />
-            <div className="border flex flex-col items-start">
+            <div className="flex flex-col items-start">
               <h1 className="text-[#74265A] font-semibold text-[12px]">
                 @johndoe1988
               </h1>

@@ -14,8 +14,8 @@ function TimeToShine() {
     arrows: false,
   };
   return (
-    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center py-[40px] md:py-[100px] w-full bg-gray-100 px-[20px] md:px-[80px] border border-green-500'>
-      <div className='w-full lg:w-[440px] border border-yellow-500'>
+    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center py-[40px] md:py-[100px] w-full bg-gray-100 px-[20px] md:px-[80px]'>
+      <div className='w-full lg:w-[440px]'>
         <h1 className='text-[20px] md:text-[40px] font-[800] font-header leading-none'>
           Beyond likes, connect with brands that matter. It's your time to shine ✨
         </h1>
@@ -26,7 +26,7 @@ function TimeToShine() {
           the superficial and build genuine relationships with brands that resonate with you.
         </p>
       </div>
-      <div className=' md:w-fit flex flex-col justify-center items-center self-cente border border-yellow-500'>
+      <div className=' md:w-fit flex flex-col justify-center items-center self-cente'>
         <div>
           <Slider {...settings} className=' md:w-[300px] w-[200px]'>
             <div>

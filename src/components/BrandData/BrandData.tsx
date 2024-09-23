@@ -3,14 +3,14 @@ import React from "react";
 import Links from "./Links";
 import Main from "./Main";
 import Roi from "./Roi";
-import Plateforms from "./Plateforms";
+import Plateforms from "../component/Plateforms";
 import { IoLinkOutline } from "react-icons/io5";
 
 function BrandData() {
   return (
     <div className="flex flex-col justify-center items-center w-full mt-8">
-      <div className="border border-green-500 px-[20px] md:px-[80px]">
-        <div className=" flex-col justify-center items-center md:flex hidden border border-red-500 ">
+      <div className="px-[20px] md:px-[80px]">
+        <div className=" flex-col justify-center items-center md:flex hidden">
           <h5 className="text-[32px] md:text-[64px] font-semibold text-center md:w-5/6 text-[#113E53] mt-10 leading-none font-header">
             Unlock your influence with Linkfluencer.io
           </h5>
@@ -18,7 +18,7 @@ function BrandData() {
             Super tool that helps you grow across all social media apps and get
             better engagement!!
           </p>
-          <div className="border border-yellow-500">
+          <div className="">
             <div className="flex w-full">
               {" "}
               <input
@@ -36,8 +36,8 @@ function BrandData() {
           </div>
         </div>
         {/* images section  */}
-        <div className="flex flex-col md:flex-row gap-4 w-full pb-10 mt-6 border-4 items-end">
-          <div className="flex gap-x-4 border border-orange-500">
+        <div className="flex flex-col md:flex-row gap-4 w-full pb-10 mt-6 items-end">
+          <div className="flex gap-x-4">
             <div className="">
               <Image
                 src="/images/badgirl.png"
@@ -86,7 +86,7 @@ function BrandData() {
               Super tool that helps you grow across all social media apps and
               get better engagement!!
             </p>
-            <div className="border w-full">
+            <div className="w-full">
               <input
                 className="md:w-[400px] w-full border p-3 rounded-full mt-5 "
                 type="text"
@@ -100,8 +100,8 @@ function BrandData() {
               </div>
             </div>
           </div>
-          <div className="flex gap-4 border-4 border-green-500 mt-4">
-            <div className="relative self-end border border-yellow-500">
+          <div className="flex gap-4 mt-4">
+            <div className="relative self-end">
               <Image
                 src="/images/blacklady.png"
                 alt="imaw"
@@ -109,7 +109,7 @@ function BrandData() {
                 height={300}
               />
             </div>
-            <div className=" border border-pink-500">
+            <div className="">
               <Image
                 src="/images/shoes.png"
                 alt="imag"

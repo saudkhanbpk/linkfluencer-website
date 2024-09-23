@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Links from "./Links";
 import Apps from "./Apps";
 import TimeToShine from "./TimeToShine";
-import Plateforms from "./Plateforms";
+import Plateforms from "../component/Plateforms"
 import { IoLinkOutline } from "react-icons/io5";
 import axios from "axios";
 import { decryptData } from "@/helper/encryptDecrypt";
@@ -33,7 +33,7 @@ function InfluencerData() {
   }, []);
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <div className="px-[20px] md:px-[80px] border border-green-500">
+      <div className="px-[20px] md:px-[80px]">
         <div className=" flex-col justify-center items-center md:flex hidden">
           <h4 className="text-[32px] md:text-[64px] font-semibold text-center md:w-[600px] text-[#113E53] mt-10 leading-none font-header">
             Open link in bio natively across 30+ Apps
@@ -42,7 +42,7 @@ function InfluencerData() {
             Super tool that helps you grow across all social media apps and get
             better brand deals!!
           </p>
-          <div className="border border-red-500">
+          <div className="">
             <div className="flex">
               {" "}
               <input
@@ -68,7 +68,7 @@ function InfluencerData() {
           </div>
         </div>
         {/* images section  */}
-        <div className="flex flex-col md:flex-row gap-4 w-full pb-10 mt-6 border-4">
+        <div className="flex flex-col md:flex-row gap-4 w-full pb-10 mt-6">
           <div className="flex gap-4 items-end w-full justify-center">
             <div className="">
               <Image
@@ -146,7 +146,7 @@ function InfluencerData() {
                 height={300}
               />
             </div>
-            <div className=" w-[300px] border flex flex-col-reverse">
+            <div className=" w-[300px] flex flex-col-reverse">
               <Image
                 src="/images/girl.png"
                 alt="imag"

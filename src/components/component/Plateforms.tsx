@@ -1,15 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
-import Netfix from '../../../public/images/Netflix.png';
-import snap from '../../../public/images/Snapchat Logomark.png';
-import reddit from '../../../public/images/Reddit Logotype.png';
-import spotify from '../../../public/images/Spotif Logotype.png';
-import appleMusic from '../../../public/images/Apple Music Classical Logotype.png';
-import line from '../../../public/images/Line Logotype.png';
-import telegram from '../../../public/images/Telegram Logotype.png';
-import soundCloud from '../../../public/images/SoundCloud Logotype.png';
-import YoutubeMusic from '../../../public/images/YouTube Music Logotype.png';
-import vimeo from '../../../public/images/Vimeo Logotype.png';
+import Netfix from '../../../public/images/Netflix Logotype.svg';
+import snap from '../../../public/images/Snapchat Logomark.svg';
+import reddit from '../../../public/images/Reddit Logotype.svg';
+import spotify from '../../../public/images/Spotif Logotype.svg';
+import appleMusic from '../../../public/images/Apple Music Classical Logotype.svg';
+import line from '../../../public/images/Line Logotype.svg';
+import telegram from '../../../public/images/Telegram Logotype.svg';
+import soundCloud from '../../../public/images/SoundCloud Logotype.svg';
+import YoutubeMusic from '../../../public/images/YouTube Music Logotype.svg';
+import vimeo from '../../../public/images/Vimeo Logotype.svg';
 import link from '../../../public/images/fi_link.png';
 
 function Plateforms() {
@@ -25,7 +25,7 @@ function Plateforms() {
           {[...platforms, ...platforms].map((platform, index) => (
             <button
               key={index}
-              className='marquee-item flex justify-center items-center w-[200px] rounded-full border h-[50px]'
+              className='marquee-item flex justify-center items-center px-8 rounded-full border h-[50px]'
             >
               <Image src={platform.src} alt={`Platform ${index}`} width={100} height={100} className='w-fit' />
             </button>
@@ -40,7 +40,7 @@ function Plateforms() {
           {[...others, ...others].map((other, index) => (
             <button
               key={index}
-              className='marquee-item flex justify-center items-center w-[200px] rounded-full border h-[50px]'
+              className='marquee-item flex justify-center items-center px-8 rounded-full border h-[50px]'
             >
               <Image src={other.src} alt={`Other ${index}`} width={100} height={100} className='w-fit' />
             </button>

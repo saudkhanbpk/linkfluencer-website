@@ -12,7 +12,7 @@ function Links() {
 
                     <div className='bg-[#F3C6E2] py-5 px-3 flex gap-2 rounded-t-xl '>
                         <Image src='/images/image 156.png' className='self-center' alt='profile' width={100} height={100}  />
-                        <div className='border flex flex-col items-start'>
+                        <div className='flex flex-col items-start'>
                             <h1 className='text-[#74265A] font-semibold text-[12px]'>@johndoe1988</h1>
                             <button className='rounded-full bg-[#74265A] my-1 text-white w-[51px] h-[19px] md:h-[30px] md:w-[85px] text-[7.2px] md:text-[12px]'>Following</button>
                             <Image src='/images/youlink.png' alt='link' width={150} height={150}  />
@@ -30,7 +30,7 @@ function Links() {
 
                     <div className='bg-[#F3C6E2] py-5 px-3 flex gap-2 rounded-t-xl '>
                         <Image src='/images/image 156.png' className='self-center' alt='profile' width={100} height={100}  />
-                        <div className='border flex flex-col items-start'>
+                        <div className='flex flex-col items-start'>
                             <h1 className='text-[#74265A] font-semibold text-[12px]'>@johndoe1988</h1>
                             <button className='rounded-full bg-[#74265A] my-1 text-white w-[51px] h-[19px] md:h-[30px] md:w-[85px] text-[7.2px] md:text-[12px]'>Following</button>
                             <Image src='/images/youlink.png' alt='link' width={150} height={150}  />
