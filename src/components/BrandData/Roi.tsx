@@ -18,7 +18,7 @@ function Roi() {
     arrows: false,
   };
   return (
-    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center w-full px-[20px] md:px-[80px] bg-gray-100'>
+    <div className='flex flex-col lg:flex-row-reverse gap-10 justify-center items-center w-full px-[20px] md:px-[80px] bg-gray-100 py-10'>
       <div className='w-full lg:w-[440px]'>
         <h1 className='text-3xl font-semibold'>
           Fix your influencer marketing ROI
@@ -27,7 +27,7 @@ function Roi() {
           With our smart linking capability, you can enhance user experience and boost engagement by ensuring that your links open directly in mobile apps, rather than app browsers. Say goodbye to the hassle of switching between apps and hello to seamless navigation.
         </p>
       </div>
-      <div className='flex flex-col justify-center items-center gap-4 self-center relative bottom-10'>
+      <div className='flex flex-col justify-center items-center gap-4 self-center relative'>
       <Slider {...settings} className='w-[70px] md:w-[100px] md:h-[100px' >
         <div>
         <Image src='/images/logo animation.png' alt='logoanim' width={100} height={100} className='md:w-auto w-[70px]' />
