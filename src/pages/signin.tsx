@@ -33,7 +33,7 @@ const LoginPage = () => {
       const response = await api.post("/auth/login", values);
       console.log(response.data);
       setUser(response.data);
-      router.push("/");
+      router.push(`${process.env.REACT_APP_DASHBOARD_URL}`);
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials and try again.");
       console.error(error);
