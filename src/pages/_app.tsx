@@ -35,44 +35,10 @@ const theme = createTheme({
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  // const router = useRouter();
-  // useEffect(()=>{
-  //   const rememberMe = localStorage.getItem('linkfluencer-remember-me')
-  //   if(rememberMe !== 'true'){
-  //     // router.push('/signin');
-  //   }
-  // },[])
+
   const router = useRouter();
   const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem('token');
-  //   if (storedToken) {
-  //     setToken(storedToken);
-  //   }
-  // }, []);
-
-  // if (token) {
-  //   axios.post('/api/verify-token', { token })
-  //     .then(response => {
-  //       if (response.data.isValid) {
-  //         setIsAuthenticated(true);
-  //       } else {
-  //         localStorage.removeItem('token');
-  //         router.push('/signin');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       localStorage.removeItem('token');
-  //       router.push('/signin');
-  //     });
-  // }
-
-  // if (!isAuthenticated) {
-  //   return null; // or a loading indicator
-  // }
   return (
    <UserProvider>
      <RootLayout>

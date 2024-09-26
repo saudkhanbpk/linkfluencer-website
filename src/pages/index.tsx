@@ -8,17 +8,17 @@ const Index = () => {
   const [selectedComponent, setSelectedComponent] = useState('Influencer');
 
   return (
-    <>
+    <div className=''>
       <Navbar
         selectedComponent={selectedComponent}
         setSelectedComponent={setSelectedComponent}
       />
-      <div className="relative">
+      <div className="relativ">
         {selectedComponent === 'Influencer' && <InfluencerData />}
         {selectedComponent === 'Brand' && <BrandData />}
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
