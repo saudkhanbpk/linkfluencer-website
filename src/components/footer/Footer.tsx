@@ -29,7 +29,7 @@ function Footer() {
       <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-6 w-full">
           <div className="mt-8">
             <Image
-              src="/images/logo.svg"
+              src="/images/Logo.svg"
               alt="logo"
               width={110}
               height={150}

@@ -31,10 +31,11 @@ const Navbar = ({
         <div>
           <div className="cursor-pointer">
             <Image
-              src="/images/logo.svg"
+              src="/images/Logo.svg"
               alt="Logo"
+              className="border"
               width={150}
-              height={40}
+              height={140}
               onClick={() => router.push("/")}
             />
           </div>
