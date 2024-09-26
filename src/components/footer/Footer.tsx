@@ -40,6 +40,7 @@ function Footer() {
             />
             <p className="my-3">@2024</p>
           </div>
+          
           <div className="mt-8">
             <h1 className="text-[14px] font-bold">Follow Us</h1>
             <div className="flex gap-1 my-1">
