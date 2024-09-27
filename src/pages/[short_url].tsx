@@ -53,10 +53,33 @@ import axios from "axios";
 
 interface Props {}
 
+// const appLinkMappings = [
+//   {
+//     name: 'Instagram',
+//     urlPattern: /https:\/\/(www\.)?instagram\.com\/(.+)/,
+//     appScheme: 'instagram://user?username=',
+//     webFallback: 'https://www.instagram.com/',
+//   },
+//   {
+//     name: 'YouTube',
+//     urlPattern: /https:\/\/(www\.)?youtube\.com\/watch\?v=([^&]+)/,
+//     appScheme: 'youtube://',
+//     webFallback: 'https://www.youtube.com/watch?v=',
+//   },
+//   {
+//     name: 'Facebook',
+//     urlPattern: /https:\/\/(www\.)?facebook\.com\/(.+)/,
+//     appScheme: 'fb://profile/',
+//     webFallback: 'https://www.facebook.com/',
+//   },
+//   // Add other apps and their URL patterns here
+// ];
+
+// Detect if the user is on a mobile device
 const appLinkMappings = [
   {
     name: 'Instagram',
-    urlPattern: /https:\/\/(www\.)?instagram\.com\/(.+)/,
+    urlPattern: /https:\/\/(www\.)?instagram\.com\/([^/?#&]+)/,
     appScheme: 'instagram://user?username=',
     webFallback: 'https://www.instagram.com/',
   },
@@ -68,14 +91,30 @@ const appLinkMappings = [
   },
   {
     name: 'Facebook',
-    urlPattern: /https:\/\/(www\.)?facebook\.com\/(.+)/,
+    urlPattern: /https:\/\/(www\.)?facebook\.com\/([^/?#&]+)/,
     appScheme: 'fb://profile/',
     webFallback: 'https://www.facebook.com/',
   },
-  // Add other apps and their URL patterns here
+  {
+    name: 'Amazon',
+    urlPattern: /https:\/\/(www\.)?amazon\.com\/(?:.+\/)?dp\/([A-Z0-9]{10})/,
+    appScheme: 'amazon://detail?asin=',
+    webFallback: 'https://www.amazon.com/dp/',
+  },
+  {
+    name: 'LinkedIn',
+    urlPattern: /https:\/\/(www\.)?linkedin\.com\/in\/([^/?#&]+)/,
+    appScheme: 'linkedin://in/',
+    webFallback: 'https://www.linkedin.com/in/',
+  },
+  {
+    name: 'Twitter',
+    urlPattern: /https:\/\/(www\.)?twitter\.com\/([^/?#&]+)/,
+    appScheme: 'twitter://user?screen_name=',
+    webFallback: 'https://www.twitter.com/',
+  },
 ];
 
-// Detect if the user is on a mobile device
 function isMobile() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
@@ -98,13 +137,32 @@ function getAppLink(url: string) {
 // Open the app link or fallback to browser
 function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
+  
+  // Detect if the user has left the page (which indicates the app was opened)
+  let appOpened = false;
+  
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      appOpened = true;  // The user left the page (likely opened the app)
+    }
+  }
+
+  // Add visibility change listener
+  document.addEventListener("visibilitychange", handleVisibilityChange);
 
   if (isMobile() && appDeepLink) {
+    // Attempt to open the app
     window.location.href = appDeepLink;
+
+    // Set a timeout to fallback to the browser version if the app isn't opened
     setTimeout(() => {
-      window.location.href = fallbackLink;
-    }, 1500); // Wait 1.5s to fall back if the app isn't installed
+      if (!appOpened) {
+        // If the user didn't leave the page, fallback to the browser
+        window.location.href = fallbackLink;
+      }
+    }, 1500);  // Wait for 1.5 seconds before triggering the fallback
   } else {
+    // If not on mobile or no app deep link, open the fallback link in the browser
     window.location.href = fallbackLink;
   }
 }
