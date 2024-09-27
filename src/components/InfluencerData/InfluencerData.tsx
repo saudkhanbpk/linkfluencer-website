@@ -35,10 +35,10 @@ function InfluencerData() {
     <div className="flex flex-col justify-center items-center w-full">
       <div className="px-[20px] md:px-[80px]">
         <div className=" flex-col justify-center items-center md:flex hidden">
-          <h4 className="text-[32px] md:text-[64px] font-semibold text-center md:w-[600px] text-[#113E53] mt-10 leading-none font-header">
+          <h4 className="text-[32px] md:text-[64px] font-semibold text-center md:w-[800px] text-[#113E53] mt-10 leading-none font-header">
             Open link in bio natively across 30+ Apps
           </h4>
-          <p className="text-xl text-[#113E53] mt-4 leading-none font-content">
+          <p className="text-xl text-[#113E53] mt-4 leading-none font-content text-center">
             Super tool that helps you grow across all social media apps and get
             better brand deals!!
           </p>

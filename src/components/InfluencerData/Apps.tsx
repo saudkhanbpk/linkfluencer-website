@@ -18,9 +18,9 @@ function Apps() {
   };
 
   return (
-    <div className="flex gap-10 flex-wrap justify-center items-center w-full py-[40px] md:py-[100px] px-[20px] md:px-[80px]">
-      <div className="md:w-[440px]">
-        <h1 className="text-[20px] ms:text-[40px] font-[800] font-header">
+    <div className="flex flex-col md:flex-row gap-10 items-center w-full py-[40px] md:py-[100px] px-[20px] md:px-[150px]">
+      <div className="md:w-2/4">
+        <h1 className="text-[20px] md:text-[40px] font-[800] font-content leading-none">
           Unlock the power of smart links that open directly in mobile apps
         </h1>
         <p className="text-[12px] md:text-[18px] mt-4 font-content">
@@ -30,7 +30,7 @@ function Apps() {
         </p>
       </div>
 
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center md:w-2/4">
         <div className="flex flex-col justify-center items-center w-[177px] md:w-[316px]">
           <Slider
             {...settings}
