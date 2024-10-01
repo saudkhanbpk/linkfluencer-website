@@ -34,9 +34,15 @@ const appLinkMappings = [
   {
     name: 'LinkedIn',
     urlPattern: /https:\/\/(www\.)?linkedin\.com\/(in\/[^/?#&]+|company\/[^/?#&]+|jobs\/view\/[^/?#&]+|posts\/[^/?#&]+)/,
-    appScheme: (match: string[]) => `linkedin://profile/${match[2]}`,
+    appScheme: (match: string[]) => {
+      if (match[2].startsWith('in/')) {
+        return `linkedin://in/${match[2].split('/')[1]}`; // Deep link for profiles
+      }
+      return `https://www.linkedin.com/${match[2]}`; // Web fallback for jobs, posts, company pages
+    },
     webFallback: (match: string[]) => `https://www.linkedin.com/${match[2]}`,
   },
+  
   {
     name: 'X (Twitter)',
     urlPattern: /https:\/\/(www\.)?twitter\.com\/(i\/status\/([^/?#&]+)|hashtag\/([^/?#&]+)|([^/?#&]+))/,
