@@ -16,8 +16,8 @@ const appLinkMappings = [
   {
     name: 'YouTube',
     urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=([^&]+)|playlist\?list=([^&]+)|channel\/([^/?#&]+))/,
-    appScheme: (match: string[]) => `youtube://${match[3] || match[4] || match[5]}`,
-    webFallback: (match: string[]) => `https://www.youtube.com/${match[0].split('/').slice(-1)[0]}`,
+    appScheme: (match: string[]) => `youtube://watch?v=${match[3] || match[4] || match[5]}`,  // Updated for video ID
+    webFallback: (match: string[]) => `https://www.youtube.com/watch?v=${match[3] || match[4] || match[5]}`,
   },  
   {
     name: 'Facebook',
@@ -34,7 +34,7 @@ const appLinkMappings = [
   {
     name: 'LinkedIn',
     urlPattern: /https:\/\/(www\.)?linkedin\.com\/(in\/[^/?#&]+|company\/[^/?#&]+|jobs\/view\/[^/?#&]+|posts\/[^/?#&]+)/,
-    appScheme: (match: string[]) => `linkedin://${match[2]}`,
+    appScheme: (match: string[]) => `linkedin://company/${match[2]}`,  // Adjusted for company IDs
     webFallback: (match: string[]) => `https://www.linkedin.com/${match[2]}`,
   },  
   {
@@ -57,12 +57,14 @@ function getAppLink(url: string) {
     if (match) {
       const appDeepLink = app.appScheme(match);
       const fallbackLink = app.webFallback(match);
+      console.log(`App Deep Link: ${appDeepLink}, Web Fallback: ${fallbackLink}`);
       return {
         appDeepLink,
         fallbackLink,
       };
     }
   }
+  console.warn('No matching app link found, using original URL:', url);
   return { fallbackLink: url };
 }
 
@@ -90,11 +92,13 @@ function openLink(url: string) {
     setTimeout(() => {
       if (!appOpened) {
         // If the user didn't leave the page, fallback to the browser
+        console.log("Fallback to browser:", fallbackLink);
         window.location.href = fallbackLink;
       }
     }, 2000);  // Wait for 2 seconds before triggering the fallback
   } else {
     // If not on mobile or no app deep link, open the fallback link in the browser
+    console.log("Not on mobile or no app deep link, opening fallback link:", fallbackLink);
     window.location.href = fallbackLink;
   }
 }
@@ -102,7 +106,7 @@ function openLink(url: string) {
 const Redirect: React.FC<Props> = () => {
   const router = useRouter();
 
-  const getReDirectLink = async (shortUrl: any) => {
+  const getReDirectLink = async (shortUrl: string) => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${shortUrl}`);
       console.log({ link: response.data });
@@ -111,7 +115,7 @@ const Redirect: React.FC<Props> = () => {
         console.log("Redirecting to:", response.data.redirectUrl);
         openLink(response.data.redirectUrl);  // Handle app deep linking and fallback to browser here
       } else {
-        console.log("No redirect URL found");
+        console.warn("No redirect URL found");
       }
     } catch (error) {
       console.error('Error fetching redirect link:', error);
@@ -123,7 +127,7 @@ const Redirect: React.FC<Props> = () => {
 
     if (short_url) {
       // Call your function to handle redirection or fetch the link
-      getReDirectLink(short_url);
+      getReDirectLink(short_url as string);  // Ensure `short_url` is passed as a string
     }
   }, [router.query]);
 
