@@ -7,12 +7,26 @@ interface Props {}
 
 // Mapping URL patterns to app schemes and fallbacks
 const appLinkMappings = [
+  // {
+  //   name: 'Instagram',
+  //   urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
+  //   appScheme: (match: string[]) => `instagram://media?id=${match[3] || match[4] || match[5]}`,
+  //   webFallback: (match: string[]) => `https://www.instagram.com/${match[0].split('/').slice(-1)[0]}/`,
+  // }, 
+  
   {
     name: 'Instagram',
     urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
-    appScheme: (match: string[]) => `instagram://media?id=${match[3] || match[4] || match[5]}`,
+    appScheme: (match: string[]) => {
+      // Check if it's a profile link
+      if (match[5]) {
+        return `instagram://user?username=${match[5]}`;  // Use username for profile
+      }
+      // Handle reels and posts
+      return `instagram://media?id=${match[3] || match[4]}`;
+    },
     webFallback: (match: string[]) => `https://www.instagram.com/${match[0].split('/').slice(-1)[0]}/`,
-  },  
+  },
   {
     name: 'YouTube',
     urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=([^&]+)|playlist\?list=([^&]+)|channel\/([^/?#&]+))/,
@@ -68,34 +82,71 @@ function getAppLink(url: string) {
   return { fallbackLink: url };
 }
 
+// // Open the app link or fallback to the browser
+// function openLink(url: string) {
+//   const { appDeepLink, fallbackLink } = getAppLink(url);
+  
+//   let appOpened = false;
+
+//   function handleVisibilityChange() {
+//     if (document.visibilityState === 'hidden') {
+//       appOpened = true;  // The user left the page (likely opened the app)
+//     }
+//   }
+
+//   document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//   if (isMobile() && appDeepLink) {
+//     window.location.href = appDeepLink;
+
+//     setTimeout(() => {
+//       if (!appOpened) {
+//         console.log("Fallback to browser:", fallbackLink);
+//         window.location.href = fallbackLink;
+//       }
+//     }, 2000);
+//   } else {
+//     console.log("Not on mobile or no app deep link, opening fallback link:", fallbackLink);
+//     window.location.href = fallbackLink;
+//   }
+// }
+
+
 // Open the app link or fallback to the browser
 function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
   
+  // Detect if the user has left the page (which indicates the app was opened)
   let appOpened = false;
-
+  
   function handleVisibilityChange() {
     if (document.visibilityState === 'hidden') {
       appOpened = true;  // The user left the page (likely opened the app)
     }
   }
 
+  // Add visibility change listener
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
   if (isMobile() && appDeepLink) {
+    // Attempt to open the app
     window.location.href = appDeepLink;
 
+    // Set a timeout to fallback to the browser version if the app isn't opened
     setTimeout(() => {
       if (!appOpened) {
-        console.log("Fallback to browser:", fallbackLink);
+        // If the user didn't leave the page, fallback to the browser
         window.location.href = fallbackLink;
       }
-    }, 2000);
+    }, 2000);  // Wait for 2 seconds before triggering the fallback
   } else {
-    console.log("Not on mobile or no app deep link, opening fallback link:", fallbackLink);
+    // If not on mobile or no app deep link, open the fallback link in the browser
     window.location.href = fallbackLink;
   }
 }
+
+
+
 
 const Redirect: React.FC<Props> = () => {
   const router = useRouter();
