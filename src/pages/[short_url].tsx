@@ -179,7 +179,6 @@
 
 // export default Redirect;
 
-
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -187,58 +186,27 @@ import axios from "axios";
 
 interface Props {}
 
-// Mapping URL patterns to app schemes and fallbacks
 const appLinkMappings = [
   {
     name: 'Instagram',
     urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
     appScheme: (match: string[]) => {
       if (match[5]) {
-        return `instagram://user?username=${match[5]}`;  // Use username for profile
+        return `instagram://user?username=${match[5]}`;
       }
       return `instagram://media?id=${match[3] || match[4]}`;
     },
     webFallback: (match: string[]) => `https://www.instagram.com/${match[0].split('/').slice(-1)[0]}/`,
   },
-  {
-    name: 'YouTube',
-    urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=([^&]+)|playlist\?list=([^&]+)|channel\/([^/?#&]+))/,
-    appScheme: (match: string[]) => `youtube://watch?v=${match[3] || match[4] || match[5]}`,
-    webFallback: (match: string[]) => `https://www.youtube.com/watch?v=${match[3] || match[4] || match[5]}`,
-  },
-  {
-    name: 'Facebook',
-    urlPattern: /https:\/\/(www\.)?facebook\.com\/(posts|pages|[^/?#&]+)/,
-    appScheme: (match: string[]) => `fb://facewebmodal/f?href=${encodeURIComponent(match[0])}`,
-    webFallback: (match: string[]) => `https://www.facebook.com/${match[0].split('/').slice(-1)[0]}`,
-  },
-  {
-    name: 'Amazon',
-    urlPattern: /https:\/\/(www\.)?amazon\.com\/(?:.+\/)?dp\/([A-Z0-9]{10})/,
-    appScheme: (match: string[]) => `amazon://detail?asin=${match[1]}`,
-    webFallback: (match: string[]) => `https://www.amazon.com/dp/${match[1]}`,
-  },
-  {
-    name: 'LinkedIn',
-    urlPattern: /https:\/\/(www\.)?linkedin\.com\/(in\/[^/?#&]+|company\/[^/?#&]+|jobs\/view\/[^/?#&]+|posts\/[^/?#&]+)/,
-    appScheme: (match: string[]) => `linkedin://company/${match[2]}`,
-    webFallback: (match: string[]) => `https://www.linkedin.com/${match[2]}`,
-  },
-  {
-    name: 'Twitter',
-    urlPattern: /https:\/\/(www\.)?twitter\.com\/(i\/status\/([^/?#&]+)|hashtag\/([^/?#&]+)|([^/?#&]+))/,
-    appScheme: (match: string[]) => `twitter://status/${match[3] || match[4]}`,
-    webFallback: (match: string[]) => `https://www.twitter.com/${match[0].split('/').slice(-1)[0]}`,
-  },
+  // Add other app link mappings here...
 ];
 
-// Detect if the user is on a mobile device
 function isMobile() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
 
-// Generate deep link for the app and fallback to browser
-function getAppLink(url: string) {
+// Updated getAppLink function
+const getAppLink = (url: string) => {
   for (let app of appLinkMappings) {
     const match = url.match(app.urlPattern);
     if (match) {
@@ -253,9 +221,9 @@ function getAppLink(url: string) {
   }
   console.warn('No matching app link found, using original URL:', url);
   return { fallbackLink: url };
-}
+};
 
-// Open the app link or fallback to the browser
+// Updated openLink function
 function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
   
@@ -263,7 +231,7 @@ function openLink(url: string) {
   
   function handleVisibilityChange() {
     if (document.visibilityState === 'hidden') {
-      appOpened = true;  // The user left the page (likely opened the app)
+      appOpened = true;
     }
   }
 
@@ -277,9 +245,8 @@ function openLink(url: string) {
         console.log("Fallback to browser:", fallbackLink);
         window.location.href = fallbackLink;
       }
-    }, 3000);  // Wait for 3 seconds before triggering the fallback
+    }, 3000);  // Adjust timeout as needed
   } else {
-    console.log("Not on mobile or no app deep link, opening fallback link:", fallbackLink);
     window.location.href = fallbackLink;
   }
 }
@@ -294,7 +261,7 @@ const Redirect: React.FC<Props> = () => {
       
       if (response.data.redirectUrl) {
         console.log("Redirecting to:", response.data.redirectUrl);
-        openLink(response.data.redirectUrl);
+        openLink(response.data.redirectUrl);  // Call openLink here
       } else {
         console.warn("No redirect URL found");
       }
@@ -318,7 +285,6 @@ const Redirect: React.FC<Props> = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Redirect;
