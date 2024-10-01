@@ -195,10 +195,10 @@ interface Props {}
 const appLinkMappings = [
   {
     name: 'Instagram',
-    urlPattern: /https:\/\/(www\.)?instagram\.com\/(p\/[^/?#&]+|[^/?#&]+)/,
+    urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/[^/?#&]+|p\/[^/?#&]+|[^/?#&]+)/,
     appScheme: 'instagram://user?username=',
     webFallback: 'https://www.instagram.com/',
-  },
+  },  
   {
     name: 'YouTube',
     urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=[^&]+|playlist\?list=[^&]+|channel\/[^/?#&]+)/,
