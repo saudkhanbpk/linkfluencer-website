@@ -193,12 +193,18 @@ interface Props {}
 
 // Mapping URL patterns to app schemes and fallbacks
 const appLinkMappings = [
+  // {
+  //   name: 'Instagram',
+  //   urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/[^/?#&]+|p\/[^/?#&]+|[^/?#&]+)/,
+  //   appScheme: 'instagram://user?username=',
+  //   webFallback: 'https://www.instagram.com/',
+  // }, 
   {
     name: 'Instagram',
-    urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/[^/?#&]+|p\/[^/?#&]+|[^/?#&]+)/,
-    appScheme: 'instagram://user?username=',
+    urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
+    appScheme: 'instagram://media?id=',
     webFallback: 'https://www.instagram.com/',
-  },  
+  }, 
   {
     name: 'YouTube',
     urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=[^&]+|playlist\?list=[^&]+|channel\/[^/?#&]+)/,
@@ -237,11 +243,30 @@ function isMobile() {
 }
 
 // Generate deep link for the app and fallback to browser
+// function getAppLink(url: string) {
+//   for (let app of appLinkMappings) {
+//     const match = url.match(app.urlPattern);
+//     if (match) {
+//       const appDeepLink = app.appScheme + match[2];
+//       return {
+//         appDeepLink,
+//         fallbackLink: app.webFallback + match[2],
+//       };
+//     }
+//   }
+//   return { fallbackLink: url };
+// }
+
 function getAppLink(url: string) {
   for (let app of appLinkMappings) {
     const match = url.match(app.urlPattern);
     if (match) {
-      const appDeepLink = app.appScheme + match[2];
+      let appDeepLink;
+      if (match[0].includes('/reel/')) {
+        appDeepLink = `instagram://media?id=${match[2]}`; // Assuming you can extract the reel ID
+      } else {
+        appDeepLink = app.appScheme + match[2]; // For profiles
+      }
       return {
         appDeepLink,
         fallbackLink: app.webFallback + match[2],
@@ -250,6 +275,7 @@ function getAppLink(url: string) {
   }
   return { fallbackLink: url };
 }
+
 
 // Open the app link or fallback to the browser
 function openLink(url: string) {
