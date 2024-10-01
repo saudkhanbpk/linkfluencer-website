@@ -17,14 +17,16 @@ const appLinkMappings = [
   },
   {
     name: 'YouTube',
-    urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=([^&]+)|playlist\?list=([^&]+)|channel\/([^/?#&]+))/,
+    urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=[^&]+|channel\/[^/?#&]+|playlist\/[^/?#&]+)/,
     appScheme: (match: string[]) => {
-      if (match[3]) return `youtube://watch?v=${match[3]}`;
-      if (match[4]) return `youtube://playlist?list=${match[4]}`;
-      return `youtube://channel/${match[5]}`;
+      if (match[2].startsWith('watch?v=')) {
+        const videoId = match[2].split('v=')[1];
+        return `vnd.youtube://${videoId}`; // Deep link for YouTube videos in the app
+      }
+      return `https://www.youtube.com/${match[2]}`; // Web fallback for channels and playlists
     },
     webFallback: (match: string[]) => `https://www.youtube.com/${match[2]}`,
-  },
+  }, 
   {
     name: 'Facebook',
     urlPattern: /https:\/\/(www\.)?facebook\.com\/(posts\/[^/?#&]+|pages\/[^/?#&]+|[^/?#&]+)/,
@@ -41,8 +43,7 @@ const appLinkMappings = [
       return `https://www.linkedin.com/${match[2]}`; // Web fallback for jobs, posts, company pages
     },
     webFallback: (match: string[]) => `https://www.linkedin.com/${match[2]}`,
-  },
-  
+  },  
   {
     name: 'X (Twitter)',
     urlPattern: /https:\/\/(www\.)?twitter\.com\/(i\/status\/([^/?#&]+)|hashtag\/([^/?#&]+)|([^/?#&]+))/,
