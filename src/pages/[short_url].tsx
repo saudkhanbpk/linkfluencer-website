@@ -7,13 +7,6 @@ interface Props {}
 
 // Mapping URL patterns to app schemes and fallbacks
 const appLinkMappings = [
-  // {
-  //   name: 'Instagram',
-  //   urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
-  //   appScheme: (match: string[]) => `instagram://media?id=${match[3] || match[4] || match[5]}`,
-  //   webFallback: (match: string[]) => `https://www.instagram.com/${match[0].split('/').slice(-1)[0]}/`,
-  // }, 
-  
   {
     name: 'Instagram',
     urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
