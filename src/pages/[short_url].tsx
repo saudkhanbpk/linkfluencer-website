@@ -318,6 +318,7 @@ const Redirect: React.FC<Props> = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Redirect;
