@@ -57,7 +57,7 @@ interface Props {}
 const appLinkMappings = [
   {
     name: 'Instagram',
-    urlPattern: /https:\/\/(www\.)?instagram\.com\/([^/?#&]+)/,
+    urlPattern: /https:\/\/(www\.)?instagram\.com\/(p\/[^/?#&]+|[^/?#&]+)/,
     appScheme: 'instagram://user?username=',
     webFallback: 'https://www.instagram.com/',
   },
