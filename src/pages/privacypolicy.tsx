@@ -452,6 +452,7 @@ function privacypolicy() {
                 <button className="w-fit py-3 px-8  rounded-full focus:outline-none md:centered bg-[#020D3A] text-white">
                   Create Smart Link
                 </button>
+                
               </div>
             </div>
           </div>
