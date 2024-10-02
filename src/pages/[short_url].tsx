@@ -75,6 +75,20 @@ const appLinkMappings = [
     },
     webFallback: (match: string[]) => `https://www.tiktok.com/${match[2]}`,
   },
+  {
+    name: "Snapchat",
+    urlPattern: /https:\/\/(www\.)?snapchat\.com\/(add\/([^/?#&]+)|story\/([^/?#&]+))/,
+    appScheme: (match: string[]) => {
+      if (match[3]) {
+        return `snapchat://add/${match[3]}`; // Snapchat profile deep link
+      }
+      if (match[4]) {
+        return `snapchat://story/${match[4]}`; // Snapchat story deep link
+      }
+      return `snapchat://`; // Fallback to Snapchat app
+    },
+    webFallback: (match: string[]) => `https://www.snapchat.com/${match[2]}`, // Web fallback
+  },
 ];
 
 // Detect if the user is on iOS
@@ -106,39 +120,6 @@ function getAppLink(url: string) {
   console.warn("No matching app link found, using original URL:", url);
   return { fallbackLink: url };
 }
-
-// Open the app or fallback to browser
-// function openLink(url: string) {
-//   const { appDeepLink, fallbackLink } = getAppLink(url);
-
-//   let appOpened = false;
-
-//   function handleVisibilityChange() {
-//     if (document.visibilityState === "hidden") {
-//       appOpened = true;
-//     }
-//   }
-
-//   document.addEventListener("visibilitychange", handleVisibilityChange);
-
-//   if (isMobile() && appDeepLink) {
-//     // On iOS, we might need a different approach
-//     if (isIOS()) {
-//       // Open Universal Links for iOS
-//       window.location.href = fallbackLink;
-//     } else {
-//       // Try app deep link on Android
-//       window.location.href = appDeepLink;
-//       setTimeout(() => {
-//         if (!appOpened) {
-//           window.location.href = fallbackLink;
-//         }
-//       }, 2000);
-//     }
-//   } else {
-//     window.location.href = fallbackLink;
-//   }
-// }
 
 function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
