@@ -33,7 +33,6 @@ const Navbar = ({
             <Image
               src="/images/Logo.svg"
               alt="Logo"
-              className="border"
               width={150}
               height={140}
               onClick={() => router.push("/")}

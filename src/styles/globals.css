@@ -25,6 +25,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    width: 100% !important;
+    display: block !important;
+    margin: 0 auto !important;
 }
 
 @layer utilities {
