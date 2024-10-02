@@ -61,6 +61,16 @@ const appLinkMappings = [
     },
     webFallback: (match: string[]) => `https://www.twitter.com/${match[2]}`,
   },
+  {
+    name: 'TikTok',
+    urlPattern: /https:\/\/(www\.)?tiktok\.com\/(@[^/?#&]+\/video\/([^/?#&]+)|(@[^/?#&]+)|([^/?#&]+))/,
+    appScheme: (match: string[]) => {
+      if (match[3]) return `snssdk1128://aweme/detail/${match[3]}`; // TikTok video deep link
+      if (match[4]) return `snssdk1128://user/profile/${match[4].replace('@', '')}`; // TikTok profile deep link
+      return `snssdk1128://feed`; // Fallback to TikTok feed in app
+    },
+    webFallback: (match: string[]) => `https://www.tiktok.com/${match[2]}`,
+  }
 ];
 
 // Detect if the user is on iOS
