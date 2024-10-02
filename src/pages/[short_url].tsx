@@ -1,156 +1,189 @@
-import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Image from "next/image";
 
-interface Props {}
-
-// Mapping URL patterns to app schemes and fallbacks
+// URL mappings for each platform with proper handling of various link types
 const appLinkMappings = [
   {
-    name: 'Instagram',
-    urlPattern: /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
+    name: "Instagram",
+    urlPattern:
+      /https:\/\/(www\.)?instagram\.com\/(reel\/([^/?#&]+)|p\/([^/?#&]+)|([^/?#&]+))/,
     appScheme: (match: string[]) => {
-      // Check if it's a profile link
       if (match[5]) {
-        return `instagram://user?username=${match[5]}`;  // Use username for profile
+        return `instagram://user?username=${match[5]}`;
       }
-      // Handle reels and posts
       return `instagram://media?id=${match[3] || match[4]}`;
     },
-    webFallback: (match: string[]) => `https://www.instagram.com/${match[0].split('/').slice(-1)[0]}/`,
+    webFallback: (match: string[]) => `https://www.instagram.com/${match[2]}`,
   },
   {
-    name: 'YouTube',
-    urlPattern: /https:\/\/(www\.)?youtube\.com\/(watch\?v=([^&]+)|playlist\?list=([^&]+)|channel\/([^/?#&]+))/,
-    appScheme: (match: string[]) => `youtube://watch?v=${match[3] || match[4] || match[5]}`,
-    webFallback: (match: string[]) => `https://www.youtube.com/watch?v=${match[3] || match[4] || match[5]}`,
-  },  
-  {
-    name: 'Facebook',
-    urlPattern: /https:\/\/(www\.)?facebook\.com\/(posts|pages|[^/?#&]+)/,
-    appScheme: (match: string[]) => `fb://facewebmodal/f?href=${encodeURIComponent(match[0])}`,
-    webFallback: (match: string[]) => `https://www.facebook.com/${match[0].split('/').slice(-1)[0]}`,
-  },  
-  {
-    name: 'Amazon',
-    urlPattern: /https:\/\/(www\.)?amazon\.com\/(?:.+\/)?dp\/([A-Z0-9]{10})/,
-    appScheme: (match: string[]) => `amazon://detail?asin=${match[1]}`,
-    webFallback: (match: string[]) => `https://www.amazon.com/dp/${match[1]}`,
+    name: "YouTube",
+    urlPattern:
+      /https:\/\/(www\.)?youtube\.com\/(watch\?v=[^&]+|channel\/[^/?#&]+|playlist\/[^/?#&]+)/,
+    appScheme: (match: string[]) => {
+      if (match[2].startsWith("watch?v=")) {
+        const videoId = match[2].split("v=")[1];
+        return `vnd.youtube://${videoId}`; // Deep link for YouTube videos in the app
+      }
+      return `https://www.youtube.com/${match[2]}`; // Web fallback for channels and playlists
+    },
+    webFallback: (match: string[]) => `https://www.youtube.com/${match[2]}`,
   },
   {
-    name: 'LinkedIn',
-    urlPattern: /https:\/\/(www\.)?linkedin\.com\/(in\/[^/?#&]+|company\/[^/?#&]+|jobs\/view\/[^/?#&]+|posts\/[^/?#&]+)/,
-    appScheme: (match: string[]) => `linkedin://company/${match[2]}`,
+    name: "Facebook",
+    urlPattern:
+      /https:\/\/(www\.)?facebook\.com\/(posts\/[^/?#&]+|pages\/[^/?#&]+|[^/?#&]+)/,
+    appScheme: (match: string[]) =>
+      `fb://facewebmodal/f?href=${encodeURIComponent(match[0])}`,
+    webFallback: (match: string[]) => `https://www.facebook.com/${match[2]}`,
+  },
+  {
+    name: "LinkedIn",
+    urlPattern:
+      /https:\/\/(www\.)?linkedin\.com\/(in\/[^/?#&]+|company\/[^/?#&]+|jobs\/view\/[^/?#&]+|posts\/[^/?#&]+)/,
+    appScheme: (match: string[]) => {
+      if (match[2].startsWith("in/")) {
+        return `linkedin://in/${match[2].split("/")[1]}`; // Deep link for profiles
+      }
+      return `https://www.linkedin.com/${match[2]}`; // Web fallback for jobs, posts, company pages
+    },
     webFallback: (match: string[]) => `https://www.linkedin.com/${match[2]}`,
-  },  
+  },
   {
-    name: 'Twitter',
-    urlPattern: /https:\/\/(www\.)?twitter\.com\/(i\/status\/([^/?#&]+)|hashtag\/([^/?#&]+)|([^/?#&]+))/,
-    appScheme: (match: string[]) => `twitter://status/${match[3] || match[4]}`,
-    webFallback: (match: string[]) => `https://www.twitter.com/${match[0].split('/').slice(-1)[0]}`,
-  },  
+    name: "X (Twitter)",
+    urlPattern:
+      /https:\/\/(www\.)?twitter\.com\/(i\/status\/([^/?#&]+)|hashtag\/([^/?#&]+)|([^/?#&]+))/,
+    appScheme: (match: string[]) => {
+      if (match[3]) return `twitter://status/${match[3]}`;
+      if (match[4]) return `twitter://hashtag/${match[4]}`;
+      return `twitter://user?screen_name=${match[5]}`;
+    },
+    webFallback: (match: string[]) => `https://www.twitter.com/${match[2]}`,
+  },
+  {
+    name: 'TikTok',
+    urlPattern: /https:\/\/(www\.)?tiktok\.com\/(@[^/?#&]+\/video\/([^/?#&]+)|(@[^/?#&]+)|([^/?#&]+))/,
+    appScheme: (match: string[]) => {
+      if (match[3]) {
+        return `snssdk1128://aweme/detail/${match[3]}`; // TikTok video deep link
+      }
+      if (match[4]) {
+        return `snssdk1128://user/profile/${match[4].replace('@', '')}`; // TikTok profile deep link
+      }
+      return `snssdk1128://feed`; // Fallback to TikTok feed in app
+    },
+    webFallback: (match: string[]) => `https://www.tiktok.com/${match[2]}`,
+  },
 ];
 
-// Detect if the user is on a mobile device
+// Detect if the user is on iOS
+function isIOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+// Detect if the user is on mobile
 function isMobile() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
 
-// Generate deep link for the app and fallback to browser
+// Generate deep link or fallback link
 function getAppLink(url: string) {
   for (let app of appLinkMappings) {
     const match = url.match(app.urlPattern);
     if (match) {
       const appDeepLink = app.appScheme(match);
-      const fallbackLink = url;  // Use the original URL for the fallback
-      console.log(`App Deep Link: ${appDeepLink}, Web Fallback: ${fallbackLink}`);
+      const fallbackLink = app.webFallback(match);
+      console.log(
+        `App Deep Link: ${appDeepLink}, Web Fallback: ${fallbackLink}`
+      );
       return {
         appDeepLink,
         fallbackLink,
       };
     }
   }
-  console.warn('No matching app link found, using original URL:', url);
+  console.warn("No matching app link found, using original URL:", url);
   return { fallbackLink: url };
 }
 
-// // Open the app link or fallback to the browser
+// Open the app or fallback to browser
 // function openLink(url: string) {
 //   const { appDeepLink, fallbackLink } = getAppLink(url);
-  
+
 //   let appOpened = false;
 
 //   function handleVisibilityChange() {
-//     if (document.visibilityState === 'hidden') {
-//       appOpened = true;  // The user left the page (likely opened the app)
+//     if (document.visibilityState === "hidden") {
+//       appOpened = true;
 //     }
 //   }
 
 //   document.addEventListener("visibilitychange", handleVisibilityChange);
 
 //   if (isMobile() && appDeepLink) {
-//     window.location.href = appDeepLink;
-
-//     setTimeout(() => {
-//       if (!appOpened) {
-//         console.log("Fallback to browser:", fallbackLink);
-//         window.location.href = fallbackLink;
-//       }
-//     }, 2000);
+//     // On iOS, we might need a different approach
+//     if (isIOS()) {
+//       // Open Universal Links for iOS
+//       window.location.href = fallbackLink;
+//     } else {
+//       // Try app deep link on Android
+//       window.location.href = appDeepLink;
+//       setTimeout(() => {
+//         if (!appOpened) {
+//           window.location.href = fallbackLink;
+//         }
+//       }, 2000);
+//     }
 //   } else {
-//     console.log("Not on mobile or no app deep link, opening fallback link:", fallbackLink);
 //     window.location.href = fallbackLink;
 //   }
 // }
 
-
-// Open the app link or fallback to the browser
 function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
-  
-  // Detect if the user has left the page (which indicates the app was opened)
+  const key = `${url}-redirected`;
+
+  // Check if the user has already been prompted
+  const hasBeenRedirected = localStorage.getItem(key);
+
   let appOpened = false;
-  
+
   function handleVisibilityChange() {
     if (document.visibilityState === 'hidden') {
-      appOpened = true;  // The user left the page (likely opened the app)
+      appOpened = true;
+      localStorage.setItem(key, 'true'); // Store in localStorage to prevent future prompts
     }
   }
 
-  // Add visibility change listener
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  if (isMobile() && appDeepLink) {
-    // Attempt to open the app
-    window.location.href = appDeepLink;
-
-    // Set a timeout to fallback to the browser version if the app isn't opened
-    setTimeout(() => {
-      if (!appOpened) {
-        // If the user didn't leave the page, fallback to the browser
-        window.location.href = fallbackLink;
-      }
-    }, 2000);  // Wait for 2 seconds before triggering the fallback
+  if (!hasBeenRedirected) {
+    // If it's a mobile device and the appDeepLink exists, try opening the app
+    if (isMobile() && appDeepLink) {
+      window.location.href = appDeepLink; // Attempt to open the app
+      setTimeout(() => {
+        if (!appOpened) {
+          window.location.href = fallbackLink; // Fallback to web if the app isn't opened
+        }
+      }, 2000); // Allow time for the app to open
+    } else {
+      window.location.href = fallbackLink;
+    }
   } else {
-    // If not on mobile or no app deep link, open the fallback link in the browser
+    // If the user has been prompted already, go straight to the fallback link
     window.location.href = fallbackLink;
   }
 }
 
-
-
-
-const Redirect: React.FC<Props> = () => {
+// Example function for handling redirect
+const Redirect: React.FC = () => {
   const router = useRouter();
 
   const getReDirectLink = async (shortUrl: string) => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${shortUrl}`);
-      console.log({ link: response.data });
-      
       if (response.data.redirectUrl) {
-        console.log("Redirecting to:", response.data.redirectUrl);
         openLink(response.data.redirectUrl);
       } else {
         console.warn("No redirect URL found");
@@ -162,16 +195,16 @@ const Redirect: React.FC<Props> = () => {
 
   useEffect(() => {
     const { short_url } = router.query;
-
     if (short_url) {
       getReDirectLink(short_url as string);
+      
     }
   }, [router.query]);
-
   return (
     <div className="border h-screen flex items-center justify-center">
       <div className="flex justify-center items-center">
-        <Image src="/images/Logo.svg" alt="Logo" height={100} width={300} />
+        {/* Add your logo here */}
+        <Image src="/images/Logo.svg" height={200} width={400} alt="logo"/>
       </div>
     </div>
   );
