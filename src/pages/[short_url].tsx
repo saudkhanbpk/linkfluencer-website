@@ -65,12 +65,16 @@ const appLinkMappings = [
     name: 'TikTok',
     urlPattern: /https:\/\/(www\.)?tiktok\.com\/(@[^/?#&]+\/video\/([^/?#&]+)|(@[^/?#&]+)|([^/?#&]+))/,
     appScheme: (match: string[]) => {
-      if (match[3]) return `snssdk1128://aweme/detail/${match[3]}`; // TikTok video deep link
-      if (match[4]) return `snssdk1128://user/profile/${match[4].replace('@', '')}`; // TikTok profile deep link
+      if (match[3]) {
+        return `snssdk1128://aweme/detail/${match[3]}`; // TikTok video deep link
+      }
+      if (match[4]) {
+        return `snssdk1128://user/profile/${match[4].replace('@', '')}`; // TikTok profile deep link
+      }
       return `snssdk1128://feed`; // Fallback to TikTok feed in app
     },
     webFallback: (match: string[]) => `https://www.tiktok.com/${match[2]}`,
-  }
+  },
 ];
 
 // Detect if the user is on iOS
@@ -104,54 +108,88 @@ function getAppLink(url: string) {
 }
 
 // Open the app or fallback to browser
+// function openLink(url: string) {
+//   const { appDeepLink, fallbackLink } = getAppLink(url);
+
+//   let appOpened = false;
+
+//   function handleVisibilityChange() {
+//     if (document.visibilityState === "hidden") {
+//       appOpened = true;
+//     }
+//   }
+
+//   document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//   if (isMobile() && appDeepLink) {
+//     // On iOS, we might need a different approach
+//     if (isIOS()) {
+//       // Open Universal Links for iOS
+//       window.location.href = fallbackLink;
+//     } else {
+//       // Try app deep link on Android
+//       window.location.href = appDeepLink;
+//       setTimeout(() => {
+//         if (!appOpened) {
+//           window.location.href = fallbackLink;
+//         }
+//       }, 2000);
+//     }
+//   } else {
+//     window.location.href = fallbackLink;
+//   }
+// }
+
 function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
+  const key = `${url}-redirected`;
+
+  // Check if the user has already been prompted
+  const hasBeenRedirected = localStorage.getItem(key);
 
   let appOpened = false;
 
   function handleVisibilityChange() {
-    if (document.visibilityState === "hidden") {
+    if (document.visibilityState === 'hidden') {
       appOpened = true;
+      localStorage.setItem(key, 'true'); // Store in localStorage to prevent future prompts
     }
   }
 
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  if (isMobile() && appDeepLink) {
-    // On iOS, we might need a different approach
-    if (isIOS()) {
-      // Open Universal Links for iOS
-      window.location.href = fallbackLink;
-    } else {
-      // Try app deep link on Android
-      window.location.href = appDeepLink;
+  if (!hasBeenRedirected) {
+    // If it's a mobile device and the appDeepLink exists, try opening the app
+    if (isMobile() && appDeepLink) {
+      window.location.href = appDeepLink; // Attempt to open the app
       setTimeout(() => {
         if (!appOpened) {
-          window.location.href = fallbackLink;
+          window.location.href = fallbackLink; // Fallback to web if the app isn't opened
         }
-      }, 2000);
+      }, 2000); // Allow time for the app to open
+    } else {
+      window.location.href = fallbackLink;
     }
   } else {
+    // If the user has been prompted already, go straight to the fallback link
     window.location.href = fallbackLink;
   }
 }
 
-// Component for redirection
+// Example function for handling redirect
 const Redirect: React.FC = () => {
   const router = useRouter();
 
   const getReDirectLink = async (shortUrl: string) => {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/${shortUrl}`
-      );
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${shortUrl}`);
       if (response.data.redirectUrl) {
         openLink(response.data.redirectUrl);
       } else {
         console.warn("No redirect URL found");
       }
     } catch (error) {
-      console.error("Error fetching redirect link:", error);
+      console.error('Error fetching redirect link:', error);
     }
   };
 
