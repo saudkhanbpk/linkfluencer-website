@@ -197,6 +197,7 @@ const Redirect: React.FC = () => {
     const { short_url } = router.query;
     if (short_url) {
       getReDirectLink(short_url as string);
+      
     }
   }, [router.query]);
   return (
