@@ -367,7 +367,7 @@ const openLink = (url: string) => {
   if (isMobile() && appDeepLink) {
     if (isIOS()) {
       // Use Universal Links on iOS
-      const universalLink = `https://myapp.com/${appDeepLink}`;
+      const universalLink = `https://instagram.com/${appDeepLink}`;
       window.location.href = universalLink;
     } else {
       // Use the appDeepLink on Android
