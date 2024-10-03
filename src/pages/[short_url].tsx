@@ -123,6 +123,64 @@ const appLinkMappings = [
       return `https://www.netflix.com/browse`; // Web fallback for browse
     },
   },
+  {
+    name: 'YouTube Music',
+    urlPattern:
+      /https:\/\/(music\.)?youtube\.com\/(watch\?v=[^&]+|playlist\?list=[^&]+)/,
+    appScheme: (match: string[]) => {
+      if (match[2].startsWith("watch?v=")) {
+        const videoId = match[2].split("v=")[1];
+        return `com.google.android.apps.youtube.music://watch?v=${videoId}`; // Deep link for YouTube Music video/song
+      } else if (match[2].startsWith("playlist?list=")) {
+        const playlistId = match[2].split("list=")[1];
+        return `com.google.android.apps.youtube.music://playlist?list=${playlistId}`; // Deep link for YouTube Music playlist
+      }
+      return `https://music.youtube.com/${match[2]}`; // Fallback link
+    },
+    webFallback: (match: string[]) => `https://music.youtube.com/${match[2]}`,
+  },
+  {
+    name: 'Threads',
+    urlPattern:
+      /https:\/\/(www\.)?threads\.net\/(@[^/?#&]+|([^/?#&]+)\/posts\/([^/?#&]+))/,
+    appScheme: (match: string[]) => {
+      if (match[1]) {
+        return `threads://user?username=${match[1].replace('@', '')}`; // Deep link for Threads user profile
+      } else if (match[3]) {
+        return `threads://post/${match[3]}`; // Deep link for Threads post
+      }
+      return `https://threads.net/${match[0]}`; // Fallback link
+    },
+    webFallback: (match: string[]) => `https://threads.net/${match[0]}`,
+  },
+  {
+    name: "Twitch",
+    urlPattern: /https:\/\/(www\.)?twitch\.tv\/([^/?#&]+)/,
+    appScheme: (match: string[]) => `twitch://stream/${match[2]}`, // Deep link to Twitch stream/channel
+    webFallback: (match: string[]) => `https://www.twitch.tv/${match[2]}`, // Fallback to web if app is not available
+  },
+  {
+    name: "Alibaba",
+    urlPattern: /https:\/\/(www\.)?alibaba\.com\/(product-detail\/[^/?#&]+|[^/?#&]+)/,
+    appScheme: (match: string[]) => {
+      if (match[2].startsWith("product-detail")) {
+        return `alibaba://product/${match[2].split("/")[1]}`; // Deep link to specific product
+      }
+      return `alibaba://home`; // General deep link to Alibaba home page
+    },
+    webFallback: (match: string[]) => `https://www.alibaba.com/${match[2]}`, // Fallback to web version
+  },
+  {
+    name: "Zomato",
+    urlPattern: /https:\/\/(www\.)?zomato\.com\/(restaurant\/[^/?#&]+|[^/?#&]+)/,
+    appScheme: (match: string[]) => {
+      if (match[2].startsWith("restaurant/")) {
+        return `zomato://restaurant/${match[2].split("/")[1]}`; // Deep link to specific restaurant
+      }
+      return `zomato://home`; // General deep link to Zomato home page
+    },
+    webFallback: (match: string[]) => `https://www.zomato.com/${match[2]}`, // Fallback to web version
+  },
 ];
 
 // Detect if the user is on iOS
