@@ -108,79 +108,6 @@ const appLinkMappings = [
     },
     webFallback: (match: string[]) => `https://open.spotify.com/${match[2]}`, // Web fallback URL
   },
-  {
-    name: 'Netflix',
-    urlPattern:
-      /https:\/\/(www\.)?netflix\.com\/(title\/([^/?#&]+)|browse|search\/([^/?#&]+))/,
-    appScheme: (match: string[]) => {
-      if (match[3]) return `nflx://www.netflix.com/title/${match[3]}`; // Netflix title deep link
-      if (match[4]) return `nflx://www.netflix.com/search?q=${match[4]}`; // Netflix search deep link
-      return `nflx://www.netflix.com/browse`; // Netflix browse deep link
-    },
-    webFallback: (match: string[]) => {
-      if (match[3]) return `https://www.netflix.com/title/${match[3]}`; // Web fallback for title
-      if (match[4]) return `https://www.netflix.com/search?q=${match[4]}`; // Web fallback for search
-      return `https://www.netflix.com/browse`; // Web fallback for browse
-    },
-  },
-  {
-    name: 'YouTube Music',
-    urlPattern:
-      /https:\/\/(music\.)?youtube\.com\/(watch\?v=[^&]+|playlist\?list=[^&]+)/,
-    appScheme: (match: string[]) => {
-      if (match[2].startsWith("watch?v=")) {
-        const videoId = match[2].split("v=")[1];
-        return `com.google.android.apps.youtube.music://watch?v=${videoId}`; // Deep link for YouTube Music video/song
-      } else if (match[2].startsWith("playlist?list=")) {
-        const playlistId = match[2].split("list=")[1];
-        return `com.google.android.apps.youtube.music://playlist?list=${playlistId}`; // Deep link for YouTube Music playlist
-      }
-      return `https://music.youtube.com/${match[2]}`; // Fallback link
-    },
-    webFallback: (match: string[]) => `https://music.youtube.com/${match[2]}`,
-  },
-  {
-    name: 'Threads',
-    urlPattern:
-      /https:\/\/(www\.)?threads\.net\/(@[^/?#&]+|([^/?#&]+)\/posts\/([^/?#&]+))/,
-    appScheme: (match: string[]) => {
-      if (match[1]) {
-        return `threads://user?username=${match[1].replace('@', '')}`; // Deep link for Threads user profile
-      } else if (match[3]) {
-        return `threads://post/${match[3]}`; // Deep link for Threads post
-      }
-      return `https://threads.net/${match[0]}`; // Fallback link
-    },
-    webFallback: (match: string[]) => `https://threads.net/${match[0]}`,
-  },
-  {
-    name: "Twitch",
-    urlPattern: /https:\/\/(www\.)?twitch\.tv\/([^/?#&]+)/,
-    appScheme: (match: string[]) => `twitch://stream/${match[2]}`, // Deep link to Twitch stream/channel
-    webFallback: (match: string[]) => `https://www.twitch.tv/${match[2]}`, // Fallback to web if app is not available
-  },
-  {
-    name: "Alibaba",
-    urlPattern: /https:\/\/(www\.)?alibaba\.com\/(product-detail\/[^/?#&]+|[^/?#&]+)/,
-    appScheme: (match: string[]) => {
-      if (match[2].startsWith("product-detail")) {
-        return `alibaba://product/${match[2].split("/")[1]}`; // Deep link to specific product
-      }
-      return `alibaba://home`; // General deep link to Alibaba home page
-    },
-    webFallback: (match: string[]) => `https://www.alibaba.com/${match[2]}`, // Fallback to web version
-  },
-  {
-    name: "Zomato",
-    urlPattern: /https:\/\/(www\.)?zomato\.com\/(restaurant\/[^/?#&]+|[^/?#&]+)/,
-    appScheme: (match: string[]) => {
-      if (match[2].startsWith("restaurant/")) {
-        return `zomato://restaurant/${match[2].split("/")[1]}`; // Deep link to specific restaurant
-      }
-      return `zomato://home`; // General deep link to Zomato home page
-    },
-    webFallback: (match: string[]) => `https://www.zomato.com/${match[2]}`, // Fallback to web version
-  },
 ];
 
 // Detect if the user is on iOS
@@ -213,98 +140,75 @@ function getAppLink(url: string) {
   return { fallbackLink: url };
 }
 
-
-// Example function for handling redirect
-// const openLink = (url: string) => {
+// function openLink(url: string) {
 //   const { appDeepLink, fallbackLink } = getAppLink(url);
+//   const key = `${url}-redirected`;
+
+//   // Check if the user has already been prompted
+//   const hasBeenRedirected = localStorage.getItem(key);
+
 //   let appOpened = false;
 
-//   const handleVisibilityChange = () => {
-//     if (document.visibilityState === "hidden") {
+//   function handleVisibilityChange() {
+//     if (document.visibilityState === 'hidden') {
 //       appOpened = true;
+//       localStorage.setItem(key, 'true'); // Store in localStorage to prevent future prompts
 //     }
-//   };
+//   }
 
 //   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-//   if (isMobile() && appDeepLink) {
-//     if (isIOS()) {
-//       // Try opening the deep link on iOS
-//       window.location.href = appDeepLink; // Directly attempt to open the app scheme
+//   if (!hasBeenRedirected) {
+//     // If it's a mobile device and the appDeepLink exists, try opening the app
+//     if (isMobile() && appDeepLink) {
+//       window.location.href = appDeepLink; // Attempt to open the app
 //       setTimeout(() => {
 //         if (!appOpened) {
-//           window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
+//           window.location.href = fallbackLink; // Fallback to web if the app isn't opened
 //         }
-
-//       }, 1500); // Slightly shorter delay to allow detection if app is opened
+//       }, 2000); // Allow time for the app to open
 //     } else {
-//       // Try opening the deep link on Android
-//       window.location.href = appDeepLink;
-//       setTimeout(() => {
-//         if (!appOpened) {
-//           window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
-//         }
-//       }, 2000); // Wait longer on Android to detect if app opens
+//       window.location.href = fallbackLink;
 //     }
 //   } else {
-//     // Fallback to the web link in case the device is not mobile or the appDeepLink is missing
+//     // If the user has been prompted already, go straight to the fallback link
 //     window.location.href = fallbackLink;
 //   }
-  
+// }
 
-//   // Cleanup event listener
-//   return () => {
-//     document.removeEventListener("visibilitychange", handleVisibilityChange);
-//   };
-// };
-
-function openLink(url: string) {
+// Example function for handling redirect
+const openLink = (url: string) => {
   const { appDeepLink, fallbackLink } = getAppLink(url);
-  const key = `${url}-redirected`;
-
-  // Check if the user has already been prompted for this URL
-  const hasBeenRedirected = localStorage.getItem(key);
-
   let appOpened = false;
 
-  // Handler to detect if the app was opened
-  function handleVisibilityChange() {
-    if (document.visibilityState === 'hidden') {
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "hidden") {
       appOpened = true;
-      localStorage.setItem(key, 'true'); // Store in localStorage to prevent future prompts
     }
-  }
+  };
 
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  // If the user has not been redirected already
-  if (!hasBeenRedirected) {
-    // If it's a mobile device and the appDeepLink exists, try opening the app
-    if (isMobile() && appDeepLink) {
-      if (isIOS()) {
-        // Open Universal Links for iOS
-        window.location.href = fallbackLink;  // iOS may need the fallback directly
-      } else {
-        // Try app deep link on Android
-        window.location.href = appDeepLink;
-
-        // Wait and fallback to web if app doesn't open
-        setTimeout(() => {
-          if (!appOpened) {
-            window.location.href = fallbackLink;
-          }
-        }, 2000); // 2 seconds delay to check if the app was opened
-      }
-    } else {
-      // Fallback to the web link if not on mobile or no deep link
+  if (isMobile() && appDeepLink) {
+    if (isIOS()) {
       window.location.href = fallbackLink;
+    } else {
+      window.location.href = appDeepLink;
+      setTimeout(() => {
+        if (!appOpened) {
+          window.location.href = fallbackLink;
+        }
+      }, 2000);
     }
   } else {
-    // If already redirected, fallback to the web link
     window.location.href = fallbackLink;
   }
-}
 
+  // Cleanup event listener
+  return () => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+  };
+};
 const Redirect: React.FC = () => {
   const router = useRouter();
 
