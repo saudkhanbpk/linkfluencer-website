@@ -405,14 +405,12 @@ const openLink = (url: string) => {
   if (isMobile() && appDeepLink) {
     let universalLink = appDeepLink;
     if (isIOS()) {
-      alert("ios")
       // Get the domain associated with the app
       const appDomain = getAppDomain(appDeepLink);
       // Get the path that corresponds to the deep link
       const appPath = getAppPath(appDeepLink);
       universalLink = `https://${appDomain}/${appPath}`;
     }
-    alert("andriod")
     window.location.href = universalLink;
   
     // Set a timeout to fall back to the web link if the app doesn't open
