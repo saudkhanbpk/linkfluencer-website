@@ -215,48 +215,96 @@ function getAppLink(url: string) {
 
 
 // Example function for handling redirect
-const openLink = (url: string) => {
+// const openLink = (url: string) => {
+//   const { appDeepLink, fallbackLink } = getAppLink(url);
+//   let appOpened = false;
+
+//   const handleVisibilityChange = () => {
+//     if (document.visibilityState === "hidden") {
+//       appOpened = true;
+//     }
+//   };
+
+//   document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//   if (isMobile() && appDeepLink) {
+//     if (isIOS()) {
+//       // Try opening the deep link on iOS
+//       window.location.href = appDeepLink; // Directly attempt to open the app scheme
+//       setTimeout(() => {
+//         if (!appOpened) {
+//           window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
+//         }
+
+//       }, 1500); // Slightly shorter delay to allow detection if app is opened
+//     } else {
+//       // Try opening the deep link on Android
+//       window.location.href = appDeepLink;
+//       setTimeout(() => {
+//         if (!appOpened) {
+//           window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
+//         }
+//       }, 2000); // Wait longer on Android to detect if app opens
+//     }
+//   } else {
+//     // Fallback to the web link in case the device is not mobile or the appDeepLink is missing
+//     window.location.href = fallbackLink;
+//   }
+  
+
+//   // Cleanup event listener
+//   return () => {
+//     document.removeEventListener("visibilitychange", handleVisibilityChange);
+//   };
+// };
+
+function openLink(url: string) {
   const { appDeepLink, fallbackLink } = getAppLink(url);
+  const key = `${url}-redirected`;
+
+  // Check if the user has already been prompted for this URL
+  const hasBeenRedirected = localStorage.getItem(key);
+
   let appOpened = false;
 
-  const handleVisibilityChange = () => {
-    if (document.visibilityState === "hidden") {
+  // Handler to detect if the app was opened
+  function handleVisibilityChange() {
+    if (document.visibilityState === 'hidden') {
       appOpened = true;
+      localStorage.setItem(key, 'true'); // Store in localStorage to prevent future prompts
     }
-  };
+  }
 
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  if (isMobile() && appDeepLink) {
-    if (isIOS()) {
-      // Try opening the deep link on iOS
-      window.location.href = appDeepLink; // Directly attempt to open the app scheme
-      setTimeout(() => {
-        if (!appOpened) {
-          window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
-        }
-        
-      }, 1500); // Slightly shorter delay to allow detection if app is opened
+  // If the user has not been redirected already
+  if (!hasBeenRedirected) {
+    // If it's a mobile device and the appDeepLink exists, try opening the app
+    if (isMobile() && appDeepLink) {
+      if (isIOS()) {
+        // Open Universal Links for iOS
+        window.location.href = fallbackLink;  // iOS may need the fallback directly
+      } else {
+        // Try app deep link on Android
+        window.location.href = appDeepLink;
+
+        // Wait and fallback to web if app doesn't open
+        setTimeout(() => {
+          if (!appOpened) {
+            window.location.href = fallbackLink;
+          }
+        }, 2000); // 2 seconds delay to check if the app was opened
+      }
     } else {
-      // Try opening the deep link on Android
-      window.location.href = appDeepLink;
-      setTimeout(() => {
-        if (!appOpened) {
-          window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
-        }
-      }, 2000); // Wait longer on Android to detect if app opens
+      // Fallback to the web link if not on mobile or no deep link
+      window.location.href = fallbackLink;
     }
   } else {
-    // Fallback to the web link in case the device is not mobile or the appDeepLink is missing
+    // If already redirected, fallback to the web link
     window.location.href = fallbackLink;
   }
-  
+}
 
-  // Cleanup event listener
-  return () => {
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-  };
-};
 const Redirect: React.FC = () => {
   const router = useRouter();
 
