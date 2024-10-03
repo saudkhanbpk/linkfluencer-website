@@ -235,6 +235,7 @@ const openLink = (url: string) => {
         if (!appOpened) {
           window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
         }
+        
       }, 1500); // Slightly shorter delay to allow detection if app is opened
     } else {
       // Try opening the deep link on Android
