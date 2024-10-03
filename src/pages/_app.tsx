@@ -46,6 +46,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <CssBaseline />
         <SessionProvider session={pageProps.session}>
        <div className=''>
+        <></>
        <Component {...pageProps} />
        </div>
         </SessionProvider>
