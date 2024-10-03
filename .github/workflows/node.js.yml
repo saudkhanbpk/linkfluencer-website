@@ -28,7 +28,7 @@ jobs:
       run: npm ci
 
     - name: Start app with PM2
-      run: pm2 restart linkfluencer-dashboard
+      run: pm2 restart linkfluencer-web
       env: 
         NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
