@@ -108,6 +108,21 @@ const appLinkMappings = [
     },
     webFallback: (match: string[]) => `https://open.spotify.com/${match[2]}`, // Web fallback URL
   },
+  {
+    name: 'Netflix',
+    urlPattern:
+      /https:\/\/(www\.)?netflix\.com\/(title\/([^/?#&]+)|browse|search\/([^/?#&]+))/,
+    appScheme: (match: string[]) => {
+      if (match[3]) return `nflx://www.netflix.com/title/${match[3]}`; // Netflix title deep link
+      if (match[4]) return `nflx://www.netflix.com/search?q=${match[4]}`; // Netflix search deep link
+      return `nflx://www.netflix.com/browse`; // Netflix browse deep link
+    },
+    webFallback: (match: string[]) => {
+      if (match[3]) return `https://www.netflix.com/title/${match[3]}`; // Web fallback for title
+      if (match[4]) return `https://www.netflix.com/search?q=${match[4]}`; // Web fallback for search
+      return `https://www.netflix.com/browse`; // Web fallback for browse
+    },
+  },
 ];
 
 // Detect if the user is on iOS
