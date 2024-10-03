@@ -104,7 +104,7 @@
 //       if (match[4]) return `spotify://album/${match[4]}`; // Spotify album deep link
 //       if (match[5]) return `spotify://playlist/${match[5]}`; // Spotify playlist deep link
 //       if (match[6]) return `spotify://user/${match[6]}`; // Spotify user deep link
-//       return null; // Fallback in case no valid match
+//       return null; // Fallback inelse if( no valid match
 //     },
 //     webFallback: (match: string[]) => `https://open.spotify.com/${match[2]}`, // Web fallback URL
 //   },
@@ -351,6 +351,44 @@ function getAppLink(url: string) {
   return { fallbackLink: url };
 }
 
+// const openLink = (url: string) => {
+//   const { appDeepLink, fallbackLink } = getAppLink(url);
+//   let appOpened = false;
+
+//   const handleVisibilityChange = () => {
+//     if (document.visibilityState === "hidden") {
+//       appOpened = true;
+//     }
+//   };
+
+//   document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//   // Attempt to open the app using the appDeepLink
+//   if (isMobile() && appDeepLink) {
+//     if (isIOS()) {
+//       // Use Universal Links on iOS
+//       const universalLink = `https://instagram.com/${appDeepLink}`;
+//       window.location.href = universalLink;
+//     } else {
+//       // Use the appDeepLink on Android
+//       window.location.href = appDeepLink;
+//     }
+//     // Set a timeout to fall back to the web link if the app doesn't open
+//     setTimeout(() => {
+//       if (!appOpened) {
+//         window.location.href = fallbackLink; // Fallback to web if the app isn't opened
+//       }
+//     }, 2000); // You can adjust the timeout duration as needed
+//   } else {
+//     window.location.href = fallbackLink; // If not mobile or no deep link, go to fallback
+//   }
+
+//   // Cleanup event listener
+//   return () => {
+//     document.removeEventListener("visibilitychange", handleVisibilityChange);
+//   };
+// };
+
 const openLink = (url: string) => {
   const { appDeepLink, fallbackLink } = getAppLink(url);
   let appOpened = false;
@@ -365,14 +403,16 @@ const openLink = (url: string) => {
 
   // Attempt to open the app using the appDeepLink
   if (isMobile() && appDeepLink) {
+    let universalLink = appDeepLink;
     if (isIOS()) {
-      // Use Universal Links on iOS
-      const universalLink = `https://instagram.com/${appDeepLink}`;
-      window.location.href = universalLink;
-    } else {
-      // Use the appDeepLink on Android
-      window.location.href = appDeepLink;
+      // Get the domain associated with the app
+      const appDomain = getAppDomain(appDeepLink);
+      // Get the path that corresponds to the deep link
+      const appPath = getAppPath(appDeepLink);
+      universalLink = `https://${appDomain}/${appPath}`;
     }
+    window.location.href = universalLink;
+  
     // Set a timeout to fall back to the web link if the app doesn't open
     setTimeout(() => {
       if (!appOpened) {
@@ -389,6 +429,59 @@ const openLink = (url: string) => {
   };
 };
 
+// Function to get the domain associated with an app
+function getAppDomain(appDeepLink: string) {
+  if (appDeepLink.startsWith('instagram://')) {
+    return 'instagram.com';
+  } else if (appDeepLink.startsWith('twitter://')) {
+    return 'twitter.com';
+  } else if (appDeepLink.startsWith('facebook://')) {
+    return 'facebook.com';
+  } else if (appDeepLink.startsWith('linkedin://')) {
+    return 'linkedin.com';
+  } else if (appDeepLink.startsWith('tiktok://')) {
+    return 'tiktok.com';
+  } else if (appDeepLink.startsWith('snapchat://')) {
+    return 'snapchat.com';
+  } else if (appDeepLink.startsWith('telegram://')) {
+    return 't.me';
+  } else if (appDeepLink.startsWith('spotify://')) {
+    return 'open.spotify.com';
+  } else {
+    return 'yourdomain.com'; // Default domain if no match is found
+  }
+
+}
+
+function getAppPath(appDeepLink: string) {
+  if (appDeepLink.startsWith('instagram://')) {
+    const username = appDeepLink.split('username=')[1];
+    return `/${username}`;
+  } else if (appDeepLink.startsWith('twitter://')) {
+    const screenName = appDeepLink.split('screen_name=')[1];
+    return `/${screenName}`;
+  } else if (appDeepLink.startsWith('facebook://')) {
+    const postId = appDeepLink.split('postId=')[1];
+    return `/posts/${postId}`;
+  } else if (appDeepLink.startsWith('linkedin://')) {
+    const profileId = appDeepLink.split('profileId=')[1];
+    return `/in/${profileId}`;
+  } else if (appDeepLink.startsWith('tiktok://')) {
+    const videoId = appDeepLink.split('videoId=')[1];
+    return `/video/${videoId}`;
+  } else if (appDeepLink.startsWith('snapchat://')) {
+    const storyId = appDeepLink.split('storyId=')[1];
+    return `/story/${storyId}`;
+  } else if (appDeepLink.startsWith('telegram://')) {
+    const chatId = appDeepLink.split('chatId=')[1];
+    return `/chat/${chatId}`;
+  } else if (appDeepLink.startsWith('spotify://')) {
+    const trackId = appDeepLink.split('trackId=')[1];
+    return `/track/${trackId}`;
+  } else {
+    return '';
+  }
+}
 const Redirect: React.FC = () => {
   const router = useRouter();
 
