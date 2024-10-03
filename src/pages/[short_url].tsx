@@ -140,41 +140,6 @@ function getAppLink(url: string) {
   return { fallbackLink: url };
 }
 
-// function openLink(url: string) {
-//   const { appDeepLink, fallbackLink } = getAppLink(url);
-//   const key = `${url}-redirected`;
-
-//   // Check if the user has already been prompted
-//   const hasBeenRedirected = localStorage.getItem(key);
-
-//   let appOpened = false;
-
-//   function handleVisibilityChange() {
-//     if (document.visibilityState === 'hidden') {
-//       appOpened = true;
-//       localStorage.setItem(key, 'true'); // Store in localStorage to prevent future prompts
-//     }
-//   }
-
-//   document.addEventListener("visibilitychange", handleVisibilityChange);
-
-//   if (!hasBeenRedirected) {
-//     // If it's a mobile device and the appDeepLink exists, try opening the app
-//     if (isMobile() && appDeepLink) {
-//       window.location.href = appDeepLink; // Attempt to open the app
-//       setTimeout(() => {
-//         if (!appOpened) {
-//           window.location.href = fallbackLink; // Fallback to web if the app isn't opened
-//         }
-//       }, 2000); // Allow time for the app to open
-//     } else {
-//       window.location.href = fallbackLink;
-//     }
-//   } else {
-//     // If the user has been prompted already, go straight to the fallback link
-//     window.location.href = fallbackLink;
-//   }
-// }
 
 // Example function for handling redirect
 const openLink = (url: string) => {
@@ -189,11 +154,26 @@ const openLink = (url: string) => {
 
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
+  // if (isMobile() && appDeepLink) {
+  //   if (isIOS()) {
+  //     window.location.href = fallbackLink;
+  //   } else {
+  //     window.location.href = appDeepLink;
+  //     setTimeout(() => {
+  //       if (!appOpened) {
+  //         window.location.href = fallbackLink;
+  //       }
+  //     }, 2000);
+  //   }
+  // } else {
+  //   window.location.href = fallbackLink;
+  // }
+
   if (isMobile() && appDeepLink) {
     if (isIOS()) {
-      window.location.href = fallbackLink;
+      window.open(appDeepLink, '_system'); // Open app scheme on iOS
     } else {
-      window.location.href = appDeepLink;
+      window.location.href = appDeepLink; // Open app scheme on Android
       setTimeout(() => {
         if (!appOpened) {
           window.location.href = fallbackLink;
