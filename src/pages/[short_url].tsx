@@ -405,6 +405,7 @@ const openLink = (url: string) => {
   if (isMobile() && appDeepLink) {
     let universalLink = appDeepLink;
     if (isIOS()) {
+      alert("available")
       // Get the domain associated with the app
       const appDomain = getAppDomain(appDeepLink);
       // Get the path that corresponds to the deep link
