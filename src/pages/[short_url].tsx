@@ -227,35 +227,29 @@ const openLink = (url: string) => {
 
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  // if (isMobile() && appDeepLink) {
-  //   if (isIOS()) {
-  //     window.location.href = fallbackLink;
-  //   } else {
-  //     window.location.href = appDeepLink;
-  //     setTimeout(() => {
-  //       if (!appOpened) {
-  //         window.location.href = fallbackLink;
-  //       }
-  //     }, 2000);
-  //   }
-  // } else {
-  //   window.location.href = fallbackLink;
-  // }
-
   if (isMobile() && appDeepLink) {
     if (isIOS()) {
-      window.open(appDeepLink, '_system'); // Open app scheme on iOS
-    } else {
-      window.location.href = appDeepLink; // Open app scheme on Android
+      // Try opening the deep link on iOS
+      window.location.href = appDeepLink; // Directly attempt to open the app scheme
       setTimeout(() => {
         if (!appOpened) {
-          window.location.href = fallbackLink;
+          window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
         }
-      }, 2000);
+      }, 1500); // Slightly shorter delay to allow detection if app is opened
+    } else {
+      // Try opening the deep link on Android
+      window.location.href = appDeepLink;
+      setTimeout(() => {
+        if (!appOpened) {
+          window.location.href = fallbackLink; // Fall back to the web link if the app doesn't open
+        }
+      }, 2000); // Wait longer on Android to detect if app opens
     }
   } else {
+    // Fallback to the web link in case the device is not mobile or the appDeepLink is missing
     window.location.href = fallbackLink;
   }
+  
 
   // Cleanup event listener
   return () => {
