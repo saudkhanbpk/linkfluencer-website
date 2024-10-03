@@ -177,6 +177,39 @@ function getAppLink(url: string) {
 // }
 
 // Example function for handling redirect
+// const openLink = (url: string) => {
+//   const { appDeepLink, fallbackLink } = getAppLink(url);
+//   let appOpened = false;
+
+//   const handleVisibilityChange = () => {
+//     if (document.visibilityState === "hidden") {
+//       appOpened = true;
+//     }
+//   };
+
+//   document.addEventListener("visibilitychange", handleVisibilityChange);
+
+//   if (isMobile() && appDeepLink) {
+//     if (isIOS()) {
+//       window.location.href = fallbackLink;
+//     } else {
+//       window.location.href = appDeepLink;
+//       setTimeout(() => {
+//         if (!appOpened) {
+//           window.location.href = fallbackLink;
+//         }
+//       }, 2000);
+//     }
+//   } else {
+//     window.location.href = fallbackLink;
+//   }
+
+//   // Cleanup event listener
+//   return () => {
+//     document.removeEventListener("visibilitychange", handleVisibilityChange);
+//   };
+// };
+
 const openLink = (url: string) => {
   const { appDeepLink, fallbackLink } = getAppLink(url);
   let appOpened = false;
@@ -189,19 +222,18 @@ const openLink = (url: string) => {
 
   document.addEventListener("visibilitychange", handleVisibilityChange);
 
+  // Attempt to open the app using the appDeepLink
   if (isMobile() && appDeepLink) {
-    if (isIOS()) {
-      window.location.href = fallbackLink;
-    } else {
-      window.location.href = appDeepLink;
-      setTimeout(() => {
-        if (!appOpened) {
-          window.location.href = fallbackLink;
-        }
-      }, 2000);
-    }
+    window.location.href = appDeepLink; // Try to open the app
+
+    // Set a timeout to fall back to the web link if the app doesn't open
+    setTimeout(() => {
+      if (!appOpened) {
+        window.location.href = fallbackLink; // Fallback to web if the app isn't opened
+      }
+    }, 2000); // You can adjust the timeout duration as needed
   } else {
-    window.location.href = fallbackLink;
+    window.location.href = fallbackLink; // If not mobile or no deep link, go to fallback
   }
 
   // Cleanup event listener
@@ -209,6 +241,7 @@ const openLink = (url: string) => {
     document.removeEventListener("visibilitychange", handleVisibilityChange);
   };
 };
+
 const Redirect: React.FC = () => {
   const router = useRouter();
 
