@@ -62,14 +62,15 @@ const appLinkMappings = [
     webFallback: (match: string[]) => `https://www.twitter.com/${match[2]}`,
   },
   {
-    name: 'TikTok',
-    urlPattern: /https:\/\/(www\.)?tiktok\.com\/(@[^/?#&]+\/video\/([^/?#&]+)|(@[^/?#&]+)|([^/?#&]+))/,
+    name: "TikTok",
+    urlPattern:
+      /https:\/\/(www\.)?tiktok\.com\/(@[^/?#&]+\/video\/([^/?#&]+)|(@[^/?#&]+)|([^/?#&]+))/,
     appScheme: (match: string[]) => {
       if (match[3]) {
         return `snssdk1128://aweme/detail/${match[3]}`; // TikTok video deep link
       }
       if (match[4]) {
-        return `snssdk1128://user/profile/${match[4].replace('@', '')}`; // TikTok profile deep link
+        return `snssdk1128://user/profile/${match[4].replace("@", "")}`; // TikTok profile deep link
       }
       return `snssdk1128://feed`; // Fallback to TikTok feed in app
     },
@@ -77,7 +78,8 @@ const appLinkMappings = [
   },
   {
     name: "Snapchat",
-    urlPattern: /https:\/\/(www\.)?snapchat\.com\/(add\/([^/?#&]+)|story\/([^/?#&]+))/,
+    urlPattern:
+      /https:\/\/(www\.)?snapchat\.com\/(add\/([^/?#&]+)|story\/([^/?#&]+))/,
     appScheme: (match: string[]) => {
       if (match[3]) {
         return `snapchat://add/${match[3]}`; // Snapchat profile deep link
@@ -96,7 +98,7 @@ const appLinkMappings = [
     webFallback: (match: string[]) => `https://t.me/${match[2]}`, // Web fallback
   },
   {
-    name: 'Spotify',
+    name: "Spotify",
     urlPattern:
       /https:\/\/(open\.)?spotify\.com\/(track\/([^/?#&]+)|album\/([^/?#&]+)|playlist\/([^/?#&]+)|user\/([^/?#&]+))/,
     appScheme: (match: string[]) => {
@@ -140,6 +142,20 @@ function getAppLink(url: string) {
   return { fallbackLink: url };
 }
 
+// Redirect function using iframe
+const redirect = (location: string) => {
+  const iframe = document.createElement("iframe");
+  iframe.setAttribute("src", location);
+  iframe.setAttribute("width", "1px");
+  iframe.setAttribute("height", "1px");
+  iframe.style.position = "absolute";
+  iframe.style.top = "0";
+  iframe.style.left = "0";
+  document.documentElement.appendChild(iframe);
+  iframe.parentNode?.removeChild(iframe);
+};
+
+// Updated openLink function with redirect integrated
 const openLink = (url: string) => {
   const { appDeepLink, fallbackLink } = getAppLink(url);
   let appOpened = false;
@@ -154,14 +170,14 @@ const openLink = (url: string) => {
 
   // Attempt to open the app using the appDeepLink
   if (isMobile() && appDeepLink) {
-    window.location.href = appDeepLink; // Try to open the app
+    redirect(appDeepLink); // Use the redirect function to open the app
 
     // Set a timeout to fall back to the web link if the app doesn't open
     setTimeout(() => {
       if (!appOpened) {
         window.location.href = fallbackLink; // Fallback to web if the app isn't opened
       }
-    }, 2000); // You can adjust the timeout duration as needed
+    }, 5000); // You can adjust the timeout duration as needed
   } else {
     window.location.href = fallbackLink; // If not mobile or no deep link, go to fallback
   }
@@ -174,35 +190,34 @@ const openLink = (url: string) => {
 
 const Redirect: React.FC = () => {
   const router = useRouter();
-
   const getReDirectLink = async (shortUrl: string) => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${shortUrl}`);
-      console.log({response});
-      
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/${shortUrl}`
+      );
+      console.log({ response });
+
       if (response.data.redirectUrl) {
-        // openLink(response.data.redirectUrl);
+        openLink(response.data.redirectUrl);
       } else {
         console.warn("No redirect URL found");
       }
     } catch (error) {
-      console.error('Error fetching redirect link:', error);
+      console.error("Error fetching redirect link:", error);
     }
   };
 
-  
   useEffect(() => {
     const { short_url } = router.query;
     if (short_url) {
       getReDirectLink(short_url as string);
-      
     }
   }, [router.query]);
   return (
     <div className="border h-screen flex items-center justify-center">
       <div className="flex justify-center items-center">
         {/* Add your logo here */}
-        <Image src="/images/Logo.svg" height={200} width={400} alt="logo"/>
+        <Image src="/images/Logo.svg" height={200} width={400} alt="logo" />
       </div>
     </div>
   );
