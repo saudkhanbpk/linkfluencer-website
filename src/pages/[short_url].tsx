@@ -172,7 +172,7 @@ const openLink = (url: string) => {
       if (!appOpened) {
         window.location.href = fallbackLink; // Fallback to web if the app isn't opened
       }
-    }, 5000); // You can adjust the timeout duration as needed
+    }, 3000); // You can adjust the timeout duration as needed
   } else {
     window.location.href = fallbackLink; // If not mobile or no deep link, go to fallback
   }
