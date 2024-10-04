@@ -116,7 +116,7 @@ const appLinkMappings = [
 function isMobile() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
-const isAndroid = (): boolean => /android/i.test(navigator.userAgent);
+
 // Generate deep link or fallback link
 function getAppLink(url: string) {
   for (let app of appLinkMappings) {
@@ -165,8 +165,6 @@ const openLink = (url: string) => {
 
   // Attempt to open the app using the appDeepLink
   if (isMobile() && appDeepLink) {
-    const isIOS = (): boolean => /iPad|iPhone|iPod/.test(navigator.userAgent);
-    if(isIOS()){
     redirect(appDeepLink); // Use the redirect function to open the app
 
     // Set a timeout to fall back to the web link if the app doesn't open
@@ -175,17 +173,6 @@ const openLink = (url: string) => {
         window.location.href = fallbackLink; // Fallback to web if the app isn't opened
       }
     }, 2000); // You can adjust the timeout duration as needed
-  }else{
-    window.location.href = appDeepLink;
-
-    // Set a timeout to fallback to the browser version if the app isn't opened
-    setTimeout(() => {
-      if (!appOpened) {
-        // If the user didn't leave the page, fallback to the browser
-        window.location.href = fallbackLink;
-      }
-    }, 2000);  // Wait for 2 seconds before triggering the fallback
-  }
   } else {
     window.location.href = fallbackLink; // If not mobile or no deep link, go to fallback
   }
